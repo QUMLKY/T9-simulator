@@ -97,8 +97,10 @@ binaries; frozen dataset archives with checksums and a DOI will accompany the ca
 release (Zenodo).
 
 Calibration targets in `calibration/` are **aggregated distribution shapes** derived from the
-public iPinYou dataset (Zhang et al., 2014), rescaled to a 2025 US mobile-gaming market — no
-raw iPinYou records are included.
+public iPinYou dataset (Zhang et al., 2014), rescaled to a 2025 US mobile-gaming market - no
+raw iPinYou records are included. The derivation is fully reproducible:
+`scripts/calibrate_ipinyou.py` regenerates every CSV in `calibration/` from the raw iPinYou
+season 2+3 logs (download separately; ~28 GB).
 
 ## Repository layout
 
