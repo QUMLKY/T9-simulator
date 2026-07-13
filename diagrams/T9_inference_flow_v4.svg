@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="566" viewBox="0 0 840 566" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9a988f"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="840" height="566" fill="#191919"/>
+
+  <!-- Bid request -->
+  <rect x="270" y="20" width="300" height="56" rx="9" fill="#16467e" stroke="#3f74b3"/>
+  <text x="420" y="44" fill="#eaf1fa" font-size="15" font-weight="600" text-anchor="middle">Bid request arrives</text>
+  <text x="420" y="63" fill="#b9d2ec" font-size="12.5" text-anchor="middle">user, app, context, floor price</text>
+
+  <line x1="420" y1="76" x2="420" y2="106" stroke="#9a988f" stroke-width="1.4" marker-end="url(#arr2)"/>
+
+  <!-- Parse -->
+  <rect x="265" y="109" width="310" height="44" rx="9" fill="#4a4a43" stroke="#7d7d72"/>
+  <text x="420" y="136" fill="#efede4" font-size="14" font-weight="600" text-anchor="middle">Parse into raw feature vector</text>
+
+  <!-- Fork arrows -->
+  <line x1="345" y1="153" x2="221" y2="186" stroke="#9a988f" stroke-width="1.4" marker-end="url(#arr2)"/>
+  <line x1="495" y1="153" x2="625" y2="186" stroke="#9a988f" stroke-width="1.4" marker-end="url(#arr2)"/>
+
+  <!-- TIER 1 container -->
+  <rect x="30" y="188" width="382" height="196" rx="11" fill="#3c338f" stroke="#6a60c4"/>
+  <text x="221" y="212" fill="#f0eefb" font-size="14.5" font-weight="600" text-anchor="middle">Tier 1 — user value  (frozen)</text>
+
+  <!-- Four diverging arrows from feature vector to score outputs (hurdle heads) -->
+  <line x1="150" y1="222" x2="84" y2="248" stroke="#9a988f" stroke-width="1.1" marker-end="url(#arr2)"/>
+  <line x1="195" y1="222" x2="172" y2="248" stroke="#9a988f" stroke-width="1.1" marker-end="url(#arr2)"/>
+  <line x1="245" y1="222" x2="260" y2="248" stroke="#9a988f" stroke-width="1.1" marker-end="url(#arr2)"/>
+  <line x1="295" y1="222" x2="348" y2="248" stroke="#9a988f" stroke-width="1.1" marker-end="url(#arr2)"/>
+
+  <!-- Four score output labels (4-head hurdle) -->
+  <rect x="44" y="250" width="80" height="36" rx="7" fill="none" stroke="#b9b3ea"/>
+  <text x="84" y="273" fill="#d9d5f2" font-size="11" text-anchor="middle">P(click)</text>
+
+  <rect x="132" y="250" width="80" height="36" rx="7" fill="none" stroke="#b9b3ea"/>
+  <text x="172" y="272" fill="#d9d5f2" font-size="9.5" text-anchor="middle">P(install|click)</text>
+
+  <rect x="220" y="250" width="80" height="36" rx="7" fill="none" stroke="#7ed3b0"/>
+  <text x="260" y="272" fill="#bde8d6" font-size="9.5" text-anchor="middle">P(payer|install)</text>
+
+  <rect x="308" y="250" width="80" height="36" rx="7" fill="none" stroke="#7ed3b0"/>
+  <text x="348" y="272" fill="#bde8d6" font-size="9.5" text-anchor="middle">E(spend|payer)</text>
+
+  <!-- Converging arrows to EV box -->
+  <line x1="84" y1="286" x2="158" y2="314" stroke="#9a988f" stroke-width="1.1" marker-end="url(#arr2)"/>
+  <line x1="172" y1="286" x2="200" y2="314" stroke="#9a988f" stroke-width="1.1" marker-end="url(#arr2)"/>
+  <line x1="260" y1="286" x2="240" y2="314" stroke="#9a988f" stroke-width="1.1" marker-end="url(#arr2)"/>
+  <line x1="348" y1="286" x2="284" y2="314" stroke="#9a988f" stroke-width="1.1" marker-end="url(#arr2)"/>
+
+  <!-- EV arithmetic box -->
+  <rect x="55" y="316" width="332" height="54" rx="8" fill="none" stroke="#b9b3ea"/>
+  <text x="221" y="338" fill="#f0eefb" font-size="12.5" font-weight="600" text-anchor="middle">Expected Value  (arithmetic)</text>
+  <text x="221" y="357" fill="#d9d5f2" font-size="9.5" text-anchor="middle">EV = P(click)·P(install|click)·P(payer|install)·E(spend|payer)</text>
+
+  <!-- Arrow from EV → profit-max -->
+  <line x1="221" y1="370" x2="294" y2="412" stroke="#9a988f" stroke-width="1.4" marker-end="url(#arr2)"/>
+
+  <!-- TIER 2 container -->
+  <rect x="440" y="188" width="370" height="196" rx="11" fill="#7e3517" stroke="#bb6a45"/>
+  <text x="625" y="212" fill="#fcefe8" font-size="14.5" font-weight="600" text-anchor="middle">Tier 2 — win probability  (frozen)</text>
+
+  <line x1="625" y1="222" x2="625" y2="280" stroke="#9a988f" stroke-width="1.3" marker-end="url(#arr2)"/>
+
+  <!-- Tier 2 score output -->
+  <rect x="470" y="282" width="310" height="54" rx="7" fill="none" stroke="#f0b393"/>
+  <text x="625" y="305" fill="#f3cdb6" font-size="13" text-anchor="middle">P(win | bid, context)</text>
+  <text x="625" y="324" fill="#eec5ad" font-size="11.5" text-anchor="middle">swept across candidate bids</text>
+
+  <!-- Arrow from P(win) → profit-max -->
+  <line x1="625" y1="336" x2="546" y2="412" stroke="#9a988f" stroke-width="1.4" marker-end="url(#arr2)"/>
+
+  <!-- Profit-max optimiser -->
+  <rect x="185" y="414" width="470" height="68" rx="11" fill="#4a4a43" stroke="#7d7d72"/>
+  <text x="420" y="441" fill="#efede4" font-size="15" font-weight="600" text-anchor="middle">Profit-max optimiser (arithmetic)</text>
+  <text x="420" y="465" fill="#dedbd0" font-size="13" text-anchor="middle">Profit(bid) = ( EV − bid ) × P(win | bid)  ·  ROAS filter</text>
+
+  <line x1="420" y1="482" x2="420" y2="510" stroke="#9a988f" stroke-width="1.4" marker-end="url(#arr2)"/>
+
+  <!-- Bid response -->
+  <rect x="265" y="512" width="310" height="42" rx="9" fill="#4a4a43" stroke="#7d7d72"/>
+  <text x="420" y="538" fill="#efede4" font-size="14.5" font-weight="600" text-anchor="middle">Bid response to SSP</text>
+</svg>

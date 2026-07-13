@@ -1,0 +1,203 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1450" height="992" viewBox="0 0 1450 992" font-family="Segoe UI, Arial, sans-serif">
+<defs>
+<marker id="ahier" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#607D8B"/></marker>
+<marker id="akey" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#607D8B"/></marker>
+<marker id="aamber" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#607D8B"/></marker>
+<marker id="ateal" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#607D8B"/></marker>
+<marker id="aev" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#607D8B"/></marker>
+<marker id="atilt" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#E53935"/></marker>
+<marker id="aauc" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2E7D32"/></marker>
+<marker id="anew" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2E7D32"/></marker>
+<marker id="aarm" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#D81B60"/></marker>
+</defs>
+<rect width="1450" height="992" fill="#FFFFFF"/>
+<text x="725" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#212121">T9 parameter map (v11) — rival market abstracted: pools → observables → estimands/auction → outcomes</text>
+<text x="725" y="50" text-anchor="middle" font-size="11" fill="#546E7A">edges in 4 tiers: <tspan fill="#607D8B" font-weight="700">slate</tspan> generative funnel · <tspan fill="#E53935" font-weight="700">red</tspan> BN dependency (#1–5) · <tspan fill="#2E7D32" font-weight="700">green</tspan> auction &amp; rival market · <tspan fill="#D81B60" font-weight="700">magenta</tspan> v11 sensitivity arms (B1 · B2)</text>
+<rect x="25" y="78" width="270" height="246" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="37" y="96" font-size="11.5" font-weight="700" fill="#455A64">USER POOL — latents</text>
+<rect x="25" y="360" width="270" height="140" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="37" y="378" font-size="11.5" font-weight="700" fill="#455A64">APP POOL — latents</text>
+<rect x="25" y="508" width="270" height="100" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="37" y="526" font-size="11.5" font-weight="700" fill="#455A64">CAMPAIGN POOL — latents</text>
+<rect x="325" y="78" width="315" height="282" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="337" y="96" font-size="11.5" font-weight="700" fill="#455A64">OBSERVABLES — user · time</text>
+<rect x="325" y="396" width="315" height="238" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="337" y="414" font-size="11.5" font-weight="700" fill="#455A64">OBSERVABLES — app · context</text>
+<rect x="325" y="642" width="315" height="124" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="337" y="660" font-size="11.5" font-weight="700" fill="#455A64">OBSERVABLES — campaign</text>
+<rect x="325" y="800" width="315" height="116" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="337" y="818" font-size="11.5" font-weight="700" fill="#455A64">OBSERVABLES — price</text>
+<rect x="715" y="120" width="255" height="340" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="727" y="138" font-size="11.5" font-weight="700" fill="#455A64">ESTIMANDS — ground truth (master only)</text>
+<rect x="715" y="560" width="255" height="100" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="727" y="578" font-size="11.5" font-weight="700" fill="#455A64">AUCTION</text>
+<rect x="1075" y="120" width="330" height="240" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="1087" y="138" font-size="11.5" font-weight="700" fill="#455A64">OUTCOME LABELS — funnel</text>
+<rect x="1075" y="556" width="330" height="262" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="1087" y="574" font-size="11.5" font-weight="700" fill="#455A64">OUTCOME LABELS — auction</text>
+<polyline points="45,453 21,453 21,131 45,131" fill="none" stroke="#E53935" stroke-width="2.2" marker-end="url(#atilt)"/>
+<polyline points="45,258 5,258 5,553 45,553" fill="none" stroke="#E53935" stroke-width="2.2" marker-end="url(#atilt)"/>
+<polyline points="950,420 1012,420 1012,760 992,760" fill="none" stroke="#2E7D32" stroke-width="2.2" marker-end="url(#anew)"/>
+<text x="1018" y="560" font-size="8.5" fill="#2E7D32">ev_truth → rival's private valuation (w_k·z)</text>
+<polyline points="990,740 1040,740 1040,726 1103,726" fill="none" stroke="#2E7D32" stroke-width="2.2" marker-end="url(#anew)"/>
+<polyline points="735,325 672,325 672,879 532,879" fill="none" stroke="#2E7D32" stroke-width="1.5" marker-end="url(#aauc)"/>
+<polyline points="532,868 635,868 635,585 1090,585 1090,616 1103,616" fill="none" stroke="#2E7D32" stroke-width="1.8" marker-end="url(#aauc)"/>
+<text x="639" y="580" font-size="8.5" fill="#2E7D32">H2 own bid → win</text>
+<polyline points="950,622 1035,622 1035,778 1103,778" fill="none" stroke="#D81B60" stroke-width="2.2" marker-end="url(#aarm)"/>
+<text x="1042" y="700" font-size="8.5" fill="#D81B60">min-to-win (B1)</text>
+<line x1="120" y1="152" x2="120" y2="162" stroke="#607D8B" stroke-width="1.5" marker-end="url(#ahier)"/>
+<line x1="120" y1="152" x2="120" y2="190" stroke="#607D8B" stroke-width="1.5" marker-end="url(#ahier)"/>
+<line x1="120" y1="152" x2="120" y2="218" stroke="#607D8B" stroke-width="1.5" marker-end="url(#ahier)"/>
+<line x1="120" y1="152" x2="120" y2="246" stroke="#607D8B" stroke-width="1.5" marker-end="url(#ahier)"/>
+<line x1="120" y1="152" x2="120" y2="274" stroke="#607D8B" stroke-width="1.5" marker-end="url(#ahier)"/>
+<line x1="438" y1="296" x2="438" y2="300" stroke="#607D8B" stroke-width="1.3" marker-end="url(#ahier)"/>
+<line x1="438" y1="296" x2="438" y2="328" stroke="#607D8B" stroke-width="1.3" marker-end="url(#ahier)"/>
+<line x1="195" y1="129" x2="345" y2="126" stroke="#E53935" stroke-width="2.2" marker-end="url(#atilt)"/>
+<line x1="195" y1="136" x2="345" y2="146" stroke="#E53935" stroke-width="2.2" marker-end="url(#atilt)"/>
+<line x1="157" y1="152" x2="416" y2="300" stroke="#E53935" stroke-width="2.2" marker-end="url(#atilt)"/>
+<line x1="462" y1="136" x2="812" y2="310" stroke="#E53935" stroke-width="2.0" marker-end="url(#atilt)"/>
+<line x1="530" y1="304" x2="735" y2="286" stroke="#E53935" stroke-width="2.0" marker-end="url(#atilt)"/>
+<line x1="515" y1="328" x2="746" y2="292" stroke="#E53935" stroke-width="2.0" marker-end="url(#atilt)"/>
+<line x1="195" y1="418" x2="345" y2="427" stroke="#607D8B" stroke-width="1.6" marker-end="url(#akey)"/>
+<line x1="195" y1="448" x2="345" y2="439" stroke="#607D8B" stroke-width="1.6" marker-end="url(#akey)"/>
+<line x1="151" y1="566" x2="406" y2="672" stroke="#607D8B" stroke-width="1.6" marker-end="url(#akey)"/>
+<line x1="161" y1="598" x2="396" y2="672" stroke="#607D8B" stroke-width="1.6" marker-end="url(#akey)"/>
+<line x1="460" y1="452" x2="814" y2="244" stroke="#607D8B" stroke-width="1.6" marker-end="url(#akey)"/>
+<line x1="475" y1="452" x2="799" y2="340" stroke="#607D8B" stroke-width="1.6" marker-end="url(#akey)"/>
+<line x1="195" y1="174" x2="735" y2="175" stroke="#607D8B" stroke-width="1.6" marker-end="url(#aamber)"/>
+<line x1="195" y1="205" x2="735" y2="223" stroke="#607D8B" stroke-width="1.6" marker-end="url(#aamber)"/>
+<line x1="195" y1="235" x2="735" y2="270" stroke="#607D8B" stroke-width="1.6" marker-end="url(#aamber)"/>
+<line x1="195" y1="265" x2="735" y2="315" stroke="#607D8B" stroke-width="1.6" marker-end="url(#aamber)"/>
+<line x1="159" y1="400" x2="791" y2="192" stroke="#607D8B" stroke-width="1.6" marker-end="url(#aamber)"/>
+<line x1="170" y1="400" x2="776" y2="244" stroke="#607D8B" stroke-width="1.6" marker-end="url(#aamber)"/>
+<line x1="145" y1="540" x2="810" y2="192" stroke="#607D8B" stroke-width="1.6" marker-end="url(#aamber)"/>
+<line x1="156" y1="572" x2="801" y2="340" stroke="#607D8B" stroke-width="1.6" marker-end="url(#aamber)"/>
+<line x1="950" y1="174" x2="1105" y2="174" stroke="#607D8B" stroke-width="1.6" marker-end="url(#ateal)"/>
+<line x1="950" y1="226" x2="1105" y2="226" stroke="#607D8B" stroke-width="1.6" marker-end="url(#ateal)"/>
+<line x1="950" y1="277" x2="1105" y2="277" stroke="#607D8B" stroke-width="1.6" marker-end="url(#ateal)"/>
+<line x1="950" y1="325" x2="1105" y2="325" stroke="#607D8B" stroke-width="1.6" marker-end="url(#ateal)"/>
+<line x1="842" y1="192" x2="842" y2="400" stroke="#607D8B" stroke-width="1.8" marker-end="url(#aev)"/>
+<line x1="842" y1="244" x2="842" y2="400" stroke="#607D8B" stroke-width="1.8" marker-end="url(#aev)"/>
+<line x1="842" y1="292" x2="842" y2="400" stroke="#607D8B" stroke-width="1.8" marker-end="url(#aev)"/>
+<line x1="842" y1="340" x2="842" y2="400" stroke="#607D8B" stroke-width="1.8" marker-end="url(#aev)"/>
+<line x1="950" y1="620" x2="1105" y2="618" stroke="#2E7D32" stroke-width="1.8" marker-end="url(#aauc)"/>
+<line x1="950" y1="634" x2="1105" y2="651" stroke="#2E7D32" stroke-width="1.8" marker-end="url(#aauc)"/>
+<line x1="841" y1="706" x2="842" y2="644" stroke="#2E7D32" stroke-width="2.8" marker-end="url(#anew)"/>
+<line x1="275" y1="864" x2="345" y2="870" stroke="#D81B60" stroke-width="2.2" marker-end="url(#aarm)"/>
+<rect x="45" y="110" width="150" height="42" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4"/>
+<text x="120.0" y="129.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LU1 archetype</text>
+<text x="120.0" y="142.0" text-anchor="middle" font-size="8" fill="#1A1A1A">(latent hub)</text>
+<rect x="45" y="162" width="150" height="24" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="120.0" y="178.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LU2 click_prop</text>
+<rect x="45" y="190" width="150" height="24" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="120.0" y="206.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LU3 install_prop</text>
+<rect x="45" y="218" width="150" height="24" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="120.0" y="234.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LU4 pay_prop</text>
+<rect x="45" y="246" width="150" height="24" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="120.0" y="262.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LU5 spend/whale</text>
+<rect x="45" y="274" width="150" height="24" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="120.0" y="290.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LU6 interest_vec</text>
+<rect x="45" y="400" width="150" height="26" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="120.0" y="417.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LA1 app_quality</text>
+<rect x="45" y="440" width="150" height="26" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="120.0" y="457.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LA2 audience_profile</text>
+<rect x="45" y="540" width="150" height="26" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="120.0" y="557.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LC1 creative_appeal</text>
+<rect x="45" y="572" width="150" height="26" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="120.0" y="589.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LC2 game_quality</text>
+<rect x="345" y="112" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="128.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">A3 os</text>
+<rect x="345" y="140" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="156.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">A4 os_version</text>
+<rect x="345" y="168" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="184.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">A5 device_type</text>
+<rect x="345" y="204" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="220.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">A1 region (untilted)</text>
+<rect x="345" y="232" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="248.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">A2 city</text>
+<rect x="345" y="272" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="288.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">D1 timestamp</text>
+<rect x="345" y="300" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="316.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">D2 hour_of_day</text>
+<rect x="345" y="328" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="344.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">D3 day_of_week</text>
+<rect x="345" y="420" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="437.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">B1 app_id</text>
+<rect x="345" y="452" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="469.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">B2 app_category</text>
+<rect x="345" y="484" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="501.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">B3 ad_exchange</text>
+<rect x="345" y="516" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="533.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">B4/B5 slot size</text>
+<rect x="345" y="548" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="565.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">B6 slot_format</text>
+<rect x="345" y="672" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="689.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">C1/C3 campaign_id</text>
+<rect x="345" y="704" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="721.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">C2 advertiser_scale</text>
+<rect x="345" y="736" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="753.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">C4 ad_genre</text>
+<rect x="345" y="824" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="841.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">H1 floor_price</text>
+<rect x="345" y="858" width="185" height="42" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="437.5" y="877.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">H2 bid_price</text>
+<text x="437.5" y="890.0" text-anchor="middle" font-size="8" fill="#1A1A1A">=k_cpa·v_slot·ease·E[ltv|B2]</text>
+<rect x="735" y="158" width="215" height="34" rx="6" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="1.3"/>
+<text x="842.5" y="173.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">p_click</text>
+<text x="842.5" y="186.0" text-anchor="middle" font-size="8" fill="#1A1A1A">← LU2·v_slot·m(r)·LA1·LC1</text>
+<rect x="735" y="210" width="215" height="34" rx="6" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="1.3"/>
+<text x="842.5" y="225.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">p_install</text>
+<text x="842.5" y="238.0" text-anchor="middle" font-size="8" fill="#1A1A1A">← LU3·ease(B2)·m(r)·LA1</text>
+<rect x="735" y="262" width="215" height="30" rx="6" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="1.3"/>
+<text x="842.5" y="281.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">p_payer ← LU4·t_pay(D2,D3)</text>
+<rect x="735" y="310" width="215" height="30" rx="6" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="1.3"/>
+<text x="842.5" y="329.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">e_ltv ← LU5·LC2·μ(B2)·ρ(A3)</text>
+<rect x="735" y="400" width="215" height="40" rx="6" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="1.3"/>
+<text x="842.5" y="418.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">ev_truth</text>
+<text x="842.5" y="431.0" text-anchor="middle" font-size="8" fill="#1A1A1A">= p_click·p_install·p_payer·e_ltv</text>
+<rect x="735" y="600" width="215" height="44" rx="6" fill="#FFE0B2" stroke="#F57C00" stroke-width="1.3"/>
+<text x="842.5" y="620.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LU7 competing_bid</text>
+<text x="842.5" y="633.0" text-anchor="middle" font-size="8" fill="#1A1A1A">v10: = max_{k∈A_i} b_ik</text>
+<rect x="690" y="706" width="300" height="112" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2.4"/>
+<text x="840.0" y="753.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1A1A1A">PRIVATE-RIVAL MARKET  ★ v10</text>
+<text x="840.0" y="766.0" text-anchor="middle" font-size="8.5" fill="#1A1A1A">log b_ik = log β₀ + ρ(w_k·z + β_R·R + p_k) + σ_k ε</text>
+<text x="840.0" y="778.0" text-anchor="middle" font-size="8.5" fill="#1A1A1A">K=8 rival archetypes · LU7 = max_k b_ik · internals → BN formal DAG</text>
+<rect x="1105" y="158" width="270" height="30" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.3"/>
+<text x="1240.0" y="177.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">E1 click</text>
+<rect x="1105" y="210" width="270" height="30" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.3"/>
+<text x="1240.0" y="229.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">F1 install</text>
+<rect x="1105" y="262" width="270" height="30" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.3"/>
+<text x="1240.0" y="281.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">G1 is_payer</text>
+<rect x="1105" y="310" width="270" height="30" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.3"/>
+<text x="1240.0" y="329.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">G2/G3/G4 LTV</text>
+<rect x="1105" y="596" width="270" height="40" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.3"/>
+<text x="1240.0" y="614.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">H3 won</text>
+<text x="1240.0" y="627.0" text-anchor="middle" font-size="8" fill="#1A1A1A">=[H2 ≥ max(LU7,floor)]</text>
+<rect x="1105" y="646" width="270" height="40" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.3"/>
+<text x="1240.0" y="664.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">H4 clearing</text>
+<text x="1240.0" y="677.0" text-anchor="middle" font-size="8" fill="#1A1A1A">= H2 | LU7 | NaN</text>
+<rect x="1105" y="706" width="270" height="40" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2.2"/>
+<text x="1240.0" y="724.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">H9 bid_density = N_i ★</text>
+<text x="1240.0" y="737.0" text-anchor="middle" font-size="8" fill="#1A1A1A">SSP-only (C3/C4) · endogenous</text>
+<rect x="1105" y="756" width="270" height="44" rx="6" fill="#FCE4EC" stroke="#D81B60" stroke-width="2.2"/>
+<text x="1240.0" y="776.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">H10 min_bid_to_win ★ B1</text>
+<text x="1240.0" y="789.0" text-anchor="middle" font-size="8" fill="#1A1A1A">= max(LU7, floor) · won rows · C3/C4</text>
+<rect x="45" y="830" width="230" height="46" rx="6" fill="#FCE4EC" stroke="#D81B60" stroke-width="2.2"/>
+<text x="160.0" y="851.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">explore_traffic ★ B2</text>
+<text x="160.0" y="864.0" text-anchor="middle" font-size="8" fill="#1A1A1A">~5% slice · wide jitter on H2</text>
+<rect x="989" y="872" width="205" height="32" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="1091.5" y="886.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">H6 hist_clearing_ssp (C3/C4)</text>
+<text x="1091.5" y="899.0" text-anchor="middle" font-size="8" fill="#1A1A1A">DERIVED (pipeline) · +clear_volatility</text>
+<rect x="1199" y="872" width="206" height="32" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="1302.0" y="886.0" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">H7 hist_clearing_dsp</text>
+<text x="1302.0" y="899.0" text-anchor="middle" font-size="8" fill="#1A1A1A">DERIVED (pipeline) · won-bid cell mean</text>
+<line x1="30" y1="934" x2="54" y2="934" stroke="#607D8B" stroke-width="2.4"/>
+<text x="58" y="938" font-size="9.3" fill="#37474F">generative funnel (latent→observable→estimand→outcome/EV)</text>
+<line x1="393" y1="934" x2="417" y2="934" stroke="#E53935" stroke-width="2.4"/>
+<text x="421" y="938" font-size="9.3" fill="#37474F">BN dependency edges (#1–#5)</text>
+<line x1="591" y1="934" x2="615" y2="934" stroke="#2E7D32" stroke-width="2.4"/>
+<text x="619" y="938" font-size="9.3" fill="#37474F">auction &amp; rival market (own bid · win · rival subsystem)</text>
+<line x1="949" y1="934" x2="973" y2="934" stroke="#D81B60" stroke-width="2.4"/>
+<text x="977" y="938" font-size="9.3" fill="#37474F">v11 sensitivity arms (B1 · B2)</text>
+<text x="30" y="952" font-size="9" fill="#546E7A">Rival market shown as ONE box (v10, green); its internals — w_k loading, R retargeting, pacing, participation π_k, flights — are drawn in T9_BN_Formal_DAG.svg. H10 min_bid_to_win + explore_traffic = v11 sensitivity arms (magenta; B3 mmp_txcount built then removed). H6/H7 = derived pipeline features (not schema nodes). No H8 (first-price). ρ anchored ≈ 0.8 (amplitude dial).</text>
+</svg>

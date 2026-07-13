@@ -1,0 +1,219 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1450" height="965" viewBox="0 0 1450 965" font-family="Segoe UI, Arial, sans-serif">
+<defs>
+<marker id="ahier" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#1565C0"/></marker>
+<marker id="atilt" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#C62828"/></marker>
+<marker id="av7" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#E53935"/></marker>
+<marker id="aexpose" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#E53935"/></marker>
+<marker id="apairing" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#E53935"/></marker>
+<marker id="anest" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#9E9E9E"/></marker>
+<marker id="akey" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#1E88E5"/></marker>
+<marker id="afunnel" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#00838F"/></marker>
+<marker id="ayellow" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#F9A825"/></marker>
+<marker id="aev" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#8E24AA"/></marker>
+<marker id="aauction" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#EF6C00"/></marker>
+<marker id="av8" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2E7D32"/></marker>
+</defs>
+<rect width="1450" height="965" fill="#FFFFFF"/>
+<text x="725" y="32" text-anchor="middle" font-size="21" font-weight="700" fill="#212121">T9 full parameter map (v8 build plan) &#8594; pools &#8594; observables &#8594; estimands/auction &#8594; outcomes</text>
+<text x="725" y="52" text-anchor="middle" font-size="11.5" fill="#546E7A">red = BN edges #1&#8211;#5 (MMP axis); yellow = latent&#8594;estimand; blue = obs&#8594;estimand + key lookup; orange = bid computation + auction; teal = estimand&#8594;outcome; <tspan fill="#2E7D32" font-weight="700">green = v8 price/competition edges #6&#8211;#10 + SSP-only features (PROPOSED, default OFF)</tspan></text>
+<rect x="25" y="78" width="270" height="246" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="37" y="96" font-size="11.5" font-weight="700" fill="#455A64">USER POOL &#8212; latents</text>
+<rect x="25" y="360" width="270" height="100" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="37" y="378" font-size="11.5" font-weight="700" fill="#455A64">APP POOL &#8212; latents</text>
+<rect x="25" y="508" width="270" height="100" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="37" y="526" font-size="11.5" font-weight="700" fill="#455A64">CAMPAIGN POOL &#8212; latents</text>
+<rect x="325" y="78" width="315" height="282" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="337" y="96" font-size="11.5" font-weight="700" fill="#455A64">OBSERVABLES &#8212; user &#183; time</text>
+<rect x="325" y="396" width="315" height="182" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="337" y="414" font-size="11.5" font-weight="700" fill="#455A64">OBSERVABLES &#8212; app &#183; context</text>
+<rect x="325" y="642" width="315" height="124" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="337" y="660" font-size="11.5" font-weight="700" fill="#455A64">OBSERVABLES &#8212; campaign</text>
+<rect x="325" y="782" width="315" height="116" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="337" y="800" font-size="11.5" font-weight="700" fill="#455A64">OBSERVABLES &#8212; price</text>
+<rect x="715" y="120" width="255" height="340" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="727" y="138" font-size="11.5" font-weight="700" fill="#455A64">ESTIMANDS &#8212; ground truth (master only)</text>
+<rect x="715" y="560" width="255" height="100" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="727" y="578" font-size="11.5" font-weight="700" fill="#455A64">AUCTION</text>
+<rect x="1075" y="120" width="330" height="240" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="1087" y="138" font-size="11.5" font-weight="700" fill="#455A64">OUTCOME LABELS &#8212; funnel</text>
+<rect x="1075" y="556" width="330" height="160" rx="10" fill="#F7F9FB" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="1087" y="574" font-size="11.5" font-weight="700" fill="#455A64">OUTCOME LABELS &#8212; auction</text>
+<line x1="120" y1="152" x2="120" y2="162" stroke="#1565C0" stroke-width="1.5" marker-end="url(#ahier)"/>
+<line x1="120" y1="152" x2="120" y2="190" stroke="#1565C0" stroke-width="1.5" marker-end="url(#ahier)"/>
+<line x1="120" y1="152" x2="120" y2="218" stroke="#1565C0" stroke-width="1.5" marker-end="url(#ahier)"/>
+<line x1="120" y1="152" x2="120" y2="246" stroke="#1565C0" stroke-width="1.5" marker-end="url(#ahier)"/>
+<line x1="120" y1="152" x2="120" y2="274" stroke="#1565C0" stroke-width="1.5" marker-end="url(#ahier)"/>
+<line x1="195" y1="131" x2="345" y2="124" stroke="#C62828" stroke-width="2.4" marker-end="url(#atilt)"/>
+<line x1="195" y1="131" x2="345" y2="180" stroke="#C62828" stroke-width="2.4" marker-end="url(#atilt)"/>
+<line x1="438" y1="228" x2="438" y2="232" stroke="#9E9E9E" stroke-width="1.3" marker-end="url(#anest)"/>
+<line x1="438" y1="136" x2="438" y2="140" stroke="#9E9E9E" stroke-width="1.3" marker-end="url(#anest)"/>
+<line x1="438" y1="296" x2="438" y2="300" stroke="#9E9E9E" stroke-width="1.3" marker-end="url(#anest)"/>
+<line x1="438" y1="296" x2="438" y2="328" stroke="#9E9E9E" stroke-width="1.3" marker-end="url(#anest)"/>
+<line x1="195" y1="405" x2="345" y2="433" stroke="#1E88E5" stroke-width="1.6" marker-end="url(#akey)"/>
+<line x1="195" y1="437" x2="345" y2="433" stroke="#1E88E5" stroke-width="1.6" marker-end="url(#akey)"/>
+<line x1="195" y1="553" x2="345" y2="679" stroke="#1E88E5" stroke-width="1.6" marker-end="url(#akey)"/>
+<line x1="195" y1="585" x2="345" y2="679" stroke="#1E88E5" stroke-width="1.6" marker-end="url(#akey)"/>
+<polyline points="45,437 21,437 21,131 45,131" fill="none" stroke="#E53935" stroke-width="2.2" marker-end="url(#apairing)"/>
+<polyline points="45,258 5,258 5,585 45,585" fill="none" stroke="#E53935" stroke-width="2.2" marker-end="url(#apairing)"/>
+<line x1="530" y1="124" x2="735" y2="325" stroke="#E53935" stroke-width="2.4" marker-end="url(#av7)"/>
+<line x1="530" y1="312" x2="735" y2="277" stroke="#E53935" stroke-width="2.4" marker-end="url(#av7)"/>
+<line x1="530" y1="340" x2="735" y2="277" stroke="#E53935" stroke-width="2.4" marker-end="url(#av7)"/>
+<line x1="195" y1="131" x2="345" y2="312" stroke="#E53935" stroke-width="2.4" marker-end="url(#av7)"/>
+<line x1="195" y1="174" x2="735" y2="175" stroke="#F9A825" stroke-width="1.6" marker-end="url(#ayellow)"/>
+<line x1="195" y1="202" x2="735" y2="227" stroke="#F9A825" stroke-width="1.6" marker-end="url(#ayellow)"/>
+<line x1="195" y1="230" x2="735" y2="277" stroke="#F9A825" stroke-width="1.6" marker-end="url(#ayellow)"/>
+<line x1="195" y1="258" x2="735" y2="325" stroke="#F9A825" stroke-width="1.6" marker-end="url(#ayellow)"/>
+<line x1="950" y1="175" x2="1105" y2="173" stroke="#00838F" stroke-width="1.6" marker-end="url(#afunnel)"/>
+<line x1="950" y1="227" x2="1105" y2="225" stroke="#00838F" stroke-width="1.6" marker-end="url(#afunnel)"/>
+<line x1="950" y1="277" x2="1105" y2="277" stroke="#00838F" stroke-width="1.6" marker-end="url(#afunnel)"/>
+<line x1="950" y1="325" x2="1105" y2="325" stroke="#00838F" stroke-width="1.6" marker-end="url(#afunnel)"/>
+<line x1="842" y1="192" x2="842" y2="400" stroke="#8E24AA" stroke-width="1.8" marker-end="url(#aev)"/>
+<line x1="842" y1="244" x2="842" y2="400" stroke="#8E24AA" stroke-width="1.8" marker-end="url(#aev)"/>
+<line x1="842" y1="292" x2="842" y2="400" stroke="#8E24AA" stroke-width="1.8" marker-end="url(#aev)"/>
+<line x1="842" y1="340" x2="842" y2="400" stroke="#8E24AA" stroke-width="1.8" marker-end="url(#aev)"/>
+<!-- v8: ev_truth no longer drives LU7 (re-routed through EV_market, supply-only) -->
+<line x1="950" y1="615" x2="1105" y2="616" stroke="#EF6C00" stroke-width="1.8" marker-end="url(#aauction)"/>
+<line x1="950" y1="615" x2="1105" y2="676" stroke="#EF6C00" stroke-width="1.8" marker-end="url(#aauction)"/>
+<line x1="195" y1="405" x2="735" y2="175" stroke="#F9A825" stroke-width="1.6" marker-end="url(#ayellow)"/>
+<line x1="195" y1="553" x2="735" y2="175" stroke="#F9A825" stroke-width="1.6" marker-end="url(#ayellow)"/>
+<line x1="195" y1="405" x2="735" y2="227" stroke="#F9A825" stroke-width="1.6" marker-end="url(#ayellow)"/>
+<line x1="195" y1="585" x2="735" y2="325" stroke="#F9A825" stroke-width="1.6" marker-end="url(#ayellow)"/>
+<line x1="530" y1="465" x2="735" y2="227" stroke="#1E88E5" stroke-width="1.6" marker-end="url(#akey)"/>
+<line x1="530" y1="465" x2="735" y2="325" stroke="#1E88E5" stroke-width="1.6" marker-end="url(#akey)"/>
+<line x1="735" y1="325" x2="530" y2="861" stroke="#EF6C00" stroke-width="1.8" marker-end="url(#aauction)"/>
+<polyline points="345,711 332,711 332,861 345,861" fill="none" stroke="#EF6C00" stroke-width="1.8" marker-end="url(#aauction)"/>
+<rect x="45" y="110" width="150" height="42" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4"/>
+<text x="120" y="128" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LU1 archetype</text>
+<text x="120" y="140" text-anchor="middle" font-size="8.5" font-weight="400" fill="#1A1A1A">(latent hub)</text>
+<rect x="45" y="162" width="150" height="24" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="120" y="178" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LU2 click_prop</text>
+<rect x="45" y="190" width="150" height="24" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="120" y="206" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LU3 install_prop</text>
+<rect x="45" y="218" width="150" height="24" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="120" y="234" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LU4 pay_prop</text>
+<rect x="45" y="246" width="150" height="24" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="120" y="262" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LU5 spend/whale</text>
+<rect x="45" y="274" width="150" height="24" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="120" y="290" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LU6 interest_vec</text>
+<rect x="45" y="392" width="150" height="26" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.3"/>
+<text x="120" y="408" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">LA1 app_quality</text>
+<rect x="45" y="424" width="150" height="26" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.3"/>
+<text x="120" y="440" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">LA2 audience_profile</text>
+<rect x="45" y="540" width="150" height="26" rx="6" fill="#FFE0B2" stroke="#EF6C00" stroke-width="1.3"/>
+<text x="120" y="556" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">LC1 creative_appeal</text>
+<rect x="45" y="572" width="150" height="26" rx="6" fill="#FFE0B2" stroke="#EF6C00" stroke-width="1.3"/>
+<text x="120" y="588" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">LC2 game_quality</text>
+<rect x="345" y="112" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="128" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">A3 os</text>
+<rect x="345" y="140" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="156" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">A4 os_version</text>
+<rect x="345" y="168" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="184" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">A5 device_type</text>
+<rect x="345" y="204" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="220" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">A1 region (untilted)</text>
+<rect x="345" y="232" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="248" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">A2 city</text>
+<rect x="345" y="272" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="288" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">D1 timestamp</text>
+<rect x="345" y="300" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="316" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">D2 hour_of_day</text>
+<rect x="345" y="328" width="185" height="24" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="344" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">D3 day_of_week</text>
+<rect x="345" y="420" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="436" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">B1 app_id</text>
+<rect x="345" y="452" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="468" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">B2 app_category</text>
+<rect x="345" y="484" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="500" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">B3 ad_exchange</text>
+<rect x="345" y="516" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="532" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">B4/B5 slot size</text>
+<rect x="345" y="548" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="564" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">B6 slot_format</text>
+<rect x="345" y="666" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="682" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">C1/C3 campaign_id</text>
+<rect x="345" y="698" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="714" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">C2 advertiser_scale</text>
+<rect x="345" y="730" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="746" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">C4 ad_genre</text>
+<rect x="345" y="806" width="185" height="26" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="822" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">H1 floor_price</text>
+<rect x="345" y="840" width="185" height="42" rx="6" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.3"/>
+<text x="438" y="858" text-anchor="middle" font-size="11" font-weight="400" fill="#1A1A1A">H2 bid_price</text>
+<text x="438" y="870" text-anchor="middle" font-size="8.5" font-weight="400" fill="#1A1A1A">=k_cpa&#183;v_slot&#183;ease&#183;E[ltv|B2]</text>
+<rect x="735" y="158" width="215" height="34" rx="6" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="1.3"/>
+<text x="842" y="172" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">p_click</text>
+<text x="842" y="184" text-anchor="middle" font-size="8.5" font-weight="400" fill="#1A1A1A">&#8592; LU2&#183;v_slot&#183;m(r)&#183;LA1&#183;LC1</text>
+<rect x="735" y="210" width="215" height="34" rx="6" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="1.3"/>
+<text x="842" y="224" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">p_install</text>
+<text x="842" y="236" text-anchor="middle" font-size="8.5" font-weight="400" fill="#1A1A1A">&#8592; LU3&#183;ease(B2)&#183;m(r)&#183;LA1</text>
+<rect x="735" y="262" width="215" height="30" rx="6" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="1.3"/>
+<text x="842" y="280" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">p_payer &#8592; LU4&#183;t_pay(D2,D3)</text>
+<rect x="735" y="310" width="215" height="30" rx="6" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="1.3"/>
+<text x="842" y="328" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">e_ltv &#8592; LU5&#183;LC2&#183;&#956;(B2)&#183;&#961;(A3)</text>
+<rect x="735" y="400" width="215" height="40" rx="6" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="1.3"/>
+<text x="842" y="417" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">ev_truth</text>
+<text x="842" y="429" text-anchor="middle" font-size="8.5" font-weight="400" fill="#1A1A1A">= p_click&#183;p_install&#183;p_payer&#183;e_ltv</text>
+<rect x="735" y="600" width="215" height="30" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.3"/>
+<text x="842" y="618" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">LU7 competing_bid</text>
+<rect x="1105" y="158" width="270" height="30" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.3"/>
+<text x="1240" y="176" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">E1 click</text>
+<rect x="1105" y="210" width="270" height="30" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.3"/>
+<text x="1240" y="228" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">F1 install</text>
+<rect x="1105" y="262" width="270" height="30" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.3"/>
+<text x="1240" y="280" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">G1 is_payer</text>
+<rect x="1105" y="310" width="270" height="30" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.3"/>
+<text x="1240" y="328" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">G2/G3/G4 LTV</text>
+<rect x="1105" y="596" width="270" height="40" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.3"/>
+<text x="1240" y="613" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">H3 won</text>
+<text x="1240" y="625" text-anchor="middle" font-size="8.5" font-weight="400" fill="#1A1A1A">=[H2 &#8805; max(LU7,floor)]</text>
+<rect x="1105" y="656" width="270" height="40" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.3"/>
+<text x="1240" y="673" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">H4 clearing</text>
+<text x="1240" y="685" text-anchor="middle" font-size="8.5" font-weight="400" fill="#1A1A1A">= H2 | LU7 | NaN</text>
+<line x1="30" y1="931" x2="54" y2="931" stroke="#1565C0" stroke-width="2.2"/>
+<text x="60" y="935" font-size="9.5" fill="#37474F">archetype &#8594; value latents (hierarchy)</text>
+<line x1="290" y1="931" x2="314" y2="931" stroke="#C62828" stroke-width="2.2"/>
+<text x="320" y="935" font-size="9.5" fill="#37474F">CPT tilt archetype &#8594; A-feature (WIRED)</text>
+<line x1="556" y1="931" x2="580" y2="931" stroke="#E53935" stroke-width="2.2"/>
+<text x="586" y="935" font-size="9.5" fill="#37474F">BN: 5 dependency edges (#1&#8211;#5)</text>
+<line x1="780" y1="931" x2="804" y2="931" stroke="#F9A825" stroke-width="2.2"/>
+<text x="810" y="935" font-size="9.5" fill="#37474F">latent &#8594; estimand</text>
+<line x1="940" y1="931" x2="964" y2="931" stroke="#00838F" stroke-width="2.2"/>
+<text x="970" y="935" font-size="9.5" fill="#37474F">estimand &#8594; outcome</text>
+<line x1="30" y1="949" x2="54" y2="949" stroke="#9E9E9E" stroke-width="2.2"/>
+<text x="60" y="953" font-size="9.5" fill="#37474F">nesting / derivation</text>
+<line x1="184" y1="949" x2="208" y2="949" stroke="#1E88E5" stroke-width="2.2"/>
+<text x="214" y="953" font-size="9.5" fill="#37474F">entity latent &#8594; id (key)</text>
+<line x1="402" y1="949" x2="426" y2="949" stroke="#8E24AA" stroke-width="2.2"/>
+<text x="432" y="953" font-size="9.5" fill="#37474F">EV chain &#8594; competing bid</text>
+<line x1="590" y1="949" x2="614" y2="949" stroke="#EF6C00" stroke-width="2.2"/>
+<text x="620" y="953" font-size="9.5" fill="#37474F">bid computation / auction</text>
+<line x1="810" y1="949" x2="834" y2="949" stroke="#1E88E5" stroke-width="2.2"/>
+<text x="840" y="953" font-size="9.5" fill="#37474F">observable &#8594; estimand</text>
+<line x1="1090" y1="949" x2="1114" y2="949" stroke="#2E7D32" stroke-width="2.4"/>
+<text x="1120" y="953" font-size="9.5" fill="#37474F">v8 price/competition (#6&#8211;#10, PROPOSED)</text>
+<!-- ===== v8 PRICE/COMPETITION LAYER (PROPOSED, default OFF) ===== -->
+<line x1="530" y1="497" x2="731" y2="611" stroke="#2E7D32" stroke-width="2" marker-end="url(#av8)"/>
+<line x1="195" y1="405" x2="733" y2="617" stroke="#2E7D32" stroke-width="1.5" marker-end="url(#av8)"/>
+<line x1="530" y1="433" x2="731" y2="612" stroke="#2E7D32" stroke-width="1.5" marker-end="url(#av8)"/>
+<line x1="530" y1="465" x2="731" y2="616" stroke="#2E7D32" stroke-width="1.5" marker-end="url(#av8)"/>
+<line x1="530" y1="529" x2="731" y2="621" stroke="#2E7D32" stroke-width="1.5" marker-end="url(#av8)"/>
+<line x1="1235" y1="697" x2="1108" y2="868" stroke="#2E7D32" stroke-width="1.8" marker-end="url(#av8)"/>
+<line x1="1262" y1="697" x2="1298" y2="868" stroke="#2E7D32" stroke-width="1.8" marker-end="url(#av8)"/>
+<polyline points="345,500 333,500 333,601 344,601" fill="none" stroke="#2E7D32" stroke-width="1.4" marker-end="url(#av8)"/>
+<polyline points="345,312 327,312 327,596 344,596" fill="none" stroke="#2E7D32" stroke-width="1.3" marker-end="url(#av8)"/>
+<line x1="438" y1="574" x2="438" y2="589" stroke="#2E7D32" stroke-width="1.4" marker-end="url(#av8)"/>
+<line x1="530" y1="606" x2="733" y2="617" stroke="#2E7D32" stroke-width="2" marker-end="url(#av8)"/>
+<line x1="842" y1="508" x2="842" y2="598" stroke="#2E7D32" stroke-width="1.8" marker-end="url(#av8)"/>
+<rect x="345" y="589" width="185" height="34" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+<text x="437" y="604" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">bid_density = N_t</text>
+<text x="437" y="616" text-anchor="middle" font-size="7.5" fill="#1A1A1A">SSP-only obs &#183; = f(B3,B6,D2) &#8594; LU7 (#6)</text>
+<rect x="735" y="478" width="215" height="28" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+<text x="842" y="490" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1A1A1A">EV_market (supply-only)</text>
+<text x="842" y="501" text-anchor="middle" font-size="7" fill="#1A1A1A">genre-marginal E_g[LU6] &#183; keeps C1&#8211;C4 OUT</text>
+<rect x="989" y="870" width="205" height="34" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+<text x="1091" y="886" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">hist_clearing_ssp (#5)</text>
+<text x="1091" y="899" text-anchor="middle" font-size="8" fill="#1A1A1A">all-clears OOF mean &#8594; UNBIASED (C3/C4)</text>
+<rect x="1199" y="870" width="206" height="34" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+<text x="1302" y="886" text-anchor="middle" font-size="11" font-weight="700" fill="#1A1A1A">hist_clearing_dsp (#5)</text>
+<text x="1302" y="899" text-anchor="middle" font-size="8" fill="#1A1A1A">won-only OOF mean &#8594; BIASED (C1&#8211;C4 baseline)</text>
+</svg>

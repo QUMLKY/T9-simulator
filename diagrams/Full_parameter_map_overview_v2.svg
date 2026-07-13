@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="860" viewBox="0 -60 1280 860" font-family="Segoe UI, Arial, sans-serif">
+<defs>
+<marker id="ared"    markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#E53935"/></marker>
+<marker id="ayellow" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#F9A825"/></marker>
+<marker id="ablue"   markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#1E88E5"/></marker>
+<marker id="ateal"   markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#00838F"/></marker>
+<marker id="apurple" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#8E24AA"/></marker>
+<marker id="aorange" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#EF6C00"/></marker>
+</defs>
+
+<rect x="0" y="-60" width="1280" height="860" fill="#FFFFFF"/>
+<text x="640" y="-38" text-anchor="middle" font-size="24" font-weight="700" fill="#37474F">T9 Parameter Map — Group Overview (Simplified)</text>
+
+<!-- ===== COLUMN HEADERS ===== -->
+<text x="140"  y="-4" text-anchor="middle" font-size="22" font-weight="700" fill="#37474F">latents</text>
+<text x="140"  y="16" text-anchor="middle" font-size="12" fill="#78909C">(ground truth)</text>
+<text x="449"  y="-4" text-anchor="middle" font-size="22" font-weight="700" fill="#37474F">observables</text>
+<text x="784"  y="-4" text-anchor="middle" font-size="22" font-weight="700" fill="#37474F">estimands</text>
+<text x="784"  y="16" text-anchor="middle" font-size="12" fill="#78909C">(ground truth, transitional)</text>
+<text x="1140" y="-4" text-anchor="middle" font-size="22" font-weight="700" fill="#37474F">outcome labels</text>
+<text x="1140" y="16" text-anchor="middle" font-size="12" fill="#78909C">(selectively censored)</text>
+
+<!-- ===== COL 1 — LATENT BOXES ===== -->
+
+<!-- USER LATENT  x=48..232  y=62..254 -->
+<rect x="48" y="62" width="184" height="192" rx="10" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.2"/>
+<text x="140" y="84"  text-anchor="middle" font-size="13" font-weight="700" fill="#0D47A1">USER</text>
+<text x="140" y="108" text-anchor="middle" font-size="10" fill="#1A237E">LU1  archetype (hub)</text>
+<text x="140" y="126" text-anchor="middle" font-size="10" fill="#1A237E">LU2  click_prop</text>
+<text x="140" y="144" text-anchor="middle" font-size="10" fill="#1A237E">LU3  install_prop</text>
+<text x="140" y="162" text-anchor="middle" font-size="10" fill="#1A237E">LU4  pay_prop</text>
+<text x="140" y="180" text-anchor="middle" font-size="10" fill="#1A237E">LU5  spend / whale</text>
+<text x="140" y="198" text-anchor="middle" font-size="10" fill="#1A237E">LU6  interest_vec</text>
+
+<!-- APP LATENT  x=48..232  y=298..426 -->
+<rect x="48" y="298" width="184" height="128" rx="10" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2.2"/>
+<text x="140" y="320" text-anchor="middle" font-size="13" font-weight="700" fill="#1B5E20">APP</text>
+<text x="140" y="348" text-anchor="middle" font-size="10" fill="#1B5E20">LA1  app_quality</text>
+<text x="140" y="366" text-anchor="middle" font-size="10" fill="#1B5E20">LA2  audience_profile</text>
+
+<!-- CAMPAIGN LATENT  x=48..232  y=466..578 -->
+<rect x="48" y="466" width="184" height="112" rx="10" fill="#FFE0B2" stroke="#EF6C00" stroke-width="2.2"/>
+<text x="140" y="488" text-anchor="middle" font-size="13" font-weight="700" fill="#BF360C">CAMPAIGN</text>
+<text x="140" y="516" text-anchor="middle" font-size="10" fill="#BF360C">LC1  creative_appeal</text>
+<text x="140" y="534" text-anchor="middle" font-size="10" fill="#BF360C">LC2  game_quality</text>
+
+<!-- ===== COL 2 — OBSERVABLE BOXES ===== -->
+
+<!-- USER OBS  x=350..548  y=62..254  (same y-band as USER LATENT) -->
+<rect x="350" y="62" width="198" height="192" rx="10" fill="#ECEFF1" stroke="#546E7A" stroke-width="1.8"/>
+<text x="449" y="84"  text-anchor="middle" font-size="13" font-weight="700" fill="#37474F">USER · TIME</text>
+<text x="449" y="108" text-anchor="middle" font-size="10" fill="#455A64">A1 region   A2 city</text>
+<text x="449" y="126" text-anchor="middle" font-size="10" fill="#455A64">A3 os   A4 os_version   A5 device</text>
+<text x="449" y="148" text-anchor="middle" font-size="10" fill="#455A64">D1 timestamp</text>
+<text x="449" y="166" text-anchor="middle" font-size="10" fill="#455A64">D2 hour_of_day</text>
+<text x="449" y="184" text-anchor="middle" font-size="10" fill="#455A64">D3 day_of_week</text>
+<text x="449" y="242" text-anchor="middle" font-size="9" font-weight="600" fill="#1565C0">C1  C2  C3  C4 — DSP</text>
+
+<!-- APP OBS  x=350..548  y=298..426  (same y-band as APP LATENT) -->
+<rect x="350" y="298" width="198" height="128" rx="10" fill="#ECEFF1" stroke="#546E7A" stroke-width="1.8"/>
+<text x="449" y="320" text-anchor="middle" font-size="13" font-weight="700" fill="#37474F">APP · CONTEXT</text>
+<text x="449" y="348" text-anchor="middle" font-size="10" fill="#455A64">B1 app_id   B2 app_category</text>
+<text x="449" y="366" text-anchor="middle" font-size="10" fill="#455A64">B3–B6 exchange / slot</text>
+<text x="449" y="414" text-anchor="middle" font-size="9" font-weight="600" fill="#1565C0">C1  C2  C3  C4 — DSP</text>
+
+<!-- CAMPAIGN OBS  x=350..548  y=466..538 -->
+<rect x="350" y="466" width="198" height="72" rx="10" fill="#ECEFF1" stroke="#546E7A" stroke-width="1.8"/>
+<text x="449" y="488" text-anchor="middle" font-size="13" font-weight="700" fill="#37474F">CAMPAIGN</text>
+<text x="449" y="512" text-anchor="middle" font-size="10" fill="#455A64">C1–C4 campaign / advertiser</text>
+<text x="449" y="530" text-anchor="middle" font-size="9" font-weight="600" fill="#1565C0">C1  C2  C3  C4 — DSP</text>
+
+<!-- PRICES OBS  x=350..548  y=578..698 -->
+<rect x="350" y="578" width="198" height="120" rx="10" fill="#ECEFF1" stroke="#546E7A" stroke-width="1.8"/>
+<text x="449" y="600" text-anchor="middle" font-size="13" font-weight="700" fill="#37474F">PRICE</text>
+<text x="449" y="628" text-anchor="middle" font-size="10" fill="#455A64">H1  floor_price</text>
+<text x="449" y="648" text-anchor="middle" font-size="10" fill="#455A64">H2  bid  (k_cpa &#183; v_slot &#183; E[ltv|B2])</text>
+<text x="449" y="686" text-anchor="middle" font-size="9" font-weight="600" fill="#1565C0">C1  C2  C3  C4</text>
+
+<!-- ===== COL 3 — ESTIMANDS + COMPETING BID ===== -->
+
+<!-- ESTIMANDS  x=660..908  y=62..524 -->
+<rect x="660" y="62" width="248" height="462" rx="10" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="2.2"/>
+<text x="784" y="84"  text-anchor="middle" font-size="13" font-weight="700" fill="#4A148C">ESTIMANDS</text>
+<text x="784" y="100" text-anchor="middle" font-size="9"   fill="#6A1B9A">ground truth — master dataset only</text>
+<line x1="670" y1="109" x2="898" y2="109" stroke="#AB47BC" stroke-width="0.8" stroke-dasharray="4,3"/>
+<text x="784" y="146" text-anchor="middle" font-size="15" font-weight="700" fill="#311B92">p_click</text>
+<text x="784" y="164" text-anchor="middle" font-size="9"   fill="#37474F">&#8592; LU2 &#183; v_slot &#183; m(r) &#183; LA1 &#183; LC1</text>
+<text x="784" y="198" text-anchor="middle" font-size="15" font-weight="700" fill="#311B92">p_install</text>
+<text x="784" y="216" text-anchor="middle" font-size="9"   fill="#37474F">&#8592; LU3 &#183; ease(B2) &#183; m(r) &#183; LA1</text>
+<text x="784" y="250" text-anchor="middle" font-size="15" font-weight="700" fill="#311B92">p_payer</text>
+<text x="784" y="268" text-anchor="middle" font-size="9"   fill="#37474F">&#8592; LU4 &#183; t_pay(D2, D3)</text>
+<text x="784" y="302" text-anchor="middle" font-size="15" font-weight="700" fill="#311B92">e_ltv</text>
+<text x="784" y="320" text-anchor="middle" font-size="9"   fill="#37474F">&#8592; LU5 &#183; LC2 &#183; &#956;(B2) &#183; &#961;(A3)</text>
+<line x1="670" y1="338" x2="898" y2="338" stroke="#AB47BC" stroke-width="0.8" stroke-dasharray="4,3"/>
+<text x="784" y="372" text-anchor="middle" font-size="15" font-weight="700" fill="#311B92">ev_truth</text>
+<text x="784" y="392" text-anchor="middle" font-size="9"   fill="#37474F">= p_click &#215; p_install &#215; p_payer &#215; e_ltv</text>
+<text x="784" y="506" text-anchor="middle" font-size="8.5" fill="#78909C">(never directly observed in any condition)</text>
+
+<!-- COMPETING BID  x=660..908  y=560..704 -->
+<rect x="660" y="560" width="248" height="144" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.8"/>
+<text x="784" y="582" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">COMPETING BID / PRICES</text>
+<text x="784" y="606" text-anchor="middle" font-size="10" fill="#0D47A1">LU7  competing_bid (latent)</text>
+<text x="784" y="626" text-anchor="middle" font-size="9"   fill="#37474F">drawn from ev_truth distribution</text>
+<text x="784" y="648" text-anchor="middle" font-size="9"   fill="#37474F">H3  won = [H2 &#8805; max(LU7, H1)]</text>
+<text x="784" y="692" text-anchor="middle" font-size="8.5" fill="#78909C">Tier-2 win model input</text>
+
+<!-- ===== COL 4 — OUTCOME LABELS ===== -->
+
+<!-- USER FUNNEL  x=1018..1262  y=62..524 -->
+<rect x="1018" y="62" width="244" height="462" rx="10" fill="#FFCDD2" stroke="#C62828" stroke-width="1.8"/>
+<text x="1140" y="84"  text-anchor="middle" font-size="12" font-weight="700" fill="#B71C1C">OUTCOME LABELS &#8212; funnel</text>
+<line x1="1028" y1="92" x2="1252" y2="92" stroke="#EF9A9A" stroke-width="0.8" stroke-dasharray="4,3"/>
+<text x="1140" y="136" text-anchor="middle" font-size="14" font-weight="700" fill="#7F0000">E1  click  (0/1)</text>
+<text x="1140" y="196" text-anchor="middle" font-size="14" font-weight="700" fill="#7F0000">F1  install  (0/1)</text>
+<text x="1140" y="256" text-anchor="middle" font-size="14" font-weight="700" fill="#7F0000">G1  is_payer  (0/1)</text>
+<text x="1140" y="316" text-anchor="middle" font-size="14" font-weight="700" fill="#7F0000">G2  ltv_value  ($)</text>
+<text x="1140" y="368" text-anchor="middle" font-size="11"  fill="#7F0000">G3  ltv_30d &#160;&#160; G4  ltv_90d</text>
+<line x1="1028" y1="396" x2="1252" y2="396" stroke="#EF9A9A" stroke-width="0.8" stroke-dasharray="4,3"/>
+<text x="1140" y="422" text-anchor="middle" font-size="9"   fill="#37474F">C1/C3: E/F/G on WON rows only (selection bias)</text>
+<text x="1140" y="440" text-anchor="middle" font-size="9"   fill="#37474F">C2/C4: E/F/G on ALL rows (MMP correction)</text>
+<text x="1140" y="500" text-anchor="middle" font-size="9.5" font-weight="600" fill="#C62828">DSP + MMP source</text>
+<text x="1140" y="516" text-anchor="middle" font-size="9.5" font-weight="600" fill="#1565C0">Tier-1 target labels (4-head hurdle)</text>
+
+<!-- AUCTION  x=1018..1262  y=560..704 -->
+<rect x="1018" y="560" width="244" height="144" rx="10" fill="#FFCDD2" stroke="#C62828" stroke-width="1.8"/>
+<text x="1140" y="582" text-anchor="middle" font-size="12" font-weight="700" fill="#B71C1C">OUTCOME LABELS &#8212; auction</text>
+<text x="1140" y="614" text-anchor="middle" font-size="14" font-weight="700" fill="#7F0000">H3  won  (0/1)</text>
+<text x="1140" y="654" text-anchor="middle" font-size="14" font-weight="700" fill="#7F0000">H4  clearing_price  ($)</text>
+<text x="1140" y="682" text-anchor="middle" font-size="9"   fill="#37474F">H4 in C3/C4 only (SSP exposes clearing price)</text>
+<text x="1140" y="696" text-anchor="middle" font-size="9.5" font-weight="600" fill="#C62828">DSP + SSP source</text>
+
+<!-- ===== EDGES ===== -->
+
+<!-- RED BN #1: USER ↔ APP (bidirectional, vertical in gap y=254..298) -->
+<line x1="140" y1="254" x2="140" y2="298" stroke="#E53935" stroke-width="2.4" marker-end="url(#ared)"/>
+<line x1="160" y1="298" x2="160" y2="254" stroke="#E53935" stroke-width="2.4" marker-end="url(#ared)"/>
+
+<!-- RED BN #2: USER → CAMPAIGN (around left exterior) -->
+<polyline points="48,178 16,178 16,522 48,522"
+  fill="none" stroke="#E53935" stroke-width="2.4" marker-end="url(#ared)"/>
+
+<!-- YELLOW: latent pools → estimands (arch over top of diagram) -->
+<polyline points="140,62 140,42 784,42 784,62"
+  fill="none" stroke="#F9A825" stroke-width="2.8" marker-end="url(#ayellow)"/>
+
+<!-- BLUE: user latent → user obs -->
+<line x1="232" y1="158" x2="350" y2="158" stroke="#1E88E5" stroke-width="2.2" marker-end="url(#ablue)"/>
+
+<!-- BLUE: app latent → app obs -->
+<line x1="232" y1="362" x2="350" y2="362" stroke="#1E88E5" stroke-width="2.2" marker-end="url(#ablue)"/>
+
+<!-- BLUE: campaign latent → campaign obs -->
+<line x1="232" y1="502" x2="350" y2="502" stroke="#1E88E5" stroke-width="2.2" marker-end="url(#ablue)"/>
+
+<!-- BLUE: user obs → estimands -->
+<line x1="548" y1="158" x2="660" y2="158" stroke="#1E88E5" stroke-width="2.2" marker-end="url(#ablue)"/>
+
+<!-- BLUE: app obs → estimands -->
+<line x1="548" y1="362" x2="660" y2="362" stroke="#1E88E5" stroke-width="2.2" marker-end="url(#ablue)"/>
+
+<!-- ORANGE: campaign obs → prices obs (C2 → k_cpa → H2, vertical in gap y=538..578) -->
+<line x1="449" y1="538" x2="449" y2="578" stroke="#EF6C00" stroke-width="2.2" marker-end="url(#aorange)"/>
+
+<!-- ORANGE: prices obs → competing bid (horizontal) -->
+<line x1="548" y1="638" x2="660" y2="632" stroke="#EF6C00" stroke-width="2.2" marker-end="url(#aorange)"/>
+
+<!-- PURPLE: ev_truth → competing bid (vertical in gap y=524..560) -->
+<line x1="784" y1="524" x2="784" y2="560" stroke="#8E24AA" stroke-width="2.8" marker-end="url(#apurple)"/>
+
+<!-- TEAL: estimands → user funnel (horizontal) -->
+<line x1="908" y1="293" x2="1018" y2="293" stroke="#00838F" stroke-width="2.8" marker-end="url(#ateal)"/>
+
+<!-- ORANGE: competing bid → auction (horizontal) -->
+<line x1="908" y1="632" x2="1018" y2="632" stroke="#EF6C00" stroke-width="2.8" marker-end="url(#aorange)"/>
+
+<!-- ===== LEGEND ===== -->
+<rect x="30" y="722" width="1220" height="56" rx="6" fill="#F5F5F5" stroke="#CFD8DC" stroke-width="1"/>
+<line x1="48"   y1="752" x2="76"   y2="752" stroke="#E53935" stroke-width="2.6"/>
+<text x="82"    y="756" font-size="10" fill="#212121">BN dependency (user&#8596;app, user&#8594;campaign)</text>
+<line x1="310"  y1="752" x2="338"  y2="752" stroke="#F9A825" stroke-width="2.6"/>
+<text x="344"   y="756" font-size="10" fill="#212121">latent pools &#8594; estimands (direct)</text>
+<line x1="560"  y1="752" x2="588"  y2="752" stroke="#1E88E5" stroke-width="2.6"/>
+<text x="594"   y="756" font-size="10" fill="#212121">latent &#8594; obs (key lookup) · obs &#8594; estimands</text>
+<line x1="870"  y1="752" x2="898"  y2="752" stroke="#00838F" stroke-width="2.6"/>
+<text x="904"   y="756" font-size="10" fill="#212121">estimands &#8594; outcome labels</text>
+<line x1="1080" y1="752" x2="1108" y2="752" stroke="#8E24AA" stroke-width="2.6"/>
+<text x="1114"  y="756" font-size="10" fill="#212121">ev_truth &#8594; auction</text>
+
+<line x1="48"   y1="768" x2="76"   y2="768" stroke="#EF6C00" stroke-width="2.6"/>
+<text x="82"    y="772" font-size="10" fill="#212121">price / bid / auction flow (campaign &#8594; prices &#8594; competing bid &#8594; auction)</text>
+<text x="640"   y="772" text-anchor="middle" font-size="9" fill="#78909C">Ablation: C1=DSP · C2=DSP+MMP · C3=DSP+SSP · C4=all · MMP adds funnel on ALL rows · SSP adds H4 clearing price</text>
+</svg>
