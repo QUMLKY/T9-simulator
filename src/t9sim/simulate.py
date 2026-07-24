@@ -88,10 +88,16 @@ def run(profile=None, gamma=None, out_name=None, seed=None, bn_edges=None, rho=N
         cfg.provenance.to_csv(alt, index=False)
         print(f"WARNING: provenance.csv locked by another program - "
               f"wrote {alt.name} instead")
+    # The manifest is what a downloaded dataset carries to identify itself, so it
+    # must record the two settings that define the run's schema variant: rho (the
+    # privateness dial) and the BN edge flags. Without them a dataset cannot be
+    # told apart from one generated under a different configuration.
     manifest = {
         "profile": cfg.profile_name, **cfg.profile,
         "win_rate_target": cfg.win_rate["target"], **cal,
-        "schema": "Simulator_Schema - June 10 (v6)",
+        "rho": float(cfg.benchmarks.get("auction", {}).get("rho", 0.0)),
+        "bn_edges": {k: bool(v) for k, v in sorted(cfg.bn_edges.items())},
+        "schema": "T9Sim Specification v10",
         "elapsed_s": round(time.time() - t0, 1),
     }
     (out / "manifest.json").write_text(json.dumps(manifest, indent=2),
