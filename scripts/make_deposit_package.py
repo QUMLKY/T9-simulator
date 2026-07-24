@@ -21,9 +21,18 @@ The manifest records, for each archive:
                  non-deterministic metadata, so a correct regeneration differs
                  byte-for-byte; only this survives that.
 
+Resumable. Each dataset's manifest block is cached the moment it is finished, so a
+re-run skips completed datasets entirely rather than rebuilding, rehashing and
+refingerprinting them. Use --force to redo one anyway.
+
+MEMORY: the fingerprint pass loads a whole master into pandas, about 2.5 GB for a
+10M dataset. Do not run anything else memory-heavy alongside it on a 16 GB
+machine; two concurrent passes will exhaust RAM.
+
 Usage:
   python scripts/make_deposit_package.py            # package + manifest
   python scripts/make_deposit_package.py --manifest-only
+  python scripts/make_deposit_package.py --force    # ignore cached work
 """
 from __future__ import annotations
 
@@ -40,6 +49,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 OUT_DIR = ROOT / "output"
 DEPOSIT = ROOT / "zenodo_deposit"
+PARTS = DEPOSIT / ".manifest_parts"      # per-dataset cache; makes a re-run resumable
 MEMBERS = ["auctions.parquet", "pool_users.parquet",
            "pool_apps.parquet", "pool_campaigns.parquet"]
 
@@ -62,6 +72,22 @@ def hashes(path: Path) -> tuple[str, str, int]:
     return h256.hexdigest(), hmd5.hexdigest(), n
 
 
+def zip_ok(dest: Path, src: Path) -> bool:
+    """True if dest is a readable zip holding all four members at the right sizes.
+
+    Cheap: reads the central directory only, not the payload. Lets a re-run reuse
+    archives already written instead of spending minutes rewriting 1.7 GB.
+    """
+    if not dest.exists():
+        return False
+    try:
+        with zipfile.ZipFile(dest) as z:
+            have = {Path(i.filename).name: i.file_size for i in z.infolist()}
+    except (zipfile.BadZipFile, OSError):
+        return False
+    return all(have.get(m) == (src / m).stat().st_size for m in MEMBERS)
+
+
 def build(src: Path, dest: Path) -> None:
     tmp = dest.with_suffix(".zip.part")     # never leave a half-written .zip
     if tmp.exists():
@@ -77,9 +103,12 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--manifest-only", action="store_true",
                     help="skip zipping; manifest the archives already present")
+    ap.add_argument("--force", action="store_true",
+                    help="rebuild and rehash even where cached work exists")
     args = ap.parse_args()
 
     DEPOSIT.mkdir(exist_ok=True)
+    PARTS.mkdir(exist_ok=True)
     missing = [s for s, _, _ in PAYLOAD if not (OUT_DIR / s).is_dir()]
     if missing:
         sys.exit("missing source datasets: " + ", ".join(missing))
@@ -105,30 +134,48 @@ def main() -> None:
     total = 0
     for src_name, stem, label in PAYLOAD:
         src, dest = OUT_DIR / src_name, DEPOSIT / f"{stem}.zip"
+        part = PARTS / f"{stem}.txt"
 
-        if not args.manifest_only:
+        # resume: a cached block means this dataset is fully done
+        if part.exists() and dest.exists() and not args.force:
+            block = part.read_text(encoding="utf-8")
+            size = dest.stat().st_size
+            total += size
+            lines.append(block.rstrip("\n"))
+            lines.append("")
+            print(f"  skip  {stem}.zip  (already done, {size / 1e9:.2f} GB)", flush=True)
+            continue
+
+        if args.manifest_only:
+            if not dest.exists():
+                sys.exit(f"--manifest-only but {dest.name} is absent")
+        elif zip_ok(dest, src) and not args.force:
+            print(f"  reuse {stem}.zip (valid archive already present)", flush=True)
+        else:
             print(f"  packaging {stem}.zip ...", flush=True)
             build(src, dest)
-        elif not dest.exists():
-            sys.exit(f"--manifest-only but {dest.name} is absent")
 
         sha, md5, size = hashes(dest)
         total += size
 
-        lines.append(f"## {stem}.zip    ({label})")
-        lines.append(f"bytes  = {size}")
-        lines.append(f"md5    = {md5}")
-        lines.append(f"sha256 = {sha}")
-        lines.append("members:")
+        block = [f"## {stem}.zip    ({label})",
+                 f"bytes  = {size}",
+                 f"md5    = {md5}",
+                 f"sha256 = {sha}",
+                 "members:"]
         for m in MEMBERS:
             f = src / m
             msha, _, msize = hashes(f)
             rows = pq.ParquetFile(f).metadata.num_rows
-            lines.append(f"  {msha}  {m}  rows={rows}  bytes={msize}")
+            block.append(f"  {msha}  {m}  rows={rows}  bytes={msize}")
 
         from t9sim.fingerprint import fingerprint      # noqa: E402
         print(f"  fingerprinting {src_name} ...", flush=True)
-        lines.append(f"fingerprint = {fingerprint(str(src)):#018x}")
+        block.append(f"fingerprint = {fingerprint(str(src)):#018x}")
+
+        # cache before moving on, so a crash later costs only this dataset
+        part.write_text("\n".join(block) + "\n", encoding="utf-8")
+        lines.extend(block)
         lines.append("")
         print(f"  {stem}.zip  {size / 1e9:.2f} GB  md5={md5[:12]}...", flush=True)
 
