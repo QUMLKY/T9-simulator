@@ -92,9 +92,16 @@ Per-seed result JSONs for the shipped write-ups are under `docs/results/`.
 Generation is **seed-deterministic**: the same (profile, seed, ρ, edges) reproduces the dataset
 byte-for-byte (verified via the content fingerprint in `src/t9sim/fingerprint.py`; the flag-OFF
 configuration reproduces the v7 baseline fingerprint `0xdf0ac3e18624cf2b`). The paper uses seeds
-**90213–90222**. Generated data therefore ships as *recipes* (profile + seed + config), not
-binaries; frozen dataset archives with checksums and a DOI will accompany the camera-ready
-release (Zenodo).
+**90213–90222**.
+
+The paper's operative configuration is declared in `config/benchmarks.yaml` — the privateness
+dial `rho`, the `bn.rival_pool` edge flag, and the rival-pool parameters (`K`, `n_gaming`,
+`beta_R`, `pacing_ar`, `pacing_sigma`) — so the run is reproducible from configuration alone.
+`CHECKSUMS.txt` pins the SHA-256 of every calibration target and config file that fixes the
+output; regenerate it with `python scripts/make_checksums.py`.
+
+Generated data therefore ships as *recipes* (profile + seed + config), not binaries; frozen
+dataset archives with checksums and a DOI will accompany the camera-ready release (Zenodo).
 
 Calibration targets in `calibration/` are **aggregated distribution shapes** derived from the
 public iPinYou dataset (Zhang et al., 2014), rescaled to a 2025 US mobile-gaming market - no
@@ -109,20 +116,35 @@ src/t9sim/        the package: generator (auctions.py), censoring (censor.py),
                   training/eval pipeline (pipeline.py), validation, fingerprint, api
 config/           all tunable parameters (YAML; every value provenance-tagged)
 calibration/      iPinYou-derived distribution shapes (CSV)
-docs/             schema spec (V10), formal model (BN formalisation), results write-ups
+docs/             the specification (V10) + implementation status, results write-ups
 docs/results/     per-seed and aggregated result JSONs backing the write-ups
 scripts/          paper runners: ablation (1M/10M), method benchmark, sensitivity sweeps
 tests/            35 tests incl. leakage gates and schema contracts
-diagrams/         per-feature calculation SVGs + architecture/DAG diagrams
+diagrams/         schema maps (overview, generation, dependencies, rival prices),
+                  the generator and dependency-graph figures, per-feature calculation SVGs
 examples/         quickstart
 ```
 
 ## Formal model
 
-The generative model (variables, joint factorisation/DAG, the four conditions as censoring
-operators, estimands, and the marginal-preservation / identification propositions P1–P8) is
-specified in `docs/BN_Formalisation.md`, with a readable companion
-(`docs/BN_Formalisation_Readable.md`).
+The generative model is specified in `docs/T9Sim_Specification_v10.md` — the single source of
+truth for the schema:
+
+- **Part I — the data.** Every variable with its domain and parents, which layer observes it,
+  and the C1–C4 censoring map (column- *and* row-conditional), reconciled against the emitted
+  parquet.
+- **Part II — the generator.** The four entity pools, the joint factorisation, the dependency
+  graph over the anchored variables, each conditional law with its clips, and the rival-pool
+  (private-price) layer.
+- **Part III — identification.** Propositions **P1–P4**: what each data layer does and does not
+  identify, and the two-dial result (value-awareness flat, privateness ρ responsive).
+
+Its companion `docs/T9Sim_Implementation_Status.md` carries the build-side detail kept out of
+the specification: edge wiring status, declared code-vs-spec divergences, tunables, validation
+targets, and the audit trail.
+
+A **datasheet** for the dataset (motivation, composition, collection, uses and their limits,
+distribution, maintenance) is in `DATASHEET.md`.
 
 ## Status, license, citation
 
