@@ -204,6 +204,25 @@ rake log-bid moments, so raising `rho` also inflates total price variance. Decla
 between specification and code are listed in `docs/T9Sim_Implementation_Status.md`. Anyone
 drawing conclusions should read that file.
 
+**Which limitations bite hardest in practice?**
+
+Three, stated here rather than left to the divergence register.
+
+- **Three declared archetype tilts are not wired.** The specification declares that a user's
+  latent archetype tilts their `os`, `os_version`, `device_type` and `day_of_week`. Those CPTs
+  are built but no code consumes them, so **the released data carries no archetype signal in
+  those four columns** and their marginals are drawn untilted. A method that appears to extract
+  user-type information from device or day-of-week here is fitting noise. Detail:
+  `docs/T9Sim_Implementation_Status.md` §2.6.3 and the wiring summary.
+- **There is no post-auction price feedback on wins.** Auctions are first-price, so
+  `clearing_price` on a won row is the winner's own bid. The highest rival bid
+  (`lu7_competing_bid`) exists on every row but is a latent, excluded from all four conditions.
+  No condition therefore observes its own overpayment, and bid-shading research needs the
+  generator modified rather than this data as released.
+- **Edge #2 (campaign exposure) is discretised.** The continuous per-user value tilt is applied
+  through value deciles rather than continuously, so `P(campaign | user)` is a step function of
+  latent value. Marginals and monotonicity are preserved; the functional form is not.
+
 ---
 
 ## Distribution
