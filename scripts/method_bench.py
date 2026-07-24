@@ -14,10 +14,12 @@ rows no real log ever reveals):
 Estimator-side only: no schema/generator change; data byte-identical to the
 anchor battery (profile 'test', rho*=0.8, all BN edges + rival_pool).
 
-Run from repo root:  t9_sim/venv/Scripts/python.exe t9_sim/scripts/method_bench.py [--golden]
+Run from repo root:  python scripts/method_bench.py [--golden]
 """
 import sys, json, time, shutil, argparse
-sys.path.insert(0, 't9_sim/src'); sys.stdout.reconfigure(encoding='utf-8')
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+sys.stdout.reconfigure(encoding='utf-8')
 
 import numpy as np
 import pandas as pd

@@ -3,7 +3,9 @@ and combines with the 5-seed batch (v10_anchor_5seed.json) into an n=10 summary
 (mean +/- 95% t-CI + sign counts on every metric axis).
 """
 import sys, json, time
-sys.path.insert(0, 't9_sim/src'); sys.stdout.reconfigure(encoding='utf-8')
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+sys.stdout.reconfigure(encoding='utf-8')
 import numpy as np
 from scipy import stats
 import t9sim.simulate as sim

@@ -9,10 +9,12 @@ null is significant (install AUC, EV-Spearman) + the bias metric (ev_ratio) +
 weight stats. If the null is cap-robust, IPW never overtakes the uncorrected
 reference on ranking at any cap.
 
-Run from repo root:  t9_sim/venv/Scripts/python.exe t9_sim/scripts/ipw_cap_sweep.py
+Run from repo root:  python scripts/ipw_cap_sweep.py
 """
 import sys, json, time, shutil
-sys.path.insert(0, 't9_sim/src'); sys.stdout.reconfigure(encoding='utf-8')
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+sys.stdout.reconfigure(encoding='utf-8')
 import numpy as np
 import pandas as pd
 import pyarrow.parquet as pq

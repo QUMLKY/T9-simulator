@@ -4,7 +4,9 @@ Deletes the ~2.5GB parquet dir after eval (JSON kept; data reproducible by seed)
 Usage: python v10_10m_worker.py <seed>
 """
 import sys, json, shutil
-sys.path.insert(0, 't9_sim/src'); sys.stdout.reconfigure(encoding='utf-8')
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+sys.stdout.reconfigure(encoding='utf-8')
 import t9sim.simulate as sim
 from t9sim.pipeline import run_profile
 from t9sim.paths import OUTPUT_DIR

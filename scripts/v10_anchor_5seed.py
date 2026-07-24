@@ -5,7 +5,9 @@ economics from BOTH bidders (AFT win curve and CLF win curve - model-robustness
 of overpay/surplus, the economics analogue of the shrink test).
 """
 import sys, json, time
-sys.path.insert(0, 't9_sim/src'); sys.stdout.reconfigure(encoding='utf-8')
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+sys.stdout.reconfigure(encoding='utf-8')
 import numpy as np
 from scipy import stats
 import t9sim.simulate as sim

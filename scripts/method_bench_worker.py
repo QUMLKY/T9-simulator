@@ -17,7 +17,9 @@ is the shared bidder win curve for the C1 economics column.
 Usage:  python method_bench_worker.py <seed> [--golden]
 """
 import sys, json, shutil, gc
-sys.path.insert(0, 't9_sim/src'); sys.stdout.reconfigure(encoding='utf-8')
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+sys.stdout.reconfigure(encoding='utf-8')
 import numpy as np
 import pandas as pd
 import pyarrow.parquet as pq
