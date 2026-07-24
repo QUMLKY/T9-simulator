@@ -214,4 +214,6 @@ full specification (`docs/T9Sim_Specification_v10.md`), the datasheet (`DATASHEE
 reference benchmark entrants.
 
 These data are licensed **CC BY 4.0**: free to use, share and adapt, including commercially,
-with credit. Cite via the record's DOI.
+with credit.
+
+Cite as **10.5281/zenodo.21533031**.

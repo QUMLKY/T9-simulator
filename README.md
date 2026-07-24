@@ -101,8 +101,11 @@ dial `rho`, the `bn.rival_pool` edge flag, and the rival-pool parameters (`K`, `
 `CHECKSUMS.txt` pins the SHA-256 of every calibration target and config file that fixes the
 output; regenerate it with `python scripts/make_checksums.py`.
 
-Generated data therefore ships as *recipes* (profile + seed + config), not binaries; frozen
-dataset archives with checksums and a DOI will accompany the camera-ready release (Zenodo).
+Generated data therefore ships as *recipes* (profile + seed + config), not binaries. The frozen
+archives are deposited separately, with checksums and a DOI:
+
+> **Datasets:** [10.5281/zenodo.21533031](https://doi.org/10.5281/zenodo.21533031) — the ten 10M
+> masters behind the published results, plus a 1M sample. CC BY 4.0.
 
 The ten 10M masters behind the headline results (seeds 90213–90222, ~17 GB) can be rebuilt
 locally rather than downloaded:
@@ -168,4 +171,7 @@ Private preview for collaborators, ahead of public release.
 
 **Code** (the `t9sim` package, scripts, tests, examples, config) is **MIT** — see `LICENSE`.
 **Data** (calibration tables, result JSONs, and the deposited datasets) is **CC BY 4.0** — see
-`LICENSE-DATA`. Cite via `CITATION.cff` (paper reference and Zenodo DOI to follow).
+`LICENSE-DATA`.
+
+Cite via `CITATION.cff`. The deposited datasets have their own DOI:
+[10.5281/zenodo.21533031](https://doi.org/10.5281/zenodo.21533031). Paper reference to follow.

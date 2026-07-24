@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use T9, please cite it as below."
+message: "If you use T9Sim, please cite it as below."
 title: "T9Sim RTB Data Simulator: Generating, Censoring and Benchmarking DSP/MMP/SSP Adtech Data Layers"
 type: software
 authors:
@@ -12,9 +12,15 @@ authors:
 version: 1.0.0rc3
 date-released: 2026-07-24
 repository-code: "https://github.com/QUMLKY/T9-simulator"
+doi: 10.5281/zenodo.21533031
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.21533031
+    description: "Deposited datasets (ten 10M masters plus a 1M sample)"
 license:
   - MIT
   - CC-BY-4.0
 notes: >
   Software is MIT (LICENSE); data, including the deposited datasets, is CC BY 4.0
-  (LICENSE-DATA). Preprint/paper reference and Zenodo DOI to be added on release.
+  (LICENSE-DATA). The DOI above resolves once the data record is published.
+  Paper reference to be added on acceptance.
