@@ -31,7 +31,10 @@ import numpy as np
 class RivalPool:
     def __init__(self, cfg, n_days, exch_labels, users):
         bm = cfg.benchmarks
-        rp = bm.get("rival_pool", {}) or {}
+        # params live under bn.rival_pool (declared in benchmarks.yaml, beside the other
+        # edge-group params); the legacy top-level key is still honoured as a fallback
+        rp = ((bm.get("bn") or {}).get("rival_pool")
+              or bm.get("rival_pool") or {})
         self.K = int(rp.get("K", 8))
         self.n_gaming = int(rp.get("n_gaming", 3))          # k in [0, n_gaming) are gaming DSPs
         self.beta_R = float(rp.get("beta_R", 0.5))

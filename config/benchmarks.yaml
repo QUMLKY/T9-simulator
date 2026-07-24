@@ -218,6 +218,10 @@ prices:
 # Auction (LU7 competing bid, H2 our bid)
 # ---------------------------------------------------------------------
 auction:
+  # v10 privateness dial: amplitude of the rival-private structure (w_k, R, pacing) in
+  # log b_ik. 0.0 = no private structure (the SSP-null regime); the paper runs rho = 0.8
+  # (externally anchored, docs/v10_Anchor_Bands.md), passed per run via simulate(rho=...).
+  rho: 0.0
   gamma:                         # market value-sensitivity (THE central knob; drives BOTH
     value: 0.45                  # the MMP lift (selection bias) and the SSP lift (price signal)
     route: inferred
@@ -306,6 +310,8 @@ bn:
     app_price: false         # #9 B1/B2[/B4-5] -> LU7 (m_app/m_cat/m_size)
     time_competition: false  # #10 D2/D3 -> LU7 c_time (morning-peaked)
     ev_market: false         # genre-marginal EV in LU7 (C1-C4 OUT); AUTO-forced ON by any price edge
+    # --- v10 Private-Rival Market (the paper's operative layer); OFF = byte-identical v7 ---
+    rival_pool: false        # #6 K persistent rival archetypes -> LU7 = max b_ik, H9 = |A_i|
   # --- v8 #6 competition (bid_density N_t) params ---
   # MVP: constant rate -> N_t = 1 + Poisson(exp(lambda_b0)); the realized rival
   # count is iid (maximally SSP-exclusive). Per-(exch/fmt/hour) log-adjustments
@@ -316,6 +322,14 @@ bn:
   competition:
     lambda_b0: 1.2           # exp(1.2)=3.32 -> mean N_t ~ 4.3 rivals
     nmax: 64                 # c_N table size / N_t clamp (p99 of 1+Poisson(3.3) ~ 9)
+  # --- v10 #6 rival_pool params (read by rival_pool.py; values = the coded defaults,
+  # declared here so the paper configuration is reproducible from config alone) ---
+  rival_pool:
+    K: 8                     # persistent rival archetypes in the pool
+    n_gaming: 3              # k in [0, n_gaming) are gaming DSPs (k=0 always-on); rest non-gaming
+    beta_R: 0.5              # retargeting scale on R[seg, k]
+    pacing_ar: 0.85          # AR(1) persistence phi_p of the day-level pacing state
+    pacing_sigma: 0.30       # AR(1) innovation sigma_p
   # --- v8 #7-#10 deterministic LU7 price multipliers (mean-1 raked per marginal;
   # each a function of an OBSERVABLE -> learnable in ALL conditions -> raises absolute
   # auc_win = the combined-schema p(win) gain. NOT SSP-exclusive. Amplitudes = a §6 sweep) ---
