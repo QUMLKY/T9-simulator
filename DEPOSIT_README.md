@@ -20,6 +20,7 @@ scored on the auctions the DSP lost.
 |---|---|---|
 | `t9_v10_1m_sample_seed90213.zip` | **Start here.** 1M-auction sample, seed 90213 | ~0.17 GB |
 | `t9_v10_10m_seed90213.zip` … `…90222.zip` | The ten 10M masters behind the published results | ~1.7 GB each |
+| `t9sim-1.0.0-source.zip` | The generator that produced them, tagged release `v1.0.0` | 0.7 MB |
 | `MANIFEST.txt` | Checksums (MD5 + SHA-256), row counts, content fingerprints | — |
 
 Each archive is self-contained. It unpacks to a directory holding the auction master, the three
@@ -42,6 +43,21 @@ validation_report.csv    the six calibration gates, with achieved values
 
 The last three mean a downloaded archive can state its own identity and quality without
 reference to anything else.
+
+`t9sim-1.0.0-source.zip` is the complete source tree of the generator at the tagged release
+`v1.0.0`, commit `7e8ab384f0f47b15b52170799bb24192b1719737`, 191 files. It holds the package, the
+configuration, the iPinYou-derived calibration tables, the tests, the paper runners, the SHAP
+attribution analysis, the specification and the datasheet. It is included so that this record
+does not depend on the GitHub repository continuing to exist: the data and the code that produced
+it are archived together, and either can be checked against the other.
+
+That includes the scripts that rebuild this deposit. `deposit_gen_driver.py` regenerates the ten
+10M masters and `deposit_gen_sample.py` the 1M sample, then `make_deposit_package.py` repackages
+them into exactly these archives with a matching manifest.
+
+The source snapshot is **MIT** licensed, and carries its own `LICENSE`. The datasets are CC BY
+4.0. That is why the record as a whole is marked CC BY 4.0, which is the more restrictive of the
+two.
 
 The two scales use different pool sizes:
 
@@ -207,11 +223,20 @@ divergences between specification and code are in the software repository.
 
 ## Software, specification, and citation
 
-Software: <https://github.com/QUMLKY/T9-simulator> (MIT licensed)
+Software: `t9sim-1.0.0-source.zip` **in this record**, and at
+<https://github.com/QUMLKY/T9-simulator> (MIT licensed). The two are the same tree; the
+repository is where development continues, the snapshot is what these datasets were made with.
 
-That repository holds the generator, the censoring operators, the reference model pipeline, the
-full specification (`docs/T9Sim_Specification_v10.md`), the datasheet (`DATASHEET.md`), and the
+Either holds the generator, the censoring operators, the reference model pipeline, the full
+specification (`docs/T9Sim_Specification_v10.md`), the datasheet (`DATASHEET.md`), and the
 reference benchmark entrants.
+
+```bash
+unzip t9sim-1.0.0-source.zip && cd t9sim-1.0.0
+python -m venv venv && venv/Scripts/activate    # or source venv/bin/activate
+pip install -e . && pytest                      # 35 tests
+python examples/quickstart_100k.py              # ~3 min end to end
+```
 
 These data are licensed **CC BY 4.0**: free to use, share and adapt, including commercially,
 with credit.

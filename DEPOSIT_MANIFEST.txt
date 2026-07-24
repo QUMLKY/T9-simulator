@@ -1,7 +1,11 @@
 # T9 Zenodo deposit manifest
 #
 # One archive per dataset. Each is self-contained: the auction master
-# plus the three entity pools (users, apps, campaigns).
+# plus the three entity pools (users, apps, campaigns), and the run's
+# manifest, provenance and validation report.
+#
+# Plus one source snapshot, the tagged release of the generator that
+# produced them, so the record stands alone if the repository does not.
 #
 # md5     matches what Zenodo displays per uploaded file - use it to
 #         confirm the transfer arrived intact.
@@ -167,4 +171,11 @@ members:
   8725b2e692d25cc4479a2b646838e0b60bc11454747e9d43f12b307c888715e0  validation_report.csv  bytes=313
 fingerprint = 0xa8f93f650dbfe629
 
-# 11 archives, 17.61 GB total
+## t9sim-1.0.0-source.zip    (source snapshot, tag v1.0.0)
+bytes  = 1558877
+md5    = 0455d692b0a999f454586bf54953bddd
+sha256 = c5399778b0155b1b80cdcf8036af0bd89c0b1f6241cf6f5acaeda8092ce06ce7
+git    = 7e8ab384f0f47b15b52170799bb24192b1719737
+files  = 206
+
+# 11 data archives + 1 source snapshot, 17.61 GB total
