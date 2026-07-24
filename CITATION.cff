@@ -16,11 +16,26 @@ doi: 10.5281/zenodo.21533031
 identifiers:
   - type: doi
     value: 10.5281/zenodo.21533031
-    description: "Deposited datasets (ten 10M masters plus a 1M sample)"
+    description: "Deposited datasets (ten 10M masters plus a 1M sample) and a snapshot of this source tree"
 license:
   - MIT
   - CC-BY-4.0
-notes: >
-  Software is MIT (LICENSE); data, including the deposited datasets, is CC BY 4.0
-  (LICENSE-DATA). The DOI above resolves once the data record is published.
-  Paper reference to be added on acceptance.
+abstract: >
+  A calibrated simulator of mobile-game real-time-bidding auctions that retains
+  the ground truth for every auction, won or lost, and a benchmark built on it in
+  which the data stay fixed while the training method varies. Funnel outcomes and
+  the top competing bid are generated on all rows, so methods can be scored on the
+  auctions the bidder lost, which no real advertising log records. Four censoring
+  operators reduce the master table to the views real platforms hold: a demand-side
+  platform alone, plus measurement data, plus auction price data, and all three
+  combined. Software is MIT licensed; data, including the deposited datasets, is
+  CC BY 4.0.
+keywords:
+  - real-time bidding
+  - computational advertising
+  - synthetic data
+  - causal inference
+  - selection bias
+  - censored data
+  - counterfactual evaluation
+  - benchmark

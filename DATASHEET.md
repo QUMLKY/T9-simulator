@@ -62,6 +62,12 @@ The reference releases are **1,000,000** and **10,000,000** auctions per seed, a
 | H | auction (floor_price, bid_price, won, clearing_price, bid_density) |
 | LU / LA / LC | user, app and campaign latents (the generative drivers, e.g. lu1_archetype, la1_app_quality, lc1_creative_appeal) |
 
+`ltv_value` is the 90-day post-install total and is the spend target. `ltv_7d` and `ltv_30d` are
+the same figure at earlier recognition points, 40% and 70% of it, not separate targets. `e_ltv`
+and `ev_truth` are on the `ltv_value` scale, so training on `ltv_7d` and scoring against them
+understates spend by 60%.
+
+
 Full definitions, domains and parents: `docs/T9Sim_Specification_v10.md` Part I.
 
 **Is there a label or target?**

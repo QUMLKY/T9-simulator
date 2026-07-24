@@ -45,7 +45,9 @@ The last three mean a downloaded archive can state its own identity and quality 
 reference to anything else.
 
 `t9sim-1.0.0-source.zip` is the complete source tree of the generator at the tagged release
-`v1.0.0`, commit `7e8ab384f0f47b15b52170799bb24192b1719737`, 191 files. It holds the package, the
+`v1.0.0`. The exact commit it was exported from is recorded on the `git =` line of that archive's
+entry in `MANIFEST.txt`, which is generated alongside the archive and cannot drift from it. It
+holds the package, the
 configuration, the iPinYou-derived calibration tables, the tests, the paper runners, the SHAP
 attribution analysis, the specification and the datasheet. It is included so that this record
 does not depend on the GitHub repository continuing to exist: the data and the code that produced
@@ -117,6 +119,13 @@ exposed as model features in any condition. Use them to score, not to train.
 
 Training on these leaks the answer. The software repository's test suite includes leakage gates
 for exactly this reason.
+
+## Which spend column to use
+
+`ltv_value` is the 90-day post-install total, and it is the spend target to train and score
+against. `ltv_7d` and `ltv_30d` are the same figure at earlier recognition points, 40% and 70% of
+it, not separate targets. `e_ltv` and `ev_truth` are on the `ltv_value` scale, so training on
+`ltv_7d` and scoring against them understates spend by 60%.
 
 ## Verifying what you downloaded
 
