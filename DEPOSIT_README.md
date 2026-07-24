@@ -10,7 +10,7 @@ because the counterfactual was never recorded.
 
 Here it is recorded. Funnel outcomes (click, install, payer, 90-day spend) are generated on
 **all** rows, won or lost, and the top competing bid is retained. Methods can therefore be
-scored on the auctions the bidder lost.
+scored on the auctions the DSP lost.
 
 ---
 
@@ -64,7 +64,7 @@ import pandas as pd
 df = pd.read_parquet("t9_v10_1m_sample_seed90213/auctions.parquet")
 print(df.shape)                      # (1000000, 55)
 
-lost = df[df.won == 0]               # 695,683 auctions this bidder did not win
+lost = df[df.won == 0]               # 695,683 auctions the DSP did not win
 print(len(lost), lost.click.mean())  # 695683  0.0398
 ```
 
