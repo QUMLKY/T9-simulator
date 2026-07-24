@@ -148,5 +148,8 @@ distribution, maintenance) is in `DATASHEET.md`.
 
 ## Status, license, citation
 
-Private preview for collaborators; **license TBD** ahead of public release (all rights
-reserved until then). Cite via `CITATION.cff` (paper reference and Zenodo DOI to follow).
+Private preview for collaborators, ahead of public release.
+
+**Code** (the `t9sim` package, scripts, tests, examples, config) is **MIT** — see `LICENSE`.
+**Data** (calibration tables, result JSONs, and the deposited datasets) is **CC BY 4.0** — see
+`LICENSE-DATA`. Cite via `CITATION.cff` (paper reference and Zenodo DOI to follow).
