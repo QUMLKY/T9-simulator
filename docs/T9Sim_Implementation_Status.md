@@ -46,7 +46,7 @@
 | H2, LU7, H1 → H3 won | ✓ |  |  | ✓ |
 | H3, H2, LU7, H1 → H4 clearing | ✓ |  |  | ✓ |
 
-*Excluded: retired edges (LU1 → A4 direct, LU1 → A1 region, B3), the dormant v8 layer, arms B1/B2 (no new edges).*
+*Excluded: retired edges (LU1 → A4 direct, LU1 → A1 region, B3), the dormant v8 layer, and the abandoned arms B1/B2 (dropped 24 Jul 2026; they added no edges, and their flags remain in code but are inert and unreported).*
 
 Families: base structure (always-on) / archetype tilts (declared dependency-layer tilts) / dependency edges #1-#5 (flag-gated) / gated group #6 `rival_pool` / dormant / retired. The per-family tables below carry the code evidence behind each tick. rows marked AMEND are register parent-set under-listings logged in Appendix M13 (seven register rows; CODE is the authority on wiring). Parent sets are defined in 1.6; this inventory is the definitive list for wiring.
 
