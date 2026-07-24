@@ -9,8 +9,8 @@ methods and catches failures real data cannot*.
 **Setup.** v10 schema, ρ\*=0.8, all BN edges + `rival_pool`; profile `scale10m` (10M rows), **seeds
 90213-90222 (n=10)**, one fresh OS process per seed (16 GB). Estimator-side only: no schema/generator
 change, so this uses the same generated data as the paper's headline ρ\*=0.8 ablation runs, and the
-per-seed parquets are **kept** (`t9_sim/output/mb10m_s*/`) for later method variants. Script:
-`t9_sim/scripts/method_bench_{worker,driver}.py`; raw: `docs/results/method_bench_10m_n10.json` (+
+per-seed parquets are **kept** (`output/mb10m_s*/`) for later method variants. Script:
+`scripts/method_bench_{worker,driver}.py`; raw: `docs/results/method_bench_10m_n10.json` (+
 `mb10m_s*.json`). Cells are seed means over n=10; the contrast tables carry 95% t-CIs + sign counts.
 
 **Methods.**
@@ -123,7 +123,7 @@ cap**, and looser caps make it *strictly worse*:
 There is no cap at which the correction recovers ranking; the cap is the only thing preventing a variance
 blow-up (uncapped mean weight 1,215). Deltas are larger here than the 10M -0.017 because reweighting
 injects more variance at 1M. The *direction* is cap- and scale-invariant. Raw:
-`docs/results/ipw_cap_sweep_1m_n10.json` (script `t9_sim/scripts/ipw_cap_sweep.py`).
+`docs/results/ipw_cap_sweep_1m_n10.json` (script `scripts/ipw_cap_sweep.py`).
 
 ### Verdict 3. Price censoring: the censoring-aware model recovers lost-row prices; the naive one is confidently wrong
 
@@ -303,7 +303,7 @@ C3's.
 | ROAS | 2.92 | 4.75 | **4.82** | 24.18 |
 | n_won | 436,493 | 459,788 | 443,715 | 85,861 |
 
-*Notes on the three full tables. Bold marks the best value among floor / reference / IPW in each row (oracle excluded): the highest for EV-Spearman, AUC, profit and ROAS; the lowest for the error rows (EV-RMSE, ECE, regret); the closest to 1.0 for ev_ratio (calibration). n_won is descriptive (no best direction), so it is not bolded. (1) IPW is cross-fitted (propensities fit on the validation split, applied to train rows), weights capped at 20. (2) C2 has no IPW column: its funnel trains on all rows, so there is no won-only selection bias to correct. (3) floor / reference / oracle funnel rows are identical for C1 and C3 by design (the funnel uses no price or SSP features); their economics differ because C3's bidder win curve is SSP-informed. (4) EV-RMSE is on log1p(EV) so near-zero impressions do not blow it up; the oracle is 0 by construction. (5) ECE is expected calibration error; the oracle's near-zero ECE confirms the true probabilities are calibrated. (6) regret = oracle profit minus method profit. (7) Validation: these C1 cells reproduce the original 10M run exactly (profit 2,658 / 5,119 / 4,936 / 10,783), confirming the expanded pipeline is consistent with the headline results. Raw: docs/results/full_tables_10m_agg.json; script t9_sim/scripts/full_tables.py.*
+*Notes on the three full tables. Bold marks the best value among floor / reference / IPW in each row (oracle excluded): the highest for EV-Spearman, AUC, profit and ROAS; the lowest for the error rows (EV-RMSE, ECE, regret); the closest to 1.0 for ev_ratio (calibration). n_won is descriptive (no best direction), so it is not bolded. (1) IPW is cross-fitted (propensities fit on the validation split, applied to train rows), weights capped at 20. (2) C2 has no IPW column: its funnel trains on all rows, so there is no won-only selection bias to correct. (3) floor / reference / oracle funnel rows are identical for C1 and C3 by design (the funnel uses no price or SSP features); their economics differ because C3's bidder win curve is SSP-informed. (4) EV-RMSE is on log1p(EV) so near-zero impressions do not blow it up; the oracle is 0 by construction. (5) ECE is expected calibration error; the oracle's near-zero ECE confirms the true probabilities are calibrated. (6) regret = oracle profit minus method profit. (7) Validation: these C1 cells reproduce the original 10M run exactly (profit 2,658 / 5,119 / 4,936 / 10,783), confirming the expanded pipeline is consistent with the headline results. Raw: docs/results/full_tables_10m_agg.json; script scripts/full_tables.py.*
 
 ## Full C2 price comparison (seed means, n = 10)
 

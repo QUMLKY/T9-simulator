@@ -12,7 +12,7 @@ Three guards, weakest->strongest (Blueprint section 4 / section 6 / section 8):
       condition (C1/C2) -- a FEATURE-LIST assert, not NaN-masking.
 
   (3) The generator-OFF end-to-end negative control is THE leak gate and lives
-      in t9_sim/scripts/neg_control_generator_off.py (it generates data + runs
+      in scripts/neg_control_generator_off.py (it generates data + runs
       the pipeline, too heavy for the unit suite). See that file's docstring.
 
 WHY (1) ALONE IS INSUFFICIENT (Blueprint section 8, constraint 4): the

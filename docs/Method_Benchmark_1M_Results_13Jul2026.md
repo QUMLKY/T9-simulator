@@ -8,7 +8,7 @@ external correction), now run.
 
 **Setup.** v10 schema, ρ\*=0.8, all BN edges + `rival_pool`, `hist_clearing` ON; profile `test`
 (1M rows), seeds 90213-90222 (n=10, ~1.4 min/seed); estimator-side only (no schema change; same
-generated data as the paper's headline ρ\*=0.8 ablation runs). Script: `t9_sim/scripts/method_bench.py`; raw:
+generated data as the paper's headline ρ\*=0.8 ablation runs). Script: `scripts/method_bench.py`; raw:
 `docs/results/method_bench_1m_n10.json` (per-seed + aggregates).
 
 **Methods × views.**

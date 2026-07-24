@@ -24,7 +24,7 @@ def main():
     new = (
         "### Data-source audit trail (all parameters)\n\n"
         "Every number is traceable end-to-end through five persistent artifacts: "
-        "(1) `t9_sim/config/*.yaml` — each parameter stored as "
+        "(1) `config/*.yaml` — each parameter stored as "
         "`{value, route, source}` with its citation/rationale in-line; "
         "(2) `config/calibrated.yaml` — solved values of every auto-calibrated "
         "knob (dated, with target and sample size; the base file is never "

@@ -25,7 +25,7 @@ Cells are seed means; headline contrasts carry mean [95% t-CI] + sign counts.
 
 **Raw per-seed JSON:** `docs/results/v10_anchor_s13.json` … `s22.json` (1M);
 `docs/results/v10_10m_s13.json` … `s22.json` (10M); aggregates `v10_anchor_n10.json`, `v10_10m_n10.json`.
-Runners: `t9_sim/scripts/v10_anchor_5seed.py`, `v10_anchor_n10.py`, `v10_10m_worker.py` + `v10_10m_driver.py`.
+Runners: `scripts/v10_anchor_5seed.py`, `v10_anchor_n10.py`, `v10_10m_worker.py` + `v10_10m_driver.py`.
 Earlier stages (100K ablation, ρ-grid, decisive ρ=1 test): `docs/results/v10_*.json`, write-up
 `v10_Results_5Jul2026.md`.
 

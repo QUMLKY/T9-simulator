@@ -169,7 +169,7 @@ Pool-internal notes (no separate register rows): the deterministic role partitio
 
 **Verified at 100K** (`golden`, seed 90210): declaring the dials in config leaves the all-OFF and paper-configuration hashes byte-identical, and a config-only run (no Python overrides) reproduces the paper-configuration hash exactly.
 
-**Calibrated constants** (in `t9_sim/config/calibrated.yaml`, merged over benchmarks): base_ctr 0.27141, base_ir 2.564963, base_payer 0.257853, LTV mu 0.481154, sigma 1.648169. Win-rate autocalibration: k_global solved on a 50,000-row warm-up so mean H3 hits the 0.30 target.
+**Calibrated constants** (in `config/calibrated.yaml`, merged over benchmarks): base_ctr 0.27141, base_ir 2.564963, base_payer 0.257853, LTV mu 0.481154, sigma 1.648169. Win-rate autocalibration: k_global solved on a 50,000-row warm-up so mean H3 hits the 0.30 target.
 
 **Results pointer** (the one allowed): evaluation numbers for this schema are in `docs/v10_Training_Results.md`.
 

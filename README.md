@@ -84,9 +84,18 @@ master's retained truth columns (`p_click`, `p_install`, `p_payer`, `e_ltv`, `ev
 | Method benchmark, 10M × n=10 | `python scripts/method_bench_driver.py` |
 | IPW cap-robustness sweep | `python scripts/ipw_cap_sweep.py` |
 | Leakage negative control | `python scripts/neg_control_generator_off.py` |
+| SHAP attribution, both tiers | `python scripts/v10_shap.py` |
+| SHAP perturbation-mode robustness | `python scripts/shap_mode_check.py` |
 | Rebuild the deposited 10M datasets (~40 min, ~18 GB) | `python scripts/deposit_gen_driver.py` |
 
 Per-seed result JSONs for the shipped write-ups are under `docs/results/`.
+
+**Which features carry the layer effect** is answered separately from whether the effect exists.
+`docs/SHAP_Analysis_v10.md` attributes both tiers on the operative V10 schema, and reports both
+TreeSHAP perturbation modes rather than picking one, since interventional and path-dependent
+attribution disagree in the presence of correlated features. Raw attributions are in
+`docs/results/v10_shap_*.json`, with the per-row matrices in
+`v10_shap_scale10m_phirun_phi.npz` for anyone wanting to redraw the beeswarms.
 
 ## Data & reproducibility
 
@@ -111,9 +120,13 @@ The ten 10M masters behind the headline results (seeds 90213–90222, ~17 GB) ca
 locally rather than downloaded:
 
 ```bash
-python scripts/deposit_gen_driver.py                              # ~40 min, resumable
+python scripts/deposit_gen_driver.py                              # ten 10M masters, ~40 min
+python scripts/deposit_gen_sample.py                              # the 1M sample
 python scripts/make_deposit_manifest.py output/v10_10m_s* --fingerprint
 ```
+
+`scripts/make_deposit_package.py` then rebuilds the deposit exactly as published: one archive per
+dataset, plus a source snapshot of the tagged release, with the manifest that pins them.
 
 `DEPOSIT_MANIFEST.txt` records what was deposited: MD5 and SHA-256 per archive, row counts per
 file, and a **content fingerprint** per dataset. Compare fingerprints. Regeneration on the same
@@ -135,9 +148,11 @@ src/t9sim/        the package: generator (auctions.py), censoring (censor.py),
                   training/eval pipeline (pipeline.py), validation, fingerprint, api
 config/           all tunable parameters (YAML; every value provenance-tagged)
 calibration/      iPinYou-derived distribution shapes (CSV)
-docs/             the specification (V10) + implementation status, results write-ups
+docs/             the specification (V10) + implementation status, results write-ups,
+                  SHAP attribution analysis
 docs/results/     per-seed and aggregated result JSONs backing the write-ups
-scripts/          paper runners: ablation (1M/10M), method benchmark, sensitivity sweeps
+scripts/          paper runners: ablation (1M/10M), method benchmark, sensitivity
+                  sweeps, SHAP attribution, deposit rebuild and packaging
 tests/            35 tests incl. leakage gates and schema contracts
 diagrams/         schema maps (overview, generation, dependencies, rival prices),
                   the generator and dependency-graph figures, per-feature calculation SVGs

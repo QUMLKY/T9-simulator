@@ -38,6 +38,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import subprocess
 import sys
 import zipfile
 from pathlib import Path
@@ -50,14 +51,48 @@ sys.path.insert(0, str(ROOT / "src"))
 OUT_DIR = ROOT / "output"
 DEPOSIT = ROOT / "zenodo_deposit"
 PARTS = DEPOSIT / ".manifest_parts"      # per-dataset cache; makes a re-run resumable
-MEMBERS = ["auctions.parquet", "pool_users.parquet",
-           "pool_apps.parquet", "pool_campaigns.parquet"]
+DATA = ["auctions.parquet", "pool_users.parquet",
+        "pool_apps.parquet", "pool_campaigns.parquet"]
+# Small per-run metadata, ~14 KB a dataset. Without these an archive cannot state
+# its own seed, configuration, parameter provenance or calibration result, which
+# is most of what makes a deposited dataset self-describing.
+META = ["manifest.json", "provenance.csv", "validation_report.csv"]
+MEMBERS = DATA + META
 
 # (source dataset dir, archive stem, human label)
 PAYLOAD = [(f"v10_10m_s{s}", f"t9_v10_10m_seed902{s}", f"10M master, seed 902{s}")
            for s in range(13, 23)]
 PAYLOAD.append(("v10_anchor_s13", "t9_v10_1m_sample_seed90213",
                 "1M sample, seed 90213"))
+
+# The deposit also carries the code that produced the data. A record that only
+# holds parquet and points at a GitHub URL is not a snapshot: the repository can
+# move, change or disappear, and then the archived data has no generator. The
+# whole source tree is under a megabyte, so there is no reason to rely on the link.
+SOURCE_TAG = "v1.0.0"
+SOURCE_STEM = "t9sim-1.0.0-source"
+
+
+def source_repo() -> Path:
+    """The git checkout to snapshot: the public-form repo, else this one."""
+    pub = ROOT / "_public_repo" / "T9-simulator"
+    return pub if (pub / ".git").exists() else ROOT
+
+
+def git(repo: Path, *a: str) -> str:
+    return subprocess.run(["git", "-C", str(repo), *a],
+                          capture_output=True, text=True, check=True).stdout.strip()
+
+
+def build_source(dest: Path) -> str:
+    """Export SOURCE_TAG as a zip. Returns the commit it resolves to."""
+    repo = source_repo()
+    commit = git(repo, "rev-parse", f"{SOURCE_TAG}^{{commit}}")
+    tmp = dest.with_suffix(".zip.part")
+    git(repo, "archive", "--format=zip", f"--prefix={SOURCE_STEM.replace('-source', '')}/",
+        SOURCE_TAG, "-o", str(tmp))
+    tmp.replace(dest)
+    return commit
 
 
 def hashes(path: Path) -> tuple[str, str, int]:
@@ -117,7 +152,11 @@ def main() -> None:
         "# T9 Zenodo deposit manifest",
         "#",
         "# One archive per dataset. Each is self-contained: the auction master",
-        "# plus the three entity pools (users, apps, campaigns).",
+        "# plus the three entity pools (users, apps, campaigns), and the run's",
+        "# manifest, provenance and validation report.",
+        "#",
+        "# Plus one source snapshot, the tagged release of the generator that",
+        "# produced them, so the record stands alone if the repository does not.",
         "#",
         "# md5     matches what Zenodo displays per uploaded file - use it to",
         "#         confirm the transfer arrived intact.",
@@ -166,8 +205,9 @@ def main() -> None:
         for m in MEMBERS:
             f = src / m
             msha, _, msize = hashes(f)
-            rows = pq.ParquetFile(f).metadata.num_rows
-            block.append(f"  {msha}  {m}  rows={rows}  bytes={msize}")
+            # row counts only mean something for the parquets
+            rows = f"  rows={pq.ParquetFile(f).metadata.num_rows}" if m in DATA else ""
+            block.append(f"  {msha}  {m}{rows}  bytes={msize}")
 
         from t9sim.fingerprint import fingerprint      # noqa: E402
         print(f"  fingerprinting {src_name} ...", flush=True)
@@ -179,10 +219,38 @@ def main() -> None:
         lines.append("")
         print(f"  {stem}.zip  {size / 1e9:.2f} GB  md5={md5[:12]}...", flush=True)
 
-    lines.append(f"# {len(PAYLOAD)} archives, {total / 1e9:.2f} GB total")
+    # the generator itself, so the record does not depend on GitHub still existing
+    src_zip = DEPOSIT / f"{SOURCE_STEM}.zip"
+    if args.manifest_only and not src_zip.exists():
+        sys.exit(f"--manifest-only but {src_zip.name} is absent")
+    if not args.manifest_only:
+        print(f"  packaging {src_zip.name} ...", flush=True)
+        commit = build_source(src_zip)
+    else:
+        commit = "(unknown, --manifest-only)"
+
+    sha, md5, size = hashes(src_zip)
+    total += size
+    with zipfile.ZipFile(src_zip) as z:
+        n_files = len(z.infolist())
+    lines.extend([
+        f"## {src_zip.name}    (source snapshot, tag {SOURCE_TAG})",
+        f"bytes  = {size}",
+        f"md5    = {md5}",
+        f"sha256 = {sha}",
+        f"git    = {commit}",
+        f"files  = {n_files}",
+        "",
+    ])
+    print(f"  {src_zip.name}  {size / 1e6:.2f} MB  {n_files} files  commit={commit[:12]}",
+          flush=True)
+
+    lines.append(f"# {len(PAYLOAD)} data archives + 1 source snapshot, "
+                 f"{total / 1e9:.2f} GB total")
     (DEPOSIT / "MANIFEST.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"\nwrote {DEPOSIT / 'MANIFEST.txt'}")
-    print(f"{len(PAYLOAD)} archives, {total / 1e9:.2f} GB in {DEPOSIT}")
+    print(f"{len(PAYLOAD)} data archives + source snapshot, "
+          f"{total / 1e9:.2f} GB in {DEPOSIT}")
 
 
 if __name__ == "__main__":
