@@ -1,4 +1,4 @@
-# T9 — a causal RTB benchmark for learning under attribution & price censoring
+# T9Sim RTB Data Simulator: Generating, Censoring and Benchmarking DSP/MMP/SSP Adtech Data Layers
 
 T9 is a calibrated simulator of mobile-game real-time-bidding (RTB) auctions **with retained
 ground truth**, and a benchmark built on it: **the data stay fixed, the training method varies,

@@ -1,4 +1,4 @@
-# T9 — a causal RTB benchmark with retained ground truth
+# T9Sim RTB Data Simulator: Generating, Censoring and Benchmarking DSP/MMP/SSP Adtech Data Layers
 
 Simulated real-time-bidding (RTB) auction datasets for mobile-game advertising, in which
 **every auction carries its full counterfactual**.

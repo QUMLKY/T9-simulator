@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use T9, please cite it as below."
-title: "T9: A Causal RTB Benchmark for Learning under Attribution and Price Censoring"
+title: "T9Sim RTB Data Simulator: Generating, Censoring and Benchmarking DSP/MMP/SSP Adtech Data Layers"
 type: software
 authors:
   - family-names: "Yu"
