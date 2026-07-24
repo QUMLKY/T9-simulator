@@ -1,79 +1,137 @@
-# T9 dataset deposit manifest
+# T9 Zenodo deposit manifest
 #
-# SHA-256 verifies the uploaded bytes are intact.
-# The content fingerprint verifies the DATA matches what the paper used,
-# independently of parquet's non-deterministic file metadata. Recompute with:
-#     python -m t9sim.fingerprint <dataset_dir>
+# One archive per dataset. Each is self-contained: the auction master
+# plus the three entity pools (users, apps, campaigns).
 #
+# md5     matches what Zenodo displays per uploaded file - use it to
+#         confirm the transfer arrived intact.
+# sha256  stronger check of the same archive.
+# members each inner parquet, verifiable after unpacking.
+# fingerprint  content hash of the DATA, independent of parquet's
+#         non-deterministic file metadata. Recompute with:
+#             python -m t9sim.fingerprint <unpacked_dir>
+#         This is what proves a dataset matches the published one; a
+#         correct regeneration will NOT match on bytes.
 
-## v10_10m_s13
-0d82cc15e9452a00dd0b22171377111158d1234a1301bd5f8cef01ee97cbe428  auctions.parquet  rows=10000000  bytes=1588229934
-3620ff0d413aa3d3ccc0fbf068ff2515cfc32cd7712b3f05bd9fb5acf9686b3d  pool_apps.parquet  rows=1200  bytes=80671
-27993c085c9a2cd783d6aa5016e261fc907dda39e3f51ce5702e480c5a72095e  pool_campaigns.parquet  rows=200  bytes=10041
-575ea7dc6c70c4a2aa92fac18af42b7b5eff4d7c9bdf84f58c40cb9abf7a619a  pool_users.parquet  rows=2200000  bytes=154410554
+## t9_v10_10m_seed90213.zip    (10M master, seed 90213)
+bytes  = 1742731840
+md5    = 2bc095d2f95bdb31e62f2234ca2a7fa6
+sha256 = 3946f085d77aaca41823c3e223f05d8fd1fb7bdebae57287db1fdf95c6a1d657
+members:
+  0d82cc15e9452a00dd0b22171377111158d1234a1301bd5f8cef01ee97cbe428  auctions.parquet  rows=10000000  bytes=1588229934
+  575ea7dc6c70c4a2aa92fac18af42b7b5eff4d7c9bdf84f58c40cb9abf7a619a  pool_users.parquet  rows=2200000  bytes=154410554
+  3620ff0d413aa3d3ccc0fbf068ff2515cfc32cd7712b3f05bd9fb5acf9686b3d  pool_apps.parquet  rows=1200  bytes=80671
+  27993c085c9a2cd783d6aa5016e261fc907dda39e3f51ce5702e480c5a72095e  pool_campaigns.parquet  rows=200  bytes=10041
 fingerprint = 0xc11a7e6d1436c931
 
-## v10_10m_s14
-8939cc65168e9a25cd62c44a6e2b14e3edf47d8fc290bf100c7f2fe6ff44ad62  auctions.parquet  rows=10000000  bytes=1589498926
-e2cc494929f3068fec07b3d5d990577a662c77b6d201fe18e361aa38f57525a0  pool_apps.parquet  rows=1200  bytes=80684
-3cd0f1133a3377d4e836bcdea4f84b6f09ea7e3f8d5e9fe53d80195ff424692b  pool_campaigns.parquet  rows=200  bytes=10034
-4d30cb143f93b995a274a2aba6abdcac2497eb6a9faaa35c37a83e78a5a191be  pool_users.parquet  rows=2200000  bytes=154394442
+## t9_v10_10m_seed90214.zip    (10M master, seed 90214)
+bytes  = 1743984726
+md5    = 8fb4cb7d627ea33d58082a8f6b7c4380
+sha256 = 7c68ed9953c9d1287cb1be59ee05779749e6a58a14930b29593c5c13276fef0a
+members:
+  8939cc65168e9a25cd62c44a6e2b14e3edf47d8fc290bf100c7f2fe6ff44ad62  auctions.parquet  rows=10000000  bytes=1589498926
+  4d30cb143f93b995a274a2aba6abdcac2497eb6a9faaa35c37a83e78a5a191be  pool_users.parquet  rows=2200000  bytes=154394442
+  e2cc494929f3068fec07b3d5d990577a662c77b6d201fe18e361aa38f57525a0  pool_apps.parquet  rows=1200  bytes=80684
+  3cd0f1133a3377d4e836bcdea4f84b6f09ea7e3f8d5e9fe53d80195ff424692b  pool_campaigns.parquet  rows=200  bytes=10034
 fingerprint = 0x89cbdcac4f0ffd94
 
-## v10_10m_s15
-e3e66178781954caa33130f7cc84b13e27c3d90763e78f3b8b1cbfaf9e4918d8  auctions.parquet  rows=10000000  bytes=1585808909
-905a2ba399c6ee2e7ed17c1662e1fe3da8f14838dcd6e56d1066ec65774220db  pool_apps.parquet  rows=1200  bytes=80667
-ecb8195d434fea9c0fc221a9e40f958fb3b02cb65676ac505a4c535956456f3f  pool_campaigns.parquet  rows=200  bytes=10031
-2c30bef517a42c0e701816b16a87aacb76249de05fe07969ff22674bba80aea8  pool_users.parquet  rows=2200000  bytes=154374082
+## t9_v10_10m_seed90215.zip    (10M master, seed 90215)
+bytes  = 1740274329
+md5    = 9be7d22c5b605734627b5cf7eccb062a
+sha256 = a2aff5c31af0ebdf12dfa99824fa226229612b0dd6ef12a366025f0d390d6c9e
+members:
+  e3e66178781954caa33130f7cc84b13e27c3d90763e78f3b8b1cbfaf9e4918d8  auctions.parquet  rows=10000000  bytes=1585808909
+  2c30bef517a42c0e701816b16a87aacb76249de05fe07969ff22674bba80aea8  pool_users.parquet  rows=2200000  bytes=154374082
+  905a2ba399c6ee2e7ed17c1662e1fe3da8f14838dcd6e56d1066ec65774220db  pool_apps.parquet  rows=1200  bytes=80667
+  ecb8195d434fea9c0fc221a9e40f958fb3b02cb65676ac505a4c535956456f3f  pool_campaigns.parquet  rows=200  bytes=10031
 fingerprint = 0x9c63b49e11cd4e44
 
-## v10_10m_s16
-cedbd39a93f99da8689bad1906895b58075330f6da4f3cfcb60c7d972c7baf12  auctions.parquet  rows=10000000  bytes=1591354884
-68a6e709172531ed6cc8754adcaa77b4e7c67df857b1b5b86c2c2c6fdada9f5d  pool_apps.parquet  rows=1200  bytes=80628
-dae2322d88d3c6089389a9ac418ceb140f7f4fe4c8ac3742e082278194863812  pool_campaigns.parquet  rows=200  bytes=10061
-6183f92cd09f3fca9b9831fb3947c590c93fb9053b59635679fa567de1578121  pool_users.parquet  rows=2200000  bytes=154399982
+## t9_v10_10m_seed90216.zip    (10M master, seed 90216)
+bytes  = 1745846195
+md5    = 9c8895985db8e3b8dbe1d80adaf0105e
+sha256 = 55af82ac9d27b1de6ca9bbaf1a38b1cbfa1a19b5208cd8f6fb4aae1db3af6d3f
+members:
+  cedbd39a93f99da8689bad1906895b58075330f6da4f3cfcb60c7d972c7baf12  auctions.parquet  rows=10000000  bytes=1591354884
+  6183f92cd09f3fca9b9831fb3947c590c93fb9053b59635679fa567de1578121  pool_users.parquet  rows=2200000  bytes=154399982
+  68a6e709172531ed6cc8754adcaa77b4e7c67df857b1b5b86c2c2c6fdada9f5d  pool_apps.parquet  rows=1200  bytes=80628
+  dae2322d88d3c6089389a9ac418ceb140f7f4fe4c8ac3742e082278194863812  pool_campaigns.parquet  rows=200  bytes=10061
 fingerprint = 0xc318bb3925841020
 
-## v10_10m_s17
-ef6a325a9d0cffcbdad61852a634d9da91afac4083ce43f2fdbeeac9725a8b02  auctions.parquet  rows=10000000  bytes=1590827848
-84dd9f77573976cbe8ea8f63de631838be76f3a778bea3079fa79000eeaa5ddc  pool_apps.parquet  rows=1200  bytes=80669
-f706a6b773bd435955238a0fc638e3f912c49d4a5fda19b56718831e09ada45c  pool_campaigns.parquet  rows=200  bytes=10050
-cfab1f706bb2c7b6429b58798ded2dc8f9fcae789e8927c9d9dc8db3ef417a72  pool_users.parquet  rows=2200000  bytes=154397455
+## t9_v10_10m_seed90217.zip    (10M master, seed 90217)
+bytes  = 1745316662
+md5    = 6a41d67c81dd8a9cde873e1df743e63a
+sha256 = 1a88bb9384a677b394269c3b893eef8b3db105dc69c7215ded8a49105a352183
+members:
+  ef6a325a9d0cffcbdad61852a634d9da91afac4083ce43f2fdbeeac9725a8b02  auctions.parquet  rows=10000000  bytes=1590827848
+  cfab1f706bb2c7b6429b58798ded2dc8f9fcae789e8927c9d9dc8db3ef417a72  pool_users.parquet  rows=2200000  bytes=154397455
+  84dd9f77573976cbe8ea8f63de631838be76f3a778bea3079fa79000eeaa5ddc  pool_apps.parquet  rows=1200  bytes=80669
+  f706a6b773bd435955238a0fc638e3f912c49d4a5fda19b56718831e09ada45c  pool_campaigns.parquet  rows=200  bytes=10050
 fingerprint = 0x79ef1f6a85540375
 
-## v10_10m_s18
-e6aee6ddb06088587fc40e8ab95e3bdef89e7b35879fdb73f8f7bd66707bc3e3  auctions.parquet  rows=10000000  bytes=1590248656
-8201a42c8d076b332086f97420a4ea93a5c6cb90609ee2615744391b3c87d778  pool_apps.parquet  rows=1200  bytes=80666
-321528326e3ad5dfb877ba7a8c354c8b2c0452783674a682fd45046acb89a68f  pool_campaigns.parquet  rows=200  bytes=10037
-ddad193f3f64af2a2b898e68d38737cfdd5a64d1690c0a63ad772b625ce0da6a  pool_users.parquet  rows=2200000  bytes=154393776
+## t9_v10_10m_seed90218.zip    (10M master, seed 90218)
+bytes  = 1744733775
+md5    = be0c0805b73176d3ad1ffb2b233a7ce8
+sha256 = a9e0ed657a7b566215a66b2af305334752a717e1facd384ffb5d15309beadf5e
+members:
+  e6aee6ddb06088587fc40e8ab95e3bdef89e7b35879fdb73f8f7bd66707bc3e3  auctions.parquet  rows=10000000  bytes=1590248656
+  ddad193f3f64af2a2b898e68d38737cfdd5a64d1690c0a63ad772b625ce0da6a  pool_users.parquet  rows=2200000  bytes=154393776
+  8201a42c8d076b332086f97420a4ea93a5c6cb90609ee2615744391b3c87d778  pool_apps.parquet  rows=1200  bytes=80666
+  321528326e3ad5dfb877ba7a8c354c8b2c0452783674a682fd45046acb89a68f  pool_campaigns.parquet  rows=200  bytes=10037
 fingerprint = 0xe875758b02d5b406
 
-## v10_10m_s19
-40220f2dfc58df56c9a5d644b420122b21eac02edf1700b42c23815a04970bf4  auctions.parquet  rows=10000000  bytes=1589803574
-452f6493ea3ef153f592b66dacb36cffc3a08ff9d8bf78594e045c5b3c89bb74  pool_apps.parquet  rows=1200  bytes=80679
-bdc98f35df004835b5edc70dc3de5a38dd92690957fa1fc39c7f1944dd66e624  pool_campaigns.parquet  rows=200  bytes=10031
-7aa2333d07feb2331a46de6ddfdbfc131a4dc9fe49c9ca683de9b65ddea73854  pool_users.parquet  rows=2200000  bytes=154396202
+## t9_v10_10m_seed90219.zip    (10M master, seed 90219)
+bytes  = 1744291126
+md5    = f88989d0bfa1a421364d97de831f0f94
+sha256 = 041bc6041469e043ab3e2df6a5cc933d970f58d8e0680fb98a2546d20527537b
+members:
+  40220f2dfc58df56c9a5d644b420122b21eac02edf1700b42c23815a04970bf4  auctions.parquet  rows=10000000  bytes=1589803574
+  7aa2333d07feb2331a46de6ddfdbfc131a4dc9fe49c9ca683de9b65ddea73854  pool_users.parquet  rows=2200000  bytes=154396202
+  452f6493ea3ef153f592b66dacb36cffc3a08ff9d8bf78594e045c5b3c89bb74  pool_apps.parquet  rows=1200  bytes=80679
+  bdc98f35df004835b5edc70dc3de5a38dd92690957fa1fc39c7f1944dd66e624  pool_campaigns.parquet  rows=200  bytes=10031
 fingerprint = 0x0d2c9e1f1217adf4
 
-## v10_10m_s20
-202bb53939247275eccd1b24094f9c254b4ac318be498d1797f6a422d3ea22bb  auctions.parquet  rows=10000000  bytes=1588692900
-156cae201d31b8f5d6dfaef40c41a6bb14426f36fba76cc2e9be1dd16d3b915f  pool_apps.parquet  rows=1200  bytes=80698
-edcfccfc95dd08694af7528157ae8387f273d3bded79018ad90577624cb372d1  pool_campaigns.parquet  rows=200  bytes=10049
-a12709a8616c4a9980b882dc110a8f0906f023c8f04f0b7ac2e02b23b52f2824  pool_users.parquet  rows=2200000  bytes=154386327
+## t9_v10_10m_seed90220.zip    (10M master, seed 90220)
+bytes  = 1743170614
+md5    = 9d74148c4a403ad50eccc5278ca3adfc
+sha256 = 17d1670c6b3fd571c9c6bec431c71ca325c481b5b7d1bc2d285acc9f600041a2
+members:
+  202bb53939247275eccd1b24094f9c254b4ac318be498d1797f6a422d3ea22bb  auctions.parquet  rows=10000000  bytes=1588692900
+  a12709a8616c4a9980b882dc110a8f0906f023c8f04f0b7ac2e02b23b52f2824  pool_users.parquet  rows=2200000  bytes=154386327
+  156cae201d31b8f5d6dfaef40c41a6bb14426f36fba76cc2e9be1dd16d3b915f  pool_apps.parquet  rows=1200  bytes=80698
+  edcfccfc95dd08694af7528157ae8387f273d3bded79018ad90577624cb372d1  pool_campaigns.parquet  rows=200  bytes=10049
 fingerprint = 0xfe9ebee114c1544e
 
-## v10_10m_s21
-fd3e2d0be128a3c4cf86804e37cce8c99852ea4c2d309360c85bfb845981e649  auctions.parquet  rows=10000000  bytes=1590524753
-847477be48d04404c278874f0d0653e9839c35497a1be6e43bbfc2814ad86d80  pool_apps.parquet  rows=1200  bytes=80712
-93020a30339e21b6f3b31725c280911faba980a4355a09fc876a61295f7cd7aa  pool_campaigns.parquet  rows=200  bytes=10029
-b4cde56bc5d03c7e68542f0a359ada6aa9f12800ab364d2c2d1f08183aa4d3cc  pool_users.parquet  rows=2200000  bytes=154388784
+## t9_v10_10m_seed90221.zip    (10M master, seed 90221)
+bytes  = 1745004918
+md5    = e4e1af1e6905d73b2c28351a259f9aec
+sha256 = 8a487b560a6cff113fe300749764141389e8053d8b3133ef628d92acdb6792f0
+members:
+  fd3e2d0be128a3c4cf86804e37cce8c99852ea4c2d309360c85bfb845981e649  auctions.parquet  rows=10000000  bytes=1590524753
+  b4cde56bc5d03c7e68542f0a359ada6aa9f12800ab364d2c2d1f08183aa4d3cc  pool_users.parquet  rows=2200000  bytes=154388784
+  847477be48d04404c278874f0d0653e9839c35497a1be6e43bbfc2814ad86d80  pool_apps.parquet  rows=1200  bytes=80712
+  93020a30339e21b6f3b31725c280911faba980a4355a09fc876a61295f7cd7aa  pool_campaigns.parquet  rows=200  bytes=10029
 fingerprint = 0x1084aa8e768e8267
 
-## v10_10m_s22
-2ba80368e823e443834099fd31fa4579456d6721ab12eb0900d36b52f2451ca3  auctions.parquet  rows=10000000  bytes=1590049034
-d9852704c872c33af9f27f4a47f0771b3787bed9022140e4d6e65b0a981c80e2  pool_apps.parquet  rows=1200  bytes=80680
-f82694f646e27b6f95f6ea81cb3388946b1f93c6d795f700756451297cb0574c  pool_campaigns.parquet  rows=200  bytes=10036
-9085aa055ae4979693af6f3d5e0585b6a4a76a0a4de839ac0438870cf4f8fd42  pool_users.parquet  rows=2200000  bytes=154383905
+## t9_v10_10m_seed90222.zip    (10M master, seed 90222)
+bytes  = 1744524295
+md5    = d33bf152ee94bbb938c5600573bec146
+sha256 = f5acd9f0ddb5b1a5f12e54fe53e9cbe734d164c54456af51b5a8c7d7b965875c
+members:
+  2ba80368e823e443834099fd31fa4579456d6721ab12eb0900d36b52f2451ca3  auctions.parquet  rows=10000000  bytes=1590049034
+  9085aa055ae4979693af6f3d5e0585b6a4a76a0a4de839ac0438870cf4f8fd42  pool_users.parquet  rows=2200000  bytes=154383905
+  d9852704c872c33af9f27f4a47f0771b3787bed9022140e4d6e65b0a981c80e2  pool_apps.parquet  rows=1200  bytes=80680
+  f82694f646e27b6f95f6ea81cb3388946b1f93c6d795f700756451297cb0574c  pool_campaigns.parquet  rows=200  bytes=10036
 fingerprint = 0x1de737330ff8b806
 
-# 10 datasets, 17.44 GB total
+## t9_v10_1m_sample_seed90213.zip    (1M sample, seed 90213)
+bytes  = 169559257
+md5    = 056e55e32e468277bfaff95543a0e518
+sha256 = ccdf2b48a5e146c44470634a01d8325cc07d658e65433dd05edd408d96d6f265
+members:
+  efd49538eb1108306037fbfce8b75f4dc165d4789a873f41084238890627fb73  auctions.parquet  rows=1000000  bytes=152287843
+  15ae90a7f5e87176664ab8c0dcdf72cd06b73a5b08b6e01ec25f971a545497f2  pool_users.parquet  rows=220000  bytes=17227401
+  40c03a1c5245bd7e3c5fe3078c8ee784b33926110aa5bf396cda1b5195971458  pool_apps.parquet  rows=500  bytes=35900
+  97966175ab8bbdcd1ec971666599ac7831cdacc542254746d4870bcc44fdd34f  pool_campaigns.parquet  rows=100  bytes=7425
+fingerprint = 0xa8f93f650dbfe629
+
+# 11 archives, 17.61 GB total

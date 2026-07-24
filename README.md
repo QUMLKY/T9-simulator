@@ -112,9 +112,12 @@ python scripts/deposit_gen_driver.py                              # ~40 min, res
 python scripts/make_deposit_manifest.py output/v10_10m_s* --fingerprint
 ```
 
-Compare the resulting **content fingerprints** against `DEPOSIT_MANIFEST.txt` — not the file
-hashes. Parquet embeds non-deterministic metadata, so a correct regeneration still differs
-byte-for-byte; the fingerprint hashes column values and is the meaningful check.
+`DEPOSIT_MANIFEST.txt` records what was deposited: MD5 and SHA-256 per archive, row counts per
+file, and a **content fingerprint** per dataset. Compare fingerprints. Regeneration on the same
+platform and library versions does reproduce the files byte-for-byte — verified, SHA-256 matched
+on all forty files — but parquet stores the writer version, so a different pyarrow release can
+change the bytes while the data is identical. The fingerprint hashes column values and survives
+that.
 
 Calibration targets in `calibration/` are **aggregated distribution shapes** derived from the
 public iPinYou dataset (Zhang et al., 2014), rescaled to a 2025 US mobile-gaming market - no
