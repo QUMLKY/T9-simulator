@@ -84,6 +84,7 @@ master's retained truth columns (`p_click`, `p_install`, `p_payer`, `e_ltv`, `ev
 | Method benchmark, 10M × n=10 | `python scripts/method_bench_driver.py` |
 | IPW cap-robustness sweep | `python scripts/ipw_cap_sweep.py` |
 | Leakage negative control | `python scripts/neg_control_generator_off.py` |
+| Rebuild the deposited 10M datasets (~40 min, ~18 GB) | `python scripts/deposit_gen_driver.py` |
 
 Per-seed result JSONs for the shipped write-ups are under `docs/results/`.
 
@@ -102,6 +103,18 @@ output; regenerate it with `python scripts/make_checksums.py`.
 
 Generated data therefore ships as *recipes* (profile + seed + config), not binaries; frozen
 dataset archives with checksums and a DOI will accompany the camera-ready release (Zenodo).
+
+The ten 10M masters behind the headline results (seeds 90213–90222, ~17 GB) can be rebuilt
+locally rather than downloaded:
+
+```bash
+python scripts/deposit_gen_driver.py                              # ~40 min, resumable
+python scripts/make_deposit_manifest.py output/v10_10m_s* --fingerprint
+```
+
+Compare the resulting **content fingerprints** against `DEPOSIT_MANIFEST.txt` — not the file
+hashes. Parquet embeds non-deterministic metadata, so a correct regeneration still differs
+byte-for-byte; the fingerprint hashes column values and is the meaningful check.
 
 Calibration targets in `calibration/` are **aggregated distribution shapes** derived from the
 public iPinYou dataset (Zhang et al., 2014), rescaled to a 2025 US mobile-gaming market - no

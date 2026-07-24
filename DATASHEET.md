@@ -167,6 +167,10 @@ hashes column values rather than file bytes, so determinism can be verified acro
 Results: `docs/v10_Training_Results.md` and
 `docs/Method_Benchmark_10M_Results_13Jul2026.md`.
 
+Feature-attribution (SHAP) results are deliberately **not** part of this release. The pipeline
+retains the capability, so anyone can compute their own, but no attribution figures or values
+are published here and none should be attributed to the authors.
+
 **What other tasks could it be used for?**
 
 Learning under selection and censoring generally: propensity and inverse-weighting methods,
