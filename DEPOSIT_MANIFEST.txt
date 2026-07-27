@@ -171,11 +171,11 @@ members:
   8725b2e692d25cc4479a2b646838e0b60bc11454747e9d43f12b307c888715e0  validation_report.csv  bytes=313
 fingerprint = 0xa8f93f650dbfe629
 
-## t9sim-1.0.0-source.zip    (source snapshot, tag v1.0.0)
-bytes  = 1560934
-md5    = 196b52b146fbb0c892c7c1a298af5f61
-sha256 = eae2cfc183af906c193a80c16cdb20d0e241af30cfe790c6e9f9e7806c763ea2
-git    = b8d4efcd42dae7fb44e2a274ecf5c1e37e65a5e1
+## t9sim-1.0.1-source.zip    (source snapshot, tag v1.0.1)
+bytes  = 1560969
+md5    = d9ced6ded5b24e52bc31a0e50a4334de
+sha256 = 0d2b47f54679ddc7a2f05de7265786c15e9cca7ed22eca7b72c5a3aa8d3a8975
+git    = d058a982a18176def5f1348ab3e62d0f6c1a7d2c
 files  = 206
 
 # 11 data archives + 1 source snapshot, 17.61 GB total
