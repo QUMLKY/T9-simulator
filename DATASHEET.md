@@ -235,8 +235,9 @@ Two ways:
    Generation is seed-deterministic, so `(profile, seed, rho, edges)` plus the pinned config
    reproduces the dataset byte-for-byte. `CHECKSUMS.txt` pins the SHA-256 of every input that
    determines the output.
-2. **As frozen archives.** The reference 10M datasets will be deposited with a DOI (Zenodo) for
-   the camera-ready release, for reviewers who prefer not to regenerate.
+2. **As frozen archives.** The reference 10M datasets are deposited on Zenodo with a DOI,
+   [10.5281/zenodo.21533031](https://doi.org/10.5281/zenodo.21533031), for reviewers who
+   prefer not to regenerate.
 
 **Under what licence?**
 

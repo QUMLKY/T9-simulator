@@ -69,8 +69,8 @@ PAYLOAD.append(("v10_anchor_s13", "t9_v10_1m_sample_seed90213",
 # holds parquet and points at a GitHub URL is not a snapshot: the repository can
 # move, change or disappear, and then the archived data has no generator. The
 # whole source tree is under a megabyte, so there is no reason to rely on the link.
-SOURCE_TAG = "v1.0.0"
-SOURCE_STEM = "t9sim-1.0.0-source"
+SOURCE_TAG = "v1.0.1"
+SOURCE_STEM = "t9sim-1.0.1-source"
 
 
 def source_repo() -> Path:

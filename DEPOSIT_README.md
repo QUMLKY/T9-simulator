@@ -20,7 +20,7 @@ scored on the auctions the DSP lost.
 |---|---|---|
 | `t9_v10_1m_sample_seed90213.zip` | **Start here.** 1M-auction sample, seed 90213 | ~0.17 GB |
 | `t9_v10_10m_seed90213.zip` … `…90222.zip` | The ten 10M masters behind the published results | ~1.7 GB each |
-| `t9sim-1.0.0-source.zip` | The generator that produced them, tagged release `v1.0.0` | 0.7 MB |
+| `t9sim-1.0.1-source.zip` | The generator that produced them, tagged release `v1.0.1` | ~1.6 MB |
 | `MANIFEST.txt` | Checksums (MD5 + SHA-256), row counts, content fingerprints | — |
 
 Each archive is self-contained. It unpacks to a directory holding the auction master, the three
@@ -44,8 +44,8 @@ validation_report.csv    the six calibration gates, with achieved values
 The last three mean a downloaded archive can state its own identity and quality without
 reference to anything else.
 
-`t9sim-1.0.0-source.zip` is the complete source tree of the generator at the tagged release
-`v1.0.0`. The exact commit it was exported from is recorded on the `git =` line of that archive's
+`t9sim-1.0.1-source.zip` is the complete source tree of the generator at the tagged release
+`v1.0.1`. The exact commit it was exported from is recorded on the `git =` line of that archive's
 entry in `MANIFEST.txt`, which is generated alongside the archive and cannot drift from it. It
 holds the package, the
 configuration, the iPinYou-derived calibration tables, the tests, the paper runners, the SHAP
@@ -232,7 +232,7 @@ divergences between specification and code are in the software repository.
 
 ## Software, specification, and citation
 
-Software: `t9sim-1.0.0-source.zip` **in this record**, and at
+Software: `t9sim-1.0.1-source.zip` **in this record**, and at
 <https://github.com/QUMLKY/T9-simulator> (MIT licensed). The two are the same tree; the
 repository is where development continues, the snapshot is what these datasets were made with.
 
@@ -241,7 +241,7 @@ specification (`docs/T9Sim_Specification_v10.md`), the datasheet (`DATASHEET.md`
 reference benchmark entrants.
 
 ```bash
-unzip t9sim-1.0.0-source.zip && cd t9sim-1.0.0
+unzip t9sim-1.0.1-source.zip && cd t9sim-1.0.1
 python -m venv venv && venv/Scripts/activate    # or source venv/bin/activate
 pip install -e . && pytest                      # 35 tests
 python examples/quickstart_100k.py              # ~3 min end to end

@@ -4,13 +4,13 @@ title: "T9Sim RTB Data Simulator: Generating, Censoring and Benchmarking DSP/MMP
 type: software
 authors:
   - family-names: "Yu"
-    given-names: "Kanghsu"
+    given-names: "Ken Kanghsu"
     affiliation: "Queen Mary University of London"
   - family-names: "Klimis"
     given-names: "Vasileios"
     affiliation: "Queen Mary University of London"
-version: 1.0.0
-date-released: 2026-07-24
+version: 1.0.1
+date-released: 2026-07-27
 repository-code: "https://github.com/QUMLKY/T9-simulator"
 doi: 10.5281/zenodo.21533031
 identifiers:
