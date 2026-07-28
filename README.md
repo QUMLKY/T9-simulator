@@ -1,5 +1,4 @@
-# T9Sim RTB Auction Data Simulator: 
-Generating, Censoring and Benchmarking DSP/MMP/SSP Adtech Data Layers
+# T9Sim RTB Auction Data Simulator: Generating, Censoring and Benchmarking DSP/MMP/SSP Adtech Data Layers
 
 Code **MIT** · Data **CC BY 4.0** · Data DOI [10.5281/zenodo.21533031](https://doi.org/10.5281/zenodo.21533031) · **v1.0.1** · Python ≥ 3.11 · Cite: `CITATION.cff` · Datasheet: `DATASHEET.md`
 
