@@ -8,7 +8,7 @@
 
 *(The standalone `Edge_Register` was folded into this section on 23 Jul 2026 and archived; mentions of it in the audit trail below are historical.)*
 
-**At a glance.** ✓ = edge exists at this level · blank = not present / not applicable · **✗ (red)** = required but missing (a Schema edge needs Code; a dependency edge needs CPT + Code). Dep = member of the flag-gated dependency layer. CPT = a dependency-layer parameter table (`bn_cpts.yaml` or the `bn:` block of `benchmarks.yaml`); the column applies to dependency edges only. Status 22 Jul 2026, branch `t9-v11-mbw`. Parent sets corrected against code 22 Jul; rival-pool parameters now declared in `benchmarks.yaml` (`bn.rival_pool`, `bn.edges.rival_pool`, `auction.rho`), so E1-E4 carry CPT ✓. Details: `docs/Known_Defects_Register.md`.
+**At a glance.** ✓ = edge exists at this level · blank = not present / not applicable · **✗ (red)** = required but missing (a Schema edge needs Code; a dependency edge needs CPT + Code). Dep = member of the flag-gated dependency layer. CPT = a dependency-layer parameter table (`bn_cpts.yaml` or the `bn:` block of `benchmarks.yaml`); the column applies to dependency edges only. Status 22 Jul 2026, branch `t9-v11-mbw`. Parent sets corrected against code 22 Jul; rival-pool parameters now declared in `benchmarks.yaml` (`bn.rival_pool`, `bn.edges.rival_pool`, `auction.rho`), so E1-E4 carry CPT ✓. Defect detail is in 2.7 and Appendix A below.
 
 | Edge (from → to) | Schema | Dep | CPT | Code |
 |---|:---:|:---:|:---:|:---:|
@@ -161,7 +161,7 @@ Pool-internal notes (no separate register rows): the deterministic role partitio
 
 ## 4.1 Build status and reproducibility
 
-**Wired vs declared.** Everything in the edge inventory (2.6) marked "yes" is wired in code; the three declared archetype tilts T-2/T-3/T-4 have CPTs but no consuming code (the released data carries no archetype signal in os/os_version/device_type/day_of_week). Per-edge authority: `docs/Edge_Register.md`; defect detail and scheduled fixes: `docs/Known_Defects_Register.md`. This specification agrees with both registers on every wiring status; the seven register parent-set rows to amend are Appendix M13, and one register addition is proposed (chunk-relative day index, M12).
+**Wired vs declared.** Everything in the edge inventory (2.6) marked "yes" is wired in code; the three declared archetype tilts T-2/T-3/T-4 have CPTs but no consuming code (the released data carries no archetype signal in os/os_version/device_type/day_of_week). Per-edge authority is the edge inventory in 2.6; declared divergences are in 2.7 and the audit trail in Appendix A. The internal registers that once held this material were folded into this document (see the note in 2.6) and are not published separately; where the specification and those registers disagreed, the resolutions are Appendix M12 and M13.
 
 **Where each dial lives** (Q1 resolved 22 Jul 2026, option A; Known_Defects 2). All three declarations are in `config/benchmarks.yaml`: the flag `bn.edges.rival_pool`, the parameter block `bn.rival_pool` (K = 8, n_gaming = 3, beta_R = 0.5, pacing_ar = 0.85, pacing_sigma = 0.30, read by `rival_pool.py:34` with the legacy top-level key as fallback), and the privateness dial `auction.rho` (`auctions.py:99`).
 

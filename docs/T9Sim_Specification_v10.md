@@ -19,7 +19,7 @@ Arbiter rules used throughout:
 - CODE decides what exists and what is wired (`rival_pool.py`, `auctions.py`, `make_cpts.py`, `user_profiles.py`, `catalogue.py`, `config/*.yaml`);
 - the schema decides observability and censoring semantics;
 - the formalisation decides mathematical form;
-- `docs/T9Sim_Implementation_Status.md` and `docs/Known_Defects_Register.md` record wiring status, and this document agrees with both except where Appendix A says why a register row should be amended.
+- `docs/T9Sim_Implementation_Status.md` records wiring status, and this document agrees with it except where Appendix A says why a row should be amended.
 
 ---
 
