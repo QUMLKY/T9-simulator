@@ -182,12 +182,29 @@ def fmt_num(v):
     return f"{v:.4f}"
 
 
+def _pm(m):
+    """Pick a number format from the magnitude of the mean."""
+    return (lambda x: f"{x:+,.0f}") if abs(m) >= 1000 else (lambda x: f"{x:+.4f}")
+
+
 def fmt_stat(s):
     if s is None:
         return "-"
-    m, lo, hi = s["mean"], s["ci95"][0], s["ci95"][1]
-    f = (lambda x: f"{x:+,.0f}") if abs(m) >= 1000 else (lambda x: f"{x:+.4f}")
-    return f"{f(m)} [{f(lo)}, {f(hi)}] {s['n_pos']}/{s['n']}"
+    f = _pm(s["mean"])
+    return f"{f(s['mean'])} [{f(s['ci95'][0])}, {f(s['ci95'][1])}] {s['n_pos']}/{s['n']}"
+
+
+def fmt_mean(s):
+    """The effect on its own."""
+    return "-" if s is None else _pm(s["mean"])(s["mean"])
+
+
+def fmt_ci(s):
+    """The interval and sign count on their own."""
+    if s is None:
+        return "-"
+    f = _pm(s["mean"])
+    return f"[{f(s['ci95'][0])}, {f(s['ci95'][1])}] {s['n_pos']}/{s['n']}"
 
 
 def write_main_md(path, doc):
@@ -237,20 +254,49 @@ def write_supporting_md(path, doc):
          "C4-C2 to equal C3-C1 exactly, so those pairs carry no new information "
          "there. On economics all five differ, because profit comes from the bid "
          "rule, which multiplies the two tiers together.", "",
-         "| Contrast | " + " | ".join(ECON_LABELS) + " |",
-         "|---|" + "---|" * len(ECON_LABELS)]
+         "Each metric has its effect and its interval in separate columns, so the "
+         "effects can be scanned down one column without the intervals breaking the "
+         "eye. The sign count follows the interval.", "",
+         "| Contrast | " + " | ".join(f"{lab} | 95% CI, sign" for lab in ECON_LABELS) + " |",
+         "|---|" + "---|" * (2 * len(ECON_LABELS))]
     for key, block in doc["econ"].items():
-        L.append(f"| {key} | " + " | ".join(fmt_stat(block[lab]) for lab in ECON_LABELS) + " |")
+        cells = " | ".join(f"{fmt_mean(block[lab])} | {fmt_ci(block[lab])}"
+                           for lab in ECON_LABELS)
+        L.append(f"| {key} | {cells} |")
     L += ["", "## Scale check, 1M beside 10M", "",
           f"The same contrasts at 1M (n = {doc['n_1m']} seeds). This is the evidence "
           "for scale stability. 1M is not otherwise reported.", "",
-          "| Metric | Contrast | 1M | 10M |", "|---|---|---|---|"]
+          "| Metric | Contrast | 1M | 1M: 95% CI, sign | 10M | 10M: 95% CI, sign |",
+          "|---|---|---|---|---|---|"]
     for row in doc["scale"]:
-        L.append(f"| {row['metric']} | {row['contrast']} | {fmt_stat(row['s_1m'])} | "
-                 f"{fmt_stat(row['s_10m'])} |")
+        L.append(f"| {row['metric']} | {row['contrast']} | {fmt_mean(row['s_1m'])} | "
+                 f"{fmt_ci(row['s_1m'])} | {fmt_mean(row['s_10m'])} | "
+                 f"{fmt_ci(row['s_10m'])} |")
     L += ["", "## What is excluded, and why", "", doc["excluded"], ""]
     with open(path, "w", encoding="utf-8") as fh:
         fh.write("\n".join(L))
+
+
+def set_landscape(docx_path):
+    """Rotate the page. The main table is nine columns wide and needs the room."""
+    import zipfile
+    import re as _re
+    with zipfile.ZipFile(docx_path) as z:
+        names, data = z.namelist(), {n: z.read(n) for n in z.namelist()}
+    xml = data["word/document.xml"].decode("utf-8")
+    # A4 landscape in twentieths of a point, with 1.5cm side margins
+    pg = ('<w:pgSz w:w="16838" w:h="11906" w:orient="landscape"/>'
+          '<w:pgMar w:top="851" w:right="851" w:bottom="851" w:left="851" '
+          'w:header="708" w:footer="708" w:gutter="0"/>')
+    if "<w:pgSz" in xml:
+        xml = _re.sub(r"<w:pgSz[^>]*/>", pg.split("<w:pgMar")[0], xml, count=1)
+        xml = _re.sub(r"<w:pgMar[^>]*/>", "<w:pgMar" + pg.split("<w:pgMar")[1], xml, count=1)
+    else:
+        xml = xml.replace("<w:sectPr>", "<w:sectPr>" + pg, 1)
+    data["word/document.xml"] = xml.encode("utf-8")
+    with zipfile.ZipFile(docx_path, "w", zipfile.ZIP_DEFLATED) as z:
+        for nm in names:
+            z.writestr(nm, data[nm])
 
 
 def shade_by_verdict(docx_path):
@@ -381,7 +427,8 @@ def main():
                 export(md, dx)
                 if tag == "_main":
                     n = shade_by_verdict(dx)
-                    print(f"  shaded {n} rows by verdict")
+                    set_landscape(dx)
+                    print(f"  shaded {n} rows by verdict, page set to landscape")
                 print(f"wrote {rel(dx)}")
     elif args.docx:
         sys.exit("--docx needs --out")
