@@ -153,6 +153,14 @@ Pool-internal notes (no separate register rows): the deterministic role partitio
 - D1 assembly direction: the schema states D2/D3 derived from D1; the build draws `hour`/`day_of_week`/`week` first and assembles `timestamp` from them plus a uniform within-hour second, giving the same joint law over (D1, D2, D3) at hour resolution.
 - Rival-pool day indexing is CHUNK-RELATIVE: day_idx = (timestamp - min timestamp in chunk) // 86400 (`rival_pool.py:98-99`), not anchored to `window_start_utc`. Negligible at production chunk sizes (the chunk min is within seconds of window start); real at small n, where rows near day boundaries can shift one day and blur the E2 time footprint (M12; proposed Known_Defects addition).
 
+### 2.7.1 Paper method section vs released code
+
+*Declared 28 Jul 2026. The entries above are specification vs code. These three are different in kind: the paper's method section describes model machinery the released code does not implement. None of them affects the reported C1 to C4 contrasts, because every view is trained and scored identically, but a reader comparing the paper's Section 5 with `pipeline.py` will find them, so they are stated here rather than left to be discovered.*
+
+- **Probability calibration is measured, not fitted.** Paper Section 5.4 says each view and prediction head is calibrated on a validation split using isotonic regression or Platt scaling. No calibrator is fitted anywhere in the package. The pipeline measures calibration only: expected and maximum calibration error over fifteen equal-width bins (`pipeline.py:559-571`) and a ten-decile reliability table on the win curve. All reported probabilities are therefore raw model output. Because the omission is identical across C1 to C4, the data-layer contrasts are unaffected; absolute probability levels are not calibrated.
+- **The win classifier is not monotone-constrained.** The paper's introduction describes the Tier-2 model as fitted as a monotone win classifier. The XGBoost parameters in `train_tier2_clf` (`pipeline.py:607-625`) set no `monotone_constraints`, so the predicted win probability is not guaranteed to be non-decreasing in the bid. At serving time the same row is re-scored at each of the 48 grid bids (`BID_GRID`, `pipeline.py:73`; `pwin_clf`, `pipeline.py:498-507`), so a non-monotone region can in principle move the profit-maximising bid.
+- **No ROAS-constrained bid rule exists.** Paper Section 5.3 also gives a ROAS-constrained variant that keeps only candidate bids whose predicted return on ad spend clears a target and abstains when none do. The code implements only the profit-maximising argmax over the bid grid (`_resolve_bidder`, `pipeline.py:529-556`). No reported result uses the constrained variant.
+
 ---
 
 ---
