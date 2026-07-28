@@ -112,9 +112,10 @@ its default seed 90210). The paper uses seeds **90213–90222**.
 
 The dials are declared in `config/benchmarks.yaml` — the privateness dial `rho`, the
 `bn.rival_pool` edge flag, and the rival-pool parameters (`K`, `n_gaming`, `beta_R`,
-`pacing_ar`, `pacing_sigma`, at paper values). The operative point (ρ\*=0.8, rival-pool edge ON)
-is passed per run by the paper's runner scripts and by `t9sim.api` (`RHO_STAR`, `V10_EDGES`),
-and is recorded in each deposited archive's manifest.
+`pacing_ar`, `pacing_sigma`, at paper values). The operative point is passed per run rather
+than read from the config. `RHO_STAR` / ρ\* = 0.8, `rival_pool = True` and
+`hist_clearing = True` are passed by the runner scripts and by `t9sim.api`. The first two are
+recorded in each dataset manifest, the third in each results JSON.
 `CHECKSUMS.txt` pins the SHA-256 of every calibration target and config file that fixes the
 output; regenerate it with `python scripts/make_checksums.py`.
 
