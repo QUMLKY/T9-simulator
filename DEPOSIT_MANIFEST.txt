@@ -15,7 +15,8 @@
 #         non-deterministic file metadata. Recompute with:
 #             python -m t9sim.fingerprint <unpacked_dir>
 #         This is what proves a dataset matches the published one; a
-#         correct regeneration will NOT match on bytes.
+#         correct regeneration may not match on bytes under a different
+#         platform or pyarrow release (parquet stores writer metadata).
 
 ## t9_v10_10m_seed90213.zip    (10M master, seed 90213)
 bytes  = 1742745973

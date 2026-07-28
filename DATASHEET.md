@@ -259,7 +259,7 @@ Anyone regenerating them from raw logs is bound by iPinYou's own terms.
 
 **Who maintains it, and how can they be contacted?**
 
-The author. Contact details and citation metadata are in `CITATION.cff`. Issues and questions
+The author. Citation metadata is in `CITATION.cff`. Issues and questions
 via the repository issue tracker.
 
 **Will it be updated?**

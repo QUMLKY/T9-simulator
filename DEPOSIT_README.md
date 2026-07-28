@@ -97,8 +97,8 @@ the master to the views real platforms actually hold:
 | View | Sees | Real-world analogue |
 |---|---|---|
 | **C1** | own wins' funnel only, no clearing prices | a DSP alone (the "biased view") |
-| **C2** | + funnel labels on *all* rows | DSP + MMP (attribution partner) |
-| **C3** | + clearing prices and rival count | DSP + SSP (supply-side) |
+| **C2** | C1 + funnel labels on *all* rows | DSP + MMP (attribution partner) |
+| **C3** | C1 + clearing prices and rival count (funnel still on won rows only) | DSP + SSP (supply-side) |
 | **C4** | all layers | fully integrated stack |
 
 Censoring is both column-conditional (which columns exist) and row-conditional (which rows carry

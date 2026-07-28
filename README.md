@@ -1,9 +1,11 @@
 # T9Sim RTB Data Simulator: Generating, Censoring and Benchmarking DSP/MMP/SSP Adtech Data Layers
 
-T9 is a calibrated simulator of mobile-game real-time-bidding (RTB) auctions **with retained
-ground truth**, and a benchmark built on it: **the data stay fixed, the training method varies,
-and every method is scored against the truth** — including on the auctions the bidder *lost*,
-whose outcomes no real log contains.
+Code **MIT** · Data **CC BY 4.0** · Data DOI [10.5281/zenodo.21533031](https://doi.org/10.5281/zenodo.21533031) · **v1.0.1** · Python ≥ 3.11 · Cite: `CITATION.cff` · Datasheet: `DATASHEET.md`
+
+T9Sim ("T9") is a calibrated simulator of mobile-game real-time-bidding (RTB) auctions **with
+retained ground truth**, and a benchmark built on it: **the data stay fixed, the training method
+varies, and every method is scored against the truth** — including on the auctions the DSP
+*lost*, whose outcomes no real log contains.
 
 Every auction carries its full counterfactual: funnel outcomes (click → install → payer → 90-day
 spend) are generated on **all** rows, won or lost, and the top competing bid is retained. Four
@@ -13,8 +15,8 @@ hold:
 | View | Sees | Real-world analogue |
 |---|---|---|
 | **C1** | own wins' funnel only, no clearing prices | a DSP alone (the "biased view") |
-| **C2** | + funnel labels on *all* rows | DSP + MMP (attribution partner) |
-| **C3** | + clearing prices & rival count | DSP + SSP (supply-side) |
+| **C2** | C1 + funnel labels on *all* rows | DSP + MMP (attribution partner) |
+| **C3** | C1 + clearing prices & rival count (funnel still on won rows only) | DSP + SSP (supply-side) |
 | **C4** | all layers | fully integrated stack |
 
 Because the truth is retained, T9 can issue verdicts that are **uncomputable on any real
@@ -37,19 +39,20 @@ or merely looks good on observable data.
 
 Headline ablation (schema V10, anchored ρ\*=0.8; n=10 seeds at 1M **and** 10M): **SSP data
 improves the model** (win-AUC +0.014, CI excludes 0, 10/10 at both scales) **but does not
-demonstrably convert to money; MMP data drives the economics** (classifier-bidder profit +39%
-at 10M; EV-bias 0.52→0.89). Full tables: `docs/v10_Training_Results.md`.
+demonstrably convert to money; MMP data drives the economics** (classifier bidding-algorithm
+profit +39% at 10M; EV-calibration ratio (1 = unbiased) 0.52→0.89). Full tables:
+`docs/v10_Training_Results.md`.
 
 ## Install
 
 ```bash
-python -m venv venv && venv/Scripts/activate    # or source venv/bin/activate
-pip install -e .
-pytest                                          # 35 tests, ~1 min
+python -m venv venv && source venv/Scripts/activate   # Linux/macOS: source venv/bin/activate
+pip install -e .                                      # PowerShell: venv\Scripts\Activate.ps1
+pytest                                                # 35 tests, ~1 min
 ```
 
-Python ≥ 3.11. Dependencies are pinned in `requirements.txt` (pandas, numpy, scipy, pyarrow,
-xgboost, scikit-learn, pyyaml).
+Python ≥ 3.11. Dependencies are listed in `requirements.txt` (core: pandas, numpy, scipy,
+pyarrow, xgboost, scikit-learn, pyyaml).
 
 ## Quickstart (~3 min)
 
@@ -59,7 +62,9 @@ python examples/quickstart_100k.py
 
 generates a 100K master under the paper's operative configuration (schema **V10**, the
 private-rival market, at the externally anchored privateness ρ\*=0.8), trains the reference
-stack under C1–C4, and prints the headline metrics. The same loop in code:
+stack under C1–C4, and prints a summary table (single-seed 100K figures are illustrative — the
+paper's economics stabilise at ≥1M with n=10 seeds). The same loop at 1M scale (profile
+`"test"`):
 
 ```python
 import t9sim.api as t9
@@ -80,33 +85,26 @@ master's retained truth columns (`p_click`, `p_install`, `p_payer`, `e_ltv`, `ev
 | Result | Command |
 |---|---|
 | 1M ablation, n=10 seeds | `python scripts/v10_anchor_5seed.py` then `scripts/v10_anchor_n10.py` |
-| 10M ablation, n=10 (one fresh process/seed, ~16 GB) | `python scripts/v10_10m_driver.py` |
+| 10M ablation, n=10 (one fresh process/seed, ~16 GB) | `python scripts/v10_10m_driver.py` (seeds 90213–17), then `python scripts/v10_10m_worker.py <seed>` for 90218–90222 |
 | Method benchmark, 10M × n=10 | `python scripts/method_bench_driver.py` |
 | IPW cap-robustness sweep | `python scripts/ipw_cap_sweep.py` |
 | Leakage negative control | `python scripts/neg_control_generator_off.py` |
-| SHAP attribution, both tiers | `python scripts/v10_shap.py` |
-| SHAP perturbation-mode robustness | `python scripts/shap_mode_check.py` |
-| Rebuild the deposited 10M datasets (~40 min, ~18 GB) | `python scripts/deposit_gen_driver.py` |
+| Rebuild the deposited 10M datasets (~40 min, ~17.6 GB) | `python scripts/deposit_gen_driver.py` |
 
 Per-seed result JSONs for the shipped write-ups are under `docs/results/`.
-
-**Which features carry the layer effect** is answered separately from whether the effect exists.
-`docs/SHAP_Analysis_v10.md` attributes both tiers on the operative V10 schema, and reports both
-TreeSHAP perturbation modes rather than picking one, since interventional and path-dependent
-attribution disagree in the presence of correlated features. Raw attributions are in
-`docs/results/v10_shap_*.json`, with the per-row matrices in
-`v10_shap_scale10m_phirun_phi.npz` for anyone wanting to redraw the beeswarms.
 
 ## Data & reproducibility
 
 Generation is **seed-deterministic**: the same (profile, seed, ρ, edges) reproduces the dataset
 byte-for-byte (verified via the content fingerprint in `src/t9sim/fingerprint.py`; the flag-OFF
-configuration reproduces the v7 baseline fingerprint `0xdf0ac3e18624cf2b`). The paper uses seeds
-**90213–90222**.
+configuration reproduces the v7 baseline fingerprint `0xdf0ac3e18624cf2b` — golden profile at
+its default seed 90210). The paper uses seeds **90213–90222**.
 
-The paper's operative configuration is declared in `config/benchmarks.yaml` — the privateness
-dial `rho`, the `bn.rival_pool` edge flag, and the rival-pool parameters (`K`, `n_gaming`,
-`beta_R`, `pacing_ar`, `pacing_sigma`) — so the run is reproducible from configuration alone.
+The dials are declared in `config/benchmarks.yaml` — the privateness dial `rho`, the
+`bn.rival_pool` edge flag, and the rival-pool parameters (`K`, `n_gaming`, `beta_R`,
+`pacing_ar`, `pacing_sigma`, at paper values). The operative point (ρ\*=0.8, rival-pool edge ON)
+is passed per run by the paper's runner scripts and by `t9sim.api` (`RHO_STAR`, `V10_EDGES`),
+and is recorded in each deposited archive's manifest.
 `CHECKSUMS.txt` pins the SHA-256 of every calibration target and config file that fixes the
 output; regenerate it with `python scripts/make_checksums.py`.
 
@@ -116,7 +114,8 @@ archives are deposited separately, with checksums and a DOI:
 > **Datasets:** [10.5281/zenodo.21533031](https://doi.org/10.5281/zenodo.21533031) — the ten 10M
 > masters behind the published results, plus a 1M sample. CC BY 4.0.
 
-The ten 10M masters behind the headline results (seeds 90213–90222, ~17 GB) can be rebuilt
+The ten 10M masters behind the headline results (seeds 90213–90222, ~17.6 GB with the 1M
+sample) can be rebuilt
 locally rather than downloaded:
 
 ```bash
@@ -138,7 +137,7 @@ that.
 Calibration targets in `calibration/` are **aggregated distribution shapes** derived from the
 public iPinYou dataset (Zhang et al., 2014), rescaled to a 2025 US mobile-gaming market - no
 raw iPinYou records are included. The derivation is fully reproducible:
-`scripts/calibrate_ipinyou.py` regenerates every CSV in `calibration/` from the raw iPinYou
+`scripts/calibrate_ipinyou.py` regenerates every CSV the generator reads from the raw iPinYou
 season 2+3 logs (download separately; ~28 GB).
 
 ## Repository layout
@@ -148,11 +147,10 @@ src/t9sim/        the package: generator (auctions.py), censoring (censor.py),
                   training/eval pipeline (pipeline.py), validation, fingerprint, api
 config/           all tunable parameters (YAML; every value provenance-tagged)
 calibration/      iPinYou-derived distribution shapes (CSV)
-docs/             the specification (V10) + implementation status, results write-ups,
-                  SHAP attribution analysis
+docs/             the specification (V10) + implementation status, results write-ups
 docs/results/     per-seed and aggregated result JSONs backing the write-ups
 scripts/          paper runners: ablation (1M/10M), method benchmark, sensitivity
-                  sweeps, SHAP attribution, deposit rebuild and packaging
+                  sweeps, deposit rebuild and packaging
 tests/            35 tests incl. leakage gates and schema contracts
 diagrams/         schema maps (overview, generation, dependencies, rival prices),
                   the generator and dependency-graph figures, per-feature calculation SVGs
@@ -180,9 +178,17 @@ targets, and the audit trail.
 A **datasheet** for the dataset (motivation, composition, collection, uses and their limits,
 distribution, maintenance) is in `DATASHEET.md`.
 
+## Limitations and ethics
+
+The data is **fully synthetic** — no row corresponds to a real person, device or app, and no
+PII is present. Results are conditional on the generative model (DGP-conditional); bid shading
+is out of scope for this release; two archetype tilt parameters are declared but unwired. See
+`DATASHEET.md` for the full limitations and ethics discussion.
+
 ## Status, license, citation
 
-Private preview for collaborators, ahead of public release.
+Current release: **v1.0.1** (tag `v1.0.1`; version metadata in `CITATION.cff`). Questions and
+issues via the repository issue tracker.
 
 **Code** (the `t9sim` package, scripts, tests, examples, config) is **MIT** — see `LICENSE`.
 **Data** (calibration tables, result JSONs, and the deposited datasets) is **CC BY 4.0** — see
