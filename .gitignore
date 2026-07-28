@@ -14,3 +14,6 @@ __pycache__/
 *.tmp
 ~$*
 zenodo_deposit/
+
+# generated locally by scripts/aggregate_results.py --docx (readable copy, not shipped)
+*.docx
