@@ -1,11 +1,7 @@
 """Quickstart: generate a 100K master (schema V10, anchored rho*=0.8), run the
 reference ablation under all four censored views, and print the headline table.
 
-    python examples/quickstart_100k.py
-
-Generation takes seconds; the run time is dominated by training the value and
-win models under four views plus the oracle, which on a laptop without a GPU
-can take an hour or more.
+    python examples/quickstart_100k.py          # ~1.5 min on an idle laptop
 
 For the paper-scale runs use profile "test" (1M) or "scale10m" (10M, one fresh
 process per seed — see scripts/v10_10m_driver.py).
@@ -46,3 +42,6 @@ for key, label in ROWS:
 
 print("\nDesign identities to expect: C1==C3, C2==C4 on funnel metrics "
       "(MMP axis); C1==C2, C3==C4 on win metrics (SSP axis).")
+print("The prediction rows already show the paper's pattern. Profit at 100K on "
+      "one seed is noise-dominated and does NOT reproduce the paper's MMP gain, "
+      "which needs 1M+ and ten seeds - see docs/v10_Training_Results.md.")

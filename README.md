@@ -62,7 +62,7 @@ pytest                                                # 35 tests, ~1 min
 Python ≥ 3.11. Dependencies are listed in `requirements.txt` (core: pandas, numpy, scipy,
 pyarrow, xgboost, scikit-learn, pyyaml).
 
-## Quickstart
+## Quickstart (~2 min)
 
 ```bash
 python examples/quickstart_100k.py
@@ -71,9 +71,9 @@ python examples/quickstart_100k.py
 generates a 100K master under the paper's operative configuration (schema **V10**, the
 private-rival market, at the externally anchored privateness ρ\*=0.8), trains the same
 two-tier bidding algorithm under C1–C4, and prints a summary table (single-seed 100K figures
-are illustrative — the paper's economics stabilise at ≥1M with n=10 seeds). Generation takes
-seconds; the run time is dominated by training four views plus the oracle, which on a laptop
-without a GPU can take an hour or more. The same loop at 1M scale (profile `"test"`):
+are illustrative — the profit row in particular is noise-dominated at this scale and does not
+reproduce the paper's MMP gain, which needs ≥1M and ten seeds). The same loop at 1M scale
+(profile `"test"`):
 
 ```python
 import t9sim.api as t9
