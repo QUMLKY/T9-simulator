@@ -10,8 +10,7 @@ Every economic row is the classifier bidding algorithm, which is what the paper 
 |---|---|---|---|---|---|---|---|---|
 | **Tier 1 value model** | | | | | | | | |
 | ev_spearman | 0.5889 | 0.6333 | 0.5889 | 0.6333 | 1.0000 | MMP (C2-C1) +0.0443 [+0.0240, +0.0646] 10/10 | ✅ | ✅ SUPPORTED |
-| ev_ratio (level, 1 = unbiased) | 0.5238 | 0.8887 | 0.5238 | 0.8887 | 1.0000 | - | - | no claim |
-| ev_ratio bias (distance from 1) | 0.4762 | 0.1153 | 0.4762 | 0.1153 | 0.0000 | MMP (C2-C1) -0.3609 [-0.5093, -0.2125] 0/10 | ✅ | ✅ SUPPORTED |
+| ev_ratio | 0.5238 | 0.8887 | 0.5238 | 0.8887 | 1.0000 | MMP (C2-C1) -0.3609 [-0.5093, -0.2125] 0/10 (bias) | ✅ | ✅ SUPPORTED |
 | auc_click | 0.7090 | 0.7212 | 0.7090 | 0.7212 | 0.7842 | MMP (C2-C1) +0.0122 [+0.0115, +0.0129] 10/10 | ✅ | ✅ SUPPORTED |
 | auc_install | 0.6719 | 0.6994 | 0.6719 | 0.6994 | 0.8595 | MMP (C2-C1) +0.0276 [+0.0245, +0.0306] 10/10 | ✅ | ✅ SUPPORTED |
 | auc_payer | 0.5855 | 0.6835 | 0.5855 | 0.6835 | 0.8352 | MMP (C2-C1) +0.0979 [+0.0796, +0.1162] 10/10 | ✅ | ✅ SUPPORTED |
@@ -20,6 +19,7 @@ Every economic row is the classifier bidding algorithm, which is what the paper 
 | logloss_win | 0.4463 | 0.4463 | 0.4318 | 0.4318 | - | SSP (C3-C1) -0.0145 [-0.0230, -0.0059] 0/10 | ✅ | ✅ SUPPORTED |
 | **Economics, classifier bidding algorithm** | | | | | | | | |
 | profit, total ($) | 4,746 | 6,575 | 4,817 | 6,236 | - | MMP (C2-C1) +1,829 [+245, +3,413] 10/10 | ✅ | ✅ SUPPORTED |
+| profit CPM ($) | 10.23 | 13.82 | 10.25 | 12.90 | - | MMP (C2-C1) +3.5930 [-0.8702, +8.0562] 8/10 | ✅ | ❌ not supported |
 | overpay CPM ($) | 1.1850 | 1.4520 | 1.1930 | 1.4500 | - | SSP (C3-C1) +0.0080 [-0.0125, +0.0285] 6/10 | ❌ | ❌ not supported |
 | revenue ($) | 6,004 | 8,135 | 6,103 | 7,817 | - | - | - | no claim |
 | spend ($) | 1,259 | 1,560 | 1,286 | 1,582 | - | - | - | no claim |

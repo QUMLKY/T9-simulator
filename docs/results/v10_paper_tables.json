@@ -42,6 +42,7 @@
             "oracle": 1.0
           },
           "contrast": "MMP (C2-C1)",
+          "note": "",
           "stat": {
             "mean": 0.04434,
             "ci95": [
@@ -55,7 +56,7 @@
           "verdict": "supported"
         },
         {
-          "metric": "ev_ratio (level, 1 = unbiased)",
+          "metric": "ev_ratio",
           "means": {
             "C1": 0.52384,
             "C2": 0.88868,
@@ -63,21 +64,8 @@
             "C4": 0.88868,
             "oracle": 1.0
           },
-          "contrast": "-",
-          "stat": null,
-          "improved": "-",
-          "verdict": "no claim"
-        },
-        {
-          "metric": "ev_ratio bias (distance from 1)",
-          "means": {
-            "C1": 0.47616,
-            "C2": 0.11526,
-            "C3": 0.47616,
-            "C4": 0.11526,
-            "oracle": 0.0
-          },
           "contrast": "MMP (C2-C1)",
+          "note": " (bias)",
           "stat": {
             "mean": -0.3609,
             "ci95": [
@@ -100,6 +88,7 @@
             "oracle": 0.78419
           },
           "contrast": "MMP (C2-C1)",
+          "note": "",
           "stat": {
             "mean": 0.01222,
             "ci95": [
@@ -122,6 +111,7 @@
             "oracle": 0.85951
           },
           "contrast": "MMP (C2-C1)",
+          "note": "",
           "stat": {
             "mean": 0.02755,
             "ci95": [
@@ -144,6 +134,7 @@
             "oracle": 0.83519
           },
           "contrast": "MMP (C2-C1)",
+          "note": "",
           "stat": {
             "mean": 0.09793,
             "ci95": [
@@ -171,6 +162,7 @@
             "oracle": null
           },
           "contrast": "SSP (C3-C1)",
+          "note": "",
           "stat": {
             "mean": 0.01374,
             "ci95": [
@@ -193,6 +185,7 @@
             "oracle": null
           },
           "contrast": "SSP (C3-C1)",
+          "note": "",
           "stat": {
             "mean": -0.01447,
             "ci95": [
@@ -220,6 +213,7 @@
             "oracle": null
           },
           "contrast": "MMP (C2-C1)",
+          "note": "",
           "stat": {
             "mean": 1829.2,
             "ci95": [
@@ -233,6 +227,29 @@
           "verdict": "supported"
         },
         {
+          "metric": "profit CPM ($)",
+          "means": {
+            "C1": 10.227,
+            "C2": 13.82,
+            "C3": 10.25,
+            "C4": 12.904,
+            "oracle": null
+          },
+          "contrast": "MMP (C2-C1)",
+          "note": "",
+          "stat": {
+            "mean": 3.593,
+            "ci95": [
+              -0.87021,
+              8.05621
+            ],
+            "n_pos": 8,
+            "n": 10
+          },
+          "improved": "yes",
+          "verdict": "not supported"
+        },
+        {
           "metric": "overpay CPM ($)",
           "means": {
             "C1": 1.185,
@@ -242,6 +259,7 @@
             "oracle": null
           },
           "contrast": "SSP (C3-C1)",
+          "note": "",
           "stat": {
             "mean": 0.008,
             "ci95": [
@@ -264,6 +282,7 @@
             "oracle": null
           },
           "contrast": "-",
+          "note": "",
           "stat": null,
           "improved": "-",
           "verdict": "no claim"
@@ -278,6 +297,7 @@
             "oracle": null
           },
           "contrast": "-",
+          "note": "",
           "stat": null,
           "improved": "-",
           "verdict": "no claim"
@@ -292,6 +312,7 @@
             "oracle": null
           },
           "contrast": "-",
+          "note": "",
           "stat": null,
           "improved": "-",
           "verdict": "no claim"
@@ -306,6 +327,7 @@
             "oracle": null
           },
           "contrast": "-",
+          "note": "",
           "stat": null,
           "improved": "-",
           "verdict": "no claim"
@@ -439,7 +461,7 @@
       }
     },
     {
-      "metric": "ev_ratio bias (distance from 1)",
+      "metric": "ev_ratio (bias)",
       "contrast": "MMP (C2-C1)",
       "s_1m": {
         "mean": -0.11965,
@@ -589,6 +611,28 @@
           3412.93703
         ],
         "n_pos": 10,
+        "n": 10
+      }
+    },
+    {
+      "metric": "profit CPM ($)",
+      "contrast": "MMP (C2-C1)",
+      "s_1m": {
+        "mean": 8.745,
+        "ci95": [
+          -3.95851,
+          21.44851
+        ],
+        "n_pos": 9,
+        "n": 10
+      },
+      "s_10m": {
+        "mean": 3.593,
+        "ci95": [
+          -0.87021,
+          8.05621
+        ],
+        "n_pos": 8,
         "n": 10
       }
     },

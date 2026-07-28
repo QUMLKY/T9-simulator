@@ -56,31 +56,46 @@ PAIRS = [("C2", "C1", "MMP alone"), ("C3", "C1", "SSP alone"),
          ("C4", "C1", "both layers"), ("C4", "C2", "SSP given MMP"),
          ("C4", "C3", "MMP given SSP")]
 
-# label · how to read it · key · better direction · which layer can move it · claim?
+# Each row: how its VIEW COLUMNS are read, and how its CONTRAST is computed.
+# Those differ for ev_ratio, whose level is the readable number (1 = unbiased)
+# but whose signed difference is not interpretable, because error runs in both
+# directions. Its contrast is therefore computed on the bias, |ratio - 1|, and
+# tagged "(bias)" in the interval cell, exactly as the project's earlier tables
+# did. One row, readable level, valid claim.
 #   how:  "top"   read the condition dict
 #         "clf"   read the clf_bidder sub-dict
 #         "clf_k" read clf_bidder and multiply by 1000 (per-won -> CPM)
-#         "bias"  |ev_ratio - 1|, so the contrast reads as bias magnitude
+#         "bias"  |value - 1|
+def R(label, how, key, better, layer, claim, contrast_how=None, note=""):
+    return {"label": label, "how": how, "key": key, "better": better,
+            "layer": layer, "claim": claim, "chow": contrast_how or how,
+            "note": note}
+
+
 ROWS = [
     ("Tier 1 value model", [
-        ("ev_spearman", "top", "ev_spearman", "up", "MMP", True),
-        ("ev_ratio (level, 1 = unbiased)", "top", "ev_ratio", "up", "MMP", False),
-        ("ev_ratio bias (distance from 1)", "bias", "ev_ratio", "down", "MMP", True),
-        ("auc_click", "top", "auc_click", "up", "MMP", True),
-        ("auc_install", "top", "auc_install", "up", "MMP", True),
-        ("auc_payer", "top", "auc_payer", "up", "MMP", True),
+        R("ev_spearman", "top", "ev_spearman", "up", "MMP", True),
+        R("ev_ratio", "top", "ev_ratio", "down", "MMP", True,
+          contrast_how="bias", note=" (bias)"),
+        R("auc_click", "top", "auc_click", "up", "MMP", True),
+        R("auc_install", "top", "auc_install", "up", "MMP", True),
+        R("auc_payer", "top", "auc_payer", "up", "MMP", True),
     ]),
     ("Tier 2 win model, classifier", [
-        ("auc_win", "top", "auc_win_clf", "up", "SSP", True),
-        ("logloss_win", "top", "logloss_win_clf", "down", "SSP", True),
+        R("auc_win", "top", "auc_win_clf", "up", "SSP", True),
+        R("logloss_win", "top", "logloss_win_clf", "down", "SSP", True),
     ]),
     ("Economics, classifier bidding algorithm", [
-        ("profit, total ($)", "clf", "profit", "up", "MMP", True),
-        ("overpay CPM ($)", "clf_k", "overpay_per_won", "down", "SSP", True),
-        ("revenue ($)", "clf", "revenue", None, None, False),
-        ("spend ($)", "clf", "spend", None, None, False),
-        ("ROAS", "clf", "roas", None, None, False),
-        ("n_won", "clf", "n_won", None, None, False),
+        R("profit, total ($)", "clf", "profit", "up", "MMP", True),
+        # profit CPM is surplus per won impression, in dollars per thousand. It
+        # normalises for volume, so it separates "won more" from "earned more per
+        # impression". Its MMP interval spans zero at n=10, which is worth showing.
+        R("profit CPM ($)", "clf_k", "surplus_per_won", "up", "MMP", True),
+        R("overpay CPM ($)", "clf_k", "overpay_per_won", "down", "SSP", True),
+        R("revenue ($)", "clf", "revenue", None, None, False),
+        R("spend ($)", "clf", "spend", None, None, False),
+        R("ROAS", "clf", "roas", None, None, False),
+        R("n_won", "clf", "n_won", None, None, False),
     ]),
 ]
 CONTRAST_OF = {"MMP": ("C2", "C1"), "SSP": ("C3", "C1")}
@@ -153,20 +168,23 @@ def build(runs):
     out = []
     for block, rows in ROWS:
         entries = []
-        for label, how, key, better, layer, claim in rows:
+        for row in rows:
             means = {}
             for v in VIEWS + ["oracle"]:
-                vals = [read(r["conditions"].get(v, {}), how, key) for r in runs]
+                vals = [read(r["conditions"].get(v, {}), row["how"], row["key"])
+                        for r in runs]
                 vals = [x for x in vals if x is not None]
                 means[v] = round(float(np.mean(vals)), 5) if vals else None
             s = None
-            if claim and layer:
-                b, a = CONTRAST_OF[layer]
-                s = contrast(runs, b, a, how, key)
-            imp, verd = verdict(s, better if claim else None)
-            entries.append({"metric": label, "means": means,
-                            "contrast": f"{layer} ({CONTRAST_OF[layer][0]}-{CONTRAST_OF[layer][1]})" if (claim and layer) else "-",
-                            "stat": s, "improved": imp, "verdict": verd})
+            if row["claim"] and row["layer"]:
+                b, a = CONTRAST_OF[row["layer"]]
+                s = contrast(runs, b, a, row["chow"], row["key"])
+            imp, verd = verdict(s, row["better"] if row["claim"] else None)
+            lay = (f"{row['layer']} ({CONTRAST_OF[row['layer']][0]}-"
+                   f"{CONTRAST_OF[row['layer']][1]})") if (row["claim"] and row["layer"]) else "-"
+            entries.append({"metric": row["label"], "means": means, "contrast": lay,
+                            "note": row["note"], "stat": s,
+                            "improved": imp, "verdict": verd})
         out.append({"block": block, "rows": entries})
     return out
 
@@ -231,7 +249,7 @@ def write_main_md(path, doc):
             # inside the interval cell: blocks can mix MMP and SSP rows
             stat = fmt_stat(r["stat"])
             if r["contrast"] != "-" and stat != "-":
-                stat = f"{r['contrast']} {stat}"
+                stat = f"{r['contrast']} {stat}{r.get('note', '')}"
             L.append(f"| {r['metric']} | {cells} | {stat} | "
                      f"{SYM[r['improved']]} | {VERDICT_TEXT[r['verdict']]} |")
     L += ["",
@@ -381,21 +399,21 @@ def main():
     econ = {}
     for b, a, name in PAIRS:
         blk = {}
-        for label, how, key, better, layer, claim in ROWS[2][1]:
-            if label in ECON_LABELS:
-                blk[label] = contrast(runs10, b, a, how, key)
+        for row in ROWS[2][1]:
+            if row["label"] in ECON_LABELS:
+                blk[row["label"]] = contrast(runs10, b, a, row["chow"], row["key"])
         econ[f"{b}-{a} ({name})"] = blk
 
     scale = []
     for block, rows in ROWS:
-        for label, how, key, better, layer, claim in rows:
-            if not (claim and layer):
+        for row in rows:
+            if not (row["claim"] and row["layer"]):
                 continue
-            b, a = CONTRAST_OF[layer]
-            scale.append({"metric": label,
-                          "contrast": f"{layer} ({b}-{a})",
-                          "s_1m": contrast(runs1, b, a, how, key) if runs1 else None,
-                          "s_10m": contrast(runs10, b, a, how, key)})
+            b, a = CONTRAST_OF[row["layer"]]
+            scale.append({"metric": row["label"] + row["note"],
+                          "contrast": f"{row['layer']} ({b}-{a})",
+                          "s_1m": contrast(runs1, b, a, row["chow"], row["key"]) if runs1 else None,
+                          "s_10m": contrast(runs10, b, a, row["chow"], row["key"])})
 
     doc = {"scale_reported": "10m", "n_10m": len(runs10), "seeds_10m": seeds10,
            "n_1m": len(runs1), "seeds_1m": seeds1,
