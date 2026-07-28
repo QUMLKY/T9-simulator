@@ -88,9 +88,7 @@ estimands (`p_click`, `p_install`, `p_payer`, `e_ltv`), the oracle expected valu
 and the top competing bid (`lu7_competing_bid`) — on the all / won / **lost** row slices.
 Because lost-row outcomes and prices are retained but hidden from training, the harness can
 score whether a censoring correction recovers the counterfactual population rather than merely
-improving observable-row metrics. Reference implementations (a linear floor, the two-tier
-XGBoost stack, cross-fitted IPW, naive and censoring-aware price models, the oracle) live in
-`scripts/method_bench_worker.py`.
+improving observable-row metrics.
 
 ## Reproduce the paper numbers
 
@@ -100,10 +98,6 @@ XGBoost stack, cross-fitted IPW, naive and censoring-aware price models, the ora
 | 10M ablation, n=10 (one fresh process/seed, ~16 GB) | `python scripts/v10_10m_driver.py` (seeds 90213–17), then `python scripts/v10_10m_worker.py <seed>` for 90218–90222; aggregate the ten per-seed JSONs as in `scripts/v10_anchor_n10.py` (shipped aggregate: `docs/results/v10_10m_n10.json`) |
 | Leakage negative control | `python scripts/neg_control_generator_off.py` |
 | Rebuild the deposited 10M datasets (~40 min, ~17.6 GB) | `python scripts/deposit_gen_driver.py` |
-
-Supplementary harness runs, not part of the paper's reported tables: a method-comparison sweep
-(`python scripts/method_bench_driver.py`) and an IPW cap-robustness sweep
-(`python scripts/ipw_cap_sweep.py`), written up in `docs/Method_Benchmark_10M_Results_13Jul2026.md`.
 
 Per-seed result JSONs for the shipped write-ups are under `docs/results/`.
 
@@ -164,7 +158,7 @@ calibration/      iPinYou-derived distribution shapes (CSV)
 docs/             the specification (V10) + implementation status, results write-ups
 docs/results/     per-seed and aggregated result JSONs backing the write-ups
 scripts/          paper runners: ablation (1M/10M), sensitivity sweeps, deposit
-                  rebuild and packaging; plus the method-benchmark harness (supplementary)
+                  rebuild and packaging
 tests/            35 tests incl. leakage gates and schema contracts
 diagrams/         schema maps (overview, generation, dependencies, rival prices),
                   the generator and dependency-graph figures, per-feature calculation SVGs
@@ -212,4 +206,4 @@ issues via the repository issue tracker.
 `LICENSE-DATA`.
 
 Cite via `CITATION.cff`. The deposited datasets have their own DOI:
-[10.5281/zenodo.21533031](https://doi.org/10.5281/zenodo.21533031). Paper reference to follow.
+[10.5281/zenodo.21533031](https://doi.org/10.5281/zenodo.21533031).
