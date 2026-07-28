@@ -99,7 +99,7 @@ improving observable-row metrics.
 | 10M ablation, n=10 (one fresh process/seed, ~16 GB) | `python scripts/v10_10m_driver.py` (seeds 90213–17), then `python scripts/v10_10m_worker.py <seed>` for 90218–90222; aggregate the ten per-seed JSONs as in `scripts/v10_anchor_n10.py` (shipped aggregate: `docs/results/v10_10m_n10.json`) |
 | Leakage negative control | `python scripts/neg_control_generator_off.py` |
 | Rebuild the deposited 10M datasets (~40 min, ~17.6 GB) | `python scripts/deposit_gen_driver.py` |
-| The paper's two tables, from the per-seed JSONs | `python scripts/aggregate_results.py 10m` (or `1m`) |
+| The reported results tables, from the per-seed JSONs | `python scripts/aggregate_results.py --out docs/results/v10_paper_tables.json` |
 
 Per-seed result JSONs for the shipped write-ups are under `docs/results/`.
 
