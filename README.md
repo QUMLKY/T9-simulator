@@ -1,47 +1,55 @@
-# T9Sim RTB Data Simulator: Generating, Censoring and Benchmarking DSP/MMP/SSP Adtech Data Layers
+# T9Sim RTB Auction Data Simulator: Generating, Censoring and Benchmarking DSP/MMP/SSP Adtech Data Layers
 
 Code **MIT** · Data **CC BY 4.0** · Data DOI [10.5281/zenodo.21533031](https://doi.org/10.5281/zenodo.21533031) · **v1.0.1** · Python ≥ 3.11 · Cite: `CITATION.cff` · Datasheet: `DATASHEET.md`
 
-T9Sim ("T9") is a calibrated simulator of mobile-game real-time-bidding (RTB) auctions **with
-retained ground truth**, and a benchmark built on it: **the data stay fixed, the training method
-varies, and every method is scored against the truth** — including on the auctions the DSP
-*lost*, whose outcomes no real log contains.
+T9Sim ("T9") is a calibrated simulator of mobile in-app game real-time-bidding (RTB) auctions
+**with retained ground truth**, and a benchmark built on it. The design is three steps:
 
-Every auction carries its full counterfactual: funnel outcomes (click → install → payer → 90-day
-spend) are generated on **all** rows, won or lost, and the top competing bid is retained. Four
-**censoring operators** then reduce this one master table to the views real platforms actually
-hold:
+1. **Generate** one ground-truth stream of first-price auctions. Every row retains the full
+   funnel (click → install → payer → 90-day spend) and the top competing bid, **won or lost** —
+   the counterfactual outcomes no real log contains. The latent value drivers and the oracle
+   expected value are retained for scoring only.
+2. **Censor** that one stream into four views mimicking what real-world platforms can see. Two
+   censoring operators — one for funnel outcomes, one for winning prices — add one data layer
+   at a time:
 
-| View | Sees | Real-world analogue |
-|---|---|---|
-| **C1** | own wins' funnel only, no clearing prices | a standard DSP setup — MMP attribution on its own wins only (the "biased view") |
-| **C2** | C1 + funnel labels on *all* rows | deeper MMP integration: funnel outcomes beyond own wins |
-| **C3** | C1 + clearing prices & rival count (funnel still on won rows only) | DSP + SSP (supply-side) |
-| **C4** | all layers | fully integrated stack |
+   | View | Sees | Real-world analogue |
+   |---|---|---|
+   | **C1** | funnel labels on won rows only; no winning price on lost auctions | a standard DSP setup — MMP attribution on its own wins only (the "biased view") |
+   | **C2** | C1 + funnel labels on *all* rows | deeper MMP integration: funnel outcomes beyond own wins |
+   | **C3** | C1 + winning prices on all rows & rival count (funnel still on won rows only) | DSP + SSP (supply-side) |
+   | **C4** | all layers | fully integrated stack |
 
-Because the truth is retained, T9 can issue verdicts that are **uncomputable on any real
-dataset** — e.g. whether a censoring correction actually recovers the lost-row counterfactual,
-or merely looks good on observable data.
+   C2/C4's all-rows outcome visibility is a controlled idealisation of cross-network MMP
+   attribution — an upper bound on the value of reducing outcome censoring, not a literal MMP
+   capability (see `DATASHEET.md`).
+3. **Train the same two-tier bidding algorithm under each view** and score it against the
+   retained truth — lost auctions included — and against an oracle ceiling (the same pipeline
+   given the true latents). **Tier 1 is the value model**: a four-head funnel — p(click),
+   p(install | click), p(payer | install), E(spend | payer) — whose product is the impression's
+   expected value (EV). **Tier 2 is the win model**, p(win | b). The bid rule maximises
+   (EV − b) · p(win | b). Because only the view varies, the C1→C4 ablation isolates each data
+   layer's marginal predictive and economic value.
 
-## Three verdicts (10M auctions × 10 seeds; `docs/Method_Benchmark_10M_Results_13Jul2026.md`)
+Because the truth is retained, T9 answers questions no real log can: what each data layer is
+worth on its own, how far every view sits below the oracle ceiling, and how large the won-rows
+selection bias actually is — measured, not assumed.
 
-1. **Model quality** — a structured value model (two-tier XGBoost) beats a linear floor on
-   ranking by a wide, tight margin: install AUC **+0.131 [0.128, 0.134]**, EV rank-correlation
-   **+0.497 [0.452, 0.541]**, 10/10 seeds.
-2. **Bias correction** — cross-fitted inverse-propensity weighting (the textbook fix for
-   won-rows-only labels) **improves the aggregate bias it targets but degrades ranking**
-   (install AUC −0.017, 0/10), closes *less* of the floor→oracle gap than the uncorrected
-   model, and recovers no lost-row truth — because the selection operates on **latent** value
-   that no observable propensity can capture. Robust to the weight cap (swept 10→uncapped).
-3. **Price censoring** — a censoring-aware (AFT) price model recovers lost-row price
-   distributions **+41.6% better (CRPS, 10/10)** than a naive fit that *looks superior on its
-   own observable metric* (the metric illusion).
+## Headline results — the C1–C4 ablation (10M auctions × 10 seeds)
 
-Headline ablation (schema V10, anchored ρ\*=0.8; n=10 seeds at 1M **and** 10M): **SSP data
-improves the model** (win-AUC +0.014, CI excludes 0, 10/10 at both scales) **but does not
-demonstrably convert to money; MMP data drives the economics** (classifier bidding-algorithm
-profit +39% at 10M; EV-calibration ratio (1 = unbiased) 0.52→0.89). Full tables:
-`docs/v10_Training_Results.md`.
+1. **The DSP-only view is biased.** Learning the funnel from won rows alone, C1 recovers only
+   **52%** of true expected value (ev_ratio 0.524) — the selection bias of the "biased view".
+2. **MMP corrects it, and the money follows.** Funnel labels on all rows lift ev_ratio
+   **0.52 → 0.89**, payer-head AUC **+0.098**, and profit **+39%** at 10M — every contrast
+   positive in all ten seeds.
+3. **SSP improves the win model, not profit.** Winning-price visibility raises win-AUC
+   **+0.0137 [+0.0055, +0.0220]** (10/10 seeds, scale-stable at 1M and 10M), but its profit
+   contrast spans zero: no supported economic effect in this setting.
+4. **The two layers load onto disjoint axes.** MMP moves only the value model, SSP only the
+   win model. And even C4 sits well below the oracle (payer AUC 0.68 vs 0.84; ev_ratio 0.89
+   vs 1.00) — the residual gap is the latent value no observable data layer carries.
+
+Full tables: `docs/v10_Training_Results.md`.
 
 ## Install
 
@@ -61,10 +69,10 @@ python examples/quickstart_100k.py
 ```
 
 generates a 100K master under the paper's operative configuration (schema **V10**, the
-private-rival market, at the externally anchored privateness ρ\*=0.8), trains the reference
-stack under C1–C4, and prints a summary table (single-seed 100K figures are illustrative — the
-paper's economics stabilise at ≥1M with n=10 seeds). The same loop at 1M scale (profile
-`"test"`):
+private-rival market, at the externally anchored privateness ρ\*=0.8), trains the same
+two-tier bidding algorithm under C1–C4, and prints a summary table (single-seed 100K figures
+are illustrative — the paper's economics stabilise at ≥1M with n=10 seeds). The same loop at
+1M scale (profile `"test"`):
 
 ```python
 import t9sim.api as t9
@@ -73,11 +81,15 @@ t9.generate("test", seed=90213, rho=t9.RHO_STAR, bn_edges=t9.V10_EDGES)  # 1M ma
 results = t9.evaluate("test")                    # reference models, scored vs truth
 ```
 
-To benchmark **your own method**: load the master parquet, take a censored view with
-`t9.view(df, "C1")`, train on what the view exposes, and score your predictions against the
-master's retained truth columns (`p_click`, `p_install`, `p_payer`, `e_ltv`, `ev_truth`,
-`lu7_competing_bid`) on the all / won / **lost** row slices. The reference entrants
-(linear floor, XGBoost, cross-fitted IPW, naive price, AFT, oracle) live in
+**Bring your own method.** The harness accepts an external method through one function: load
+the master parquet, take a censored view with `t9.view(df, "C1")`, train on what the view
+exposes, and score your predictions against the master's retained truth columns — the
+estimands (`p_click`, `p_install`, `p_payer`, `e_ltv`), the oracle expected value (`ev_truth`)
+and the top competing bid (`lu7_competing_bid`) — on the all / won / **lost** row slices.
+Because lost-row outcomes and prices are retained but hidden from training, the harness can
+score whether a censoring correction recovers the counterfactual population rather than merely
+improving observable-row metrics. Reference implementations (a linear floor, the two-tier
+XGBoost stack, cross-fitted IPW, naive and censoring-aware price models, the oracle) live in
 `scripts/method_bench_worker.py`.
 
 ## Reproduce the paper numbers
@@ -85,11 +97,13 @@ master's retained truth columns (`p_click`, `p_install`, `p_payer`, `e_ltv`, `ev
 | Result | Command |
 |---|---|
 | 1M ablation, n=10 seeds | `python scripts/v10_anchor_5seed.py` then `scripts/v10_anchor_n10.py` |
-| 10M ablation, n=10 (one fresh process/seed, ~16 GB) | `python scripts/v10_10m_driver.py` (seeds 90213–17), then `python scripts/v10_10m_worker.py <seed>` for 90218–90222 |
-| Method benchmark, 10M × n=10 | `python scripts/method_bench_driver.py` |
-| IPW cap-robustness sweep | `python scripts/ipw_cap_sweep.py` |
+| 10M ablation, n=10 (one fresh process/seed, ~16 GB) | `python scripts/v10_10m_driver.py` (seeds 90213–17), then `python scripts/v10_10m_worker.py <seed>` for 90218–90222; aggregate the ten per-seed JSONs as in `scripts/v10_anchor_n10.py` (shipped aggregate: `docs/results/v10_10m_n10.json`) |
 | Leakage negative control | `python scripts/neg_control_generator_off.py` |
 | Rebuild the deposited 10M datasets (~40 min, ~17.6 GB) | `python scripts/deposit_gen_driver.py` |
+
+Supplementary harness runs, not part of the paper's reported tables: a method-comparison sweep
+(`python scripts/method_bench_driver.py`) and an IPW cap-robustness sweep
+(`python scripts/ipw_cap_sweep.py`), written up in `docs/Method_Benchmark_10M_Results_13Jul2026.md`.
 
 Per-seed result JSONs for the shipped write-ups are under `docs/results/`.
 
@@ -115,8 +129,7 @@ archives are deposited separately, with checksums and a DOI:
 > masters behind the published results, plus a 1M sample. CC BY 4.0.
 
 The ten 10M masters behind the headline results (seeds 90213–90222, ~17.6 GB with the 1M
-sample) can be rebuilt
-locally rather than downloaded:
+sample) can be rebuilt locally rather than downloaded:
 
 ```bash
 python scripts/deposit_gen_driver.py                              # ten 10M masters, ~40 min
@@ -130,7 +143,8 @@ dataset, plus a source snapshot of the tagged release, with the manifest that pi
 `DEPOSIT_MANIFEST.txt` records what was deposited: MD5 and SHA-256 per archive, row counts per
 file, and a **content fingerprint** per dataset. Compare fingerprints. Regeneration on the same
 platform and library versions does reproduce the files byte-for-byte — verified, SHA-256 matched
-on all forty files — but parquet stores the writer version, so a different pyarrow release can
+on all forty parquet files of the ten 10M masters — but parquet stores the writer version, so a
+different pyarrow release can
 change the bytes while the data is identical. The fingerprint hashes column values and survives
 that.
 
@@ -149,8 +163,8 @@ config/           all tunable parameters (YAML; every value provenance-tagged)
 calibration/      iPinYou-derived distribution shapes (CSV)
 docs/             the specification (V10) + implementation status, results write-ups
 docs/results/     per-seed and aggregated result JSONs backing the write-ups
-scripts/          paper runners: ablation (1M/10M), method benchmark, sensitivity
-                  sweeps, deposit rebuild and packaging
+scripts/          paper runners: ablation (1M/10M), sensitivity sweeps, deposit
+                  rebuild and packaging; plus the method-benchmark harness (supplementary)
 tests/            35 tests incl. leakage gates and schema contracts
 diagrams/         schema maps (overview, generation, dependencies, rival prices),
                   the generator and dependency-graph figures, per-feature calculation SVGs
@@ -181,8 +195,11 @@ distribution, maintenance) is in `DATASHEET.md`.
 ## Limitations and ethics
 
 The data is **fully synthetic** — no row corresponds to a real person, device or app, and no
-PII is present. Results are conditional on the generative model (DGP-conditional); bid shading
-is out of scope for this release; two archetype tilt parameters are declared but unwired. See
+PII is present. Results are conditional on the generative model (DGP-conditional) and model one
+market slice (the 2025 US mobile in-app gaming market from the DSP's point of view). All-rows
+outcome visibility in C2/C4 is an idealised upper bound; bid shading is out of scope for this
+release; three of the four archetype tilts (device type, OS, day of week) are declared but
+unwired, which lowers absolute recovery but leaves the C1–C4 contrasts intact. See
 `DATASHEET.md` for the full limitations and ethics discussion.
 
 ## Status, license, citation

@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use T9Sim, please cite it as below."
-title: "T9Sim RTB Data Simulator: Generating, Censoring and Benchmarking DSP/MMP/SSP Adtech Data Layers"
+title: "T9Sim RTB Auction Data Simulator: Generating, Censoring and Benchmarking DSP/MMP/SSP Adtech Data Layers"
 type: software
 authors:
   - family-names: "Yu"
@@ -22,14 +22,16 @@ license:
   - CC-BY-4.0
 abstract: >
   A calibrated simulator of mobile-game real-time-bidding auctions that retains
-  the ground truth for every auction, won or lost, and a benchmark built on it in
-  which the data stay fixed while the training method varies. Funnel outcomes and
-  the top competing bid are generated on all rows, so methods can be scored on the
-  auctions the bidder lost, which no real advertising log records. Four censoring
-  operators reduce the master table to the views real platforms hold: a demand-side
-  platform alone, plus measurement data, plus auction price data, and all three
-  combined. Software is MIT licensed; data, including the deposited datasets, is
-  CC BY 4.0.
+  the ground truth for every auction, won or lost, and a benchmark built on it.
+  Funnel outcomes and the top competing bid are generated on all rows, including
+  the auctions the DSP lost, which no real advertising log records. Two censoring
+  operators reduce the one master table to four views (C1-C4) mimicking what real
+  platforms hold: a demand-side platform alone, plus measurement (MMP) data, plus
+  auction price (SSP) data, and all three combined. The same two-tier bidding
+  algorithm is trained under each view and scored against the retained truth and
+  an oracle ceiling, so the ablation isolates each data layer's marginal
+  predictive and economic value; external methods plug into the same harness.
+  Software is MIT licensed; data, including the deposited datasets, is CC BY 4.0.
 keywords:
   - real-time bidding
   - computational advertising
