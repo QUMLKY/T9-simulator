@@ -1,7 +1,11 @@
 """Quickstart: generate a 100K master (schema V10, anchored rho*=0.8), run the
 reference ablation under all four censored views, and print the headline table.
 
-    python examples/quickstart_100k.py          # ~2-3 min on a laptop
+    python examples/quickstart_100k.py
+
+Generation takes seconds; the run time is dominated by training the value and
+win models under four views plus the oracle, which on a laptop without a GPU
+can take an hour or more.
 
 For the paper-scale runs use profile "test" (1M) or "scale10m" (10M, one fresh
 process per seed — see scripts/v10_10m_driver.py).
@@ -22,10 +26,21 @@ res = t9.evaluate("golden")
 print("\n3) headline (100K, single seed - see docs/ for the n=10 tables)")
 ROWS = [("ev_spearman", "EV rank corr"), ("ev_ratio", "EV ratio (1.0=unbiased)"),
         ("auc_install", "install AUC"), ("auc_win_clf", "win AUC (classifier)"),
-        ("profit", "profit $ (AFT bidder)")]
+        ("clf_bidder.profit", "profit $")]
+
+
+def cell(cond, key):
+    """Fetch a metric, following one level of nesting for clf_bidder.*."""
+    d = res["conditions"][cond]
+    if "." in key:
+        outer, inner = key.split(".", 1)
+        return (d.get(outer) or {}).get(inner)
+    return d.get(key)
+
+
 print(f"{'metric':26} " + " ".join(f"{c:>9}" for c in t9.CONDITIONS))
 for key, label in ROWS:
-    cells = [res["conditions"][c].get(key) for c in t9.CONDITIONS]
+    cells = [cell(c, key) for c in t9.CONDITIONS]
     print(f"{label:26} " + " ".join(
         f"{v:9.4f}" if isinstance(v, float) else f"{v!s:>9}" for v in cells))
 
