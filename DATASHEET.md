@@ -165,13 +165,12 @@ hashes column values rather than file bytes, so determinism can be verified acro
 
 **What has the dataset been used for?**
 
-1. A four-condition ablation (C1 to C4) measuring the marginal value of MMP and SSP data layers,
-   at 1M and 10M scale, 10 seeds each.
-2. A method-comparison benchmark: the data are held fixed, the training method varies, and every
-   method is scored against retained truth, including a lost-rows slice.
+A four-condition ablation (C1 to C4) measuring the marginal value of the MMP and SSP data
+layers, at 1M and 10M scale, 10 seeds each. The same two-tier bidding algorithm is trained under
+each view and scored against retained truth, including a lost-rows slice, and against an oracle
+ceiling.
 
-Results: `docs/v10_Training_Results.md` and
-`docs/Method_Benchmark_10M_Results_13Jul2026.md`.
+Results: `docs/v10_Training_Results.md`.
 
 Feature-attribution (SHAP) results are deliberately **not** part of this release. The pipeline
 retains the capability, so anyone can compute their own, but no attribution figures or values
@@ -280,4 +279,4 @@ remain documented so published numbers stay traceable.
 
 Yes. The benchmark is designed for it: implement a method, take a censored view with
 `t9.view(df, "C1")`, and score against the master's retained truth on the all, won, and lost
-row slices. The reference entrants are in `scripts/method_bench_worker.py`.
+row slices.
