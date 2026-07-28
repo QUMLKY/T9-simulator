@@ -27,8 +27,8 @@ from . import pipeline as _pipeline
 from . import simulate as _simulate
 
 # Schema V10 = v7 funnel BN edges (#1-#5) + the private-rival market layer.
-# (B1 `min_bid_to_win` / B2 `explore_traffic` are optional sensitivity arms,
-#  deliberately OFF in the operative configuration.)
+# (B1 `min_bid_to_win` and B2 `explore_traffic` are inert flags from an
+#  abandoned line of work: off, unreported, and not part of the schema.)
 V10_EDGES = {
     "pairing": True, "os_spend": True, "payer_timing": True,
     "hour": True, "exposure": True,
