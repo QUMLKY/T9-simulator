@@ -48,8 +48,8 @@ reference to anything else.
 `v1.0.1`. The exact commit it was exported from is recorded on the `git =` line of that archive's
 entry in `MANIFEST.txt`, which is generated alongside the archive and cannot drift from it. It
 holds the package, the
-configuration, the iPinYou-derived calibration tables, the tests, the paper runners, the SHAP
-attribution analysis, the specification and the datasheet. It is included so that this record
+configuration, the iPinYou-derived calibration tables, the tests, the paper runners, the
+specification and the datasheet. It is included so that this record
 does not depend on the GitHub repository continuing to exist: the data and the code that produced
 it are archived together, and either can be checked against the other.
 
