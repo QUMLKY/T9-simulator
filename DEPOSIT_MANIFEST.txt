@@ -173,10 +173,10 @@ members:
 fingerprint = 0xa8f93f650dbfe629
 
 ## t9sim-1.0.1-source.zip    (source snapshot, tag v1.0.1)
-bytes  = 1560969
-md5    = d9ced6ded5b24e52bc31a0e50a4334de
-sha256 = 0d2b47f54679ddc7a2f05de7265786c15e9cca7ed22eca7b72c5a3aa8d3a8975
-git    = d058a982a18176def5f1348ab3e62d0f6c1a7d2c
-files  = 206
+bytes  = 652972
+md5    = 9ea822a5977025f4084cb9bfd924ff3e
+sha256 = d5d26d6ec9ef2b333132f4ae6dbf4e21921e9c563072fe9074bd48218157cc70
+git    = 0d3f3a91ffb38f194750ad0537fecffc9526f4e5
+files  = 186
 
 # 11 data archives + 1 source snapshot, 17.61 GB total
